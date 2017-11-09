@@ -24,7 +24,7 @@ a:link, a:visited {
 	color: white;
 	}
 
-nav { 
+article { 
 	display:block; 
 	float:center; 
 	position: absolute;
@@ -35,7 +35,7 @@ nav {
 	margin:  0 0 0 -222px;
 	} 	
 	
-nav a:link, nav a:visited { 
+article a:link, nav a:visited { 
 	display: block; 
 	padding: 10px; 
 	text-decoration: none; 
@@ -43,7 +43,7 @@ nav a:link, nav a:visited {
 	margin: 8px; 
 } 
  
-nav a:hover {
+article a:hover {
 	background-color: gold; /* 이전 버전 : #aaaaaa */
 	color: black;
 } 
