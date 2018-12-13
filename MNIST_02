@@ -1,0 +1,73 @@
+# 목표 : Tensorflow의 hello world인 mnist를 글만 읽을 줄 알면 이해할 수 있도록 정리를 목표로 함
+
+# MNIST란?
+# 28x28 크기로 0~9 사이의 숫자가 그려진 손글씨 이미지와 이에 해당하는 레이블로 구성된 데이터베이스
+
+# --- import ---
+import tensorflow as tf # tensorflow를 import
+from tensorflow.examples.tutorials.mnist import input_data # tensorflow에 기본 탑재된 mnist tutorial과 그 데이터를 import
+# TensorFlow에는 tensorflow를 이해할 수 있는 예제들이 tutorial로 탑재되어 있다.
+
+# --- data ---
+mnist = input_data.read_data_sets("./mnist/data/", one_hot=True) #mnist 데이터를 내려받아 one_hot encoding 방식으로 읽어 들임
+# one-hot encoding이란 전체 데이터 테이블 중 해당되는 하나의 데이터만 1로 변경해 주고, 나머지는 0으로 채워주는 방식을 의미함
+# one-hot encoding은 매우 간단하게 구현할 수 있지만, tensorflow에서는 argmax 함수라는 이름으로 제공
+
+# ---  model ---
+# 입력 X와 출력 Y를 정의
+X = tf.placeholder(tf.float32, [None, 784]) # mnist image는 28x28 pixel로 이루어져 있으므로, 784차원을 가지고 있음.
+Y = tf.placeholder(tf.float32, [None, 10]) # mnist image는 정수이므로 0부터 9까지로 총 10개의 분류를 가지고 있음.
+# X와 Y의 첫 번 째 차원은 None으로 설정함. 배치 크기 지정석 = 이 자리에는 한 번에 학습시킬 mnist 이미지 개수를 지정하는 값이 들어감.
+# 원하는 배치 크기로 정확히 명시해주어도 되지만, 한 번에 학습할 개수를 계속 변경하면서 실험해보려는 경우에는 None을 넣어주면 tensorflow가 알아서 계산.
+
+# 신경망의 레이어는 총 3개의 계층으로 하여 다음처럼 구성합니다.
+# 784(입력 특성값)
+#   -> 256 (히든레이어 뉴런 갯수) -> 256 (히든레이어 뉴런 갯수)
+#   -> 10 (결과값 0~9 분류)
+W1 = tf.Variable(tf.random_normal([784, 256], stddev=0.01)) # 28x28 = 784, 히든레이어 뉴런 개수 256, 표준편차가 0.01인 정규분포를 가지는 임의의 값으로 뉴런을 초기화
+L1 = tf.nn.relu(tf.matmul(X, W1)) # 입력값에 가중치를 곱하고 ReLU 함수를 이용하여 레이어를 만듭니다.
+
+W2 = tf.Variable(tf.random_normal([256, 256], stddev=0.01)) # -> 256 (히든레이어 뉴런 갯수) -> 256 (히든레이어 뉴런 갯수)
+L2 = tf.nn.relu(tf.matmul(L1, W2)) # L1 레이어의 출력값에 가중치를 곱하고 ReLU 함수를 이용하여 레이어를 만듭니다.
+
+W3 = tf.Variable(tf.random_normal([256, 10], stddev=0.01)) # 표준편차가 0.01인 정규 분포를 가지는 임의의 값으로 뉴런(변수)를 초기화
+model = tf.matmul(L2, W3) # L1을 거쳐 계산된 L2에 W3 변수를 곱하여 요소 10개짜리 배열을 출력. (요소 10개 = 0~9까지의 숫자)
+# 본 예제의 mnist는 총 3개의 계층(W1, W2, W3)으로 이루어져 있다.
+
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=model, labels=Y))
+
+optimizer = tf.train.AdamOptimizer(0.001).minimize(cost)
+# tensorflow 사용 시 알고리즘의 세부적인 수학 공식이 무엇인 지 이해하려 들지 말고, 그냥 외우면 된다. Google에 가서 AdamOptimizer를 검색하고, 그래프가 어>    떤 식으로 나타나는 지를 보면 된다.
+# AdamOptimizer는 Adam: A Method for Stochastic Optimization 알고리즘으로, 가중치 parameter들을 최적화하는 방법 중 하나이다. Adam 알고리즘은 지수평균이동을 적용하며, parameter들이 업데이트될 때 방향과 크기의 손실을 최소화하고자 그래디언트 평균과 분산으로부터 직접 추정하여 Bias에 따라 가중치를 조정한다.
+# Adam is an adaptive learning rate algorithm similar to RMSProp, but updates are directly estimated using a running average of the first and second mome    nt of the gradient and also include a bias correction term.
+
+# ##############
+# 신경망 모델 학습   #
+# ##############
+init = tf.global_variables_initializer()
+sess = tf.Session()
+sess.run(init)
+
+batch_size = 100
+total_batch = int(mnist.train.num_examples / batch_size)
+
+for epoch in range(30):
+	total_cost = 0
+    for i in range(total_batch): # 텐서플로우의 mnist 모델의 next_batch 함수를 이용해 지정한 크기만큼 학습할 데이터를 가져온다.
+		batch_xs, batch_ys = mnist.train.next_batch(batch_size)
+
+        _, cost_val = sess.run([optimizer, cost],feed_dict={X: batch_xs,Y: batch_ys})
+
+        total_cost += cost_val
+
+	print('Epoch:', '%04d' % (epoch + 1),'Avg. cost = ', '{:.3f}'.format(total_cost / total_batch))
+ 
+print('최적화 완료!')
+ 
+# #########
+# 결과 확인   #
+# #########
+is_correct = tf.equal(tf.argmax(model, 1), tf.argmax(Y, 1)) # model 로 예측한 값과 실제 레이블인 Y의 값을 비교한다.
+# tf.argmax 함수를 이용해 예측한 값에서 가장 큰 값을 예측한 레이블이라고 평가한다.
+accuracy = tf.reduce_mean(tf.cast(is_correct, tf.float32))
+print('정확도:', sess.run(accuracy,feed_dict={X: mnist.test.images,Y: mnist.test.labels}))
