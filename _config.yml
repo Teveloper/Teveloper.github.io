@@ -17,7 +17,7 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "ko-KR"
-title                    : "Teveloper"
+title                    : "Teveloper @ github"
 title_separator          : "-"
 name                     : "Teveloper"
 description              : "천년나무가 프로그래머 모드일 때는 Teveloper입니다."
