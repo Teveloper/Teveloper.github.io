@@ -1,0 +1,13 @@
+import unittest
+import myLotto
+
+class MyLottoTest(unittest.TestCase):
+    def test_listLengthCheck(self):
+        c = myLotto.lottoOfThisWeek
+        self.assertEqual(len(c), 6)
+    def test_listCheck(self):
+        c = myLotto.lottoOfThisWeek
+        self.assertListEqual(c, tensor07.lottoOfThisWeek)
+        
+if __name__ == '__main__':
+    unittest.main()
