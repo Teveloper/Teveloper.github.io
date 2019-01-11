@@ -33,3 +33,5 @@ randomNumerResult = randomNumbers()
 print(randomNumerResult)
 print("그 중 양수는 : ", positive(randomNumerResult))
 print("그 중 음수는 : ", negative(randomNumerResult))
+if 0 in randomNumerResult:
+    print("Zero가 존재합니다!!")
