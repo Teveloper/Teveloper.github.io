@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!-- 웹폰트 추가 : 2021-01-28-->
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/font-iropke-batang/1.2/font-iropke-batang.css">
+
+    
+<link rel="stylesheet" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.css">
+
+    
+    
+
+    
+    <title>[테스팅 실무] 더 나은 버그 보고를 위한 테스터의 글쓰기 3편 | 천년나무 블로그</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="글쓰기,소프트웨어,테스팅,실무,버그보고,한글,한국어,맞춤법,글 잘 쓰는 방법" />
+    
+    <!-- 도메인 주소 자체를 걸었을 때 image가 표시되지 않는 문제가 있어서 변경
+    <meta name="description" content="이번 편은 좋은 글을 쓰는 방법에 대해 세 가지 정도를 소개한다. 모두 글쓰기 시 알고 있으면 좋은 내용들이다.  필자는 실무에서 Technical Writer(테크니컬 라이터)로서 혹은 다른 여러 직무를 수행하면서 업무에 필요한 글쓰기를 하거나, 개인 취미로 블로그에 글쓰기를 하는 사람이다. 그러니 필자가 하는 조언만으로 글쓰기를 잘 할 수는 없다. 이렇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[테스팅 실무] 더 나은 버그 보고를 위한 테스터의 글쓰기 3편">
+<meta property="og:url" content="https://xeppetto.github.io/Software-Testing-and-QA/%ED%85%8C%EC%8A%A4%ED%8C%85-%EC%8B%A4%EB%AC%B4/%ED%85%8C%EC%8A%A4%ED%8C%85-%EB%B2%84%EA%B7%B8%EB%B3%B4%EA%B3%A0/%ED%85%8C%EC%8A%A4%ED%84%B0%EC%9D%98%EA%B8%80%EC%93%B0%EA%B8%B0-03%ED%8E%B8/index.html">
+<meta property="og:site_name" content="천년나무 블로그">
+<meta property="og:description" content="이번 편은 좋은 글을 쓰는 방법에 대해 세 가지 정도를 소개한다. 모두 글쓰기 시 알고 있으면 좋은 내용들이다.  필자는 실무에서 Technical Writer(테크니컬 라이터)로서 혹은 다른 여러 직무를 수행하면서 업무에 필요한 글쓰기를 하거나, 개인 취미로 블로그에 글쓰기를 하는 사람이다. 그러니 필자가 하는 조언만으로 글쓰기를 잘 할 수는 없다. 이렇">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xeppetto.github.io/thumbnails/Software/Writing.png">
+<meta property="article:published_time" content="2022-05-01T08:01:00.000Z">
+<meta property="article:modified_time" content="2022-05-01T08:01:00.000Z">
+<meta property="article:author" content="Xeppetto">
+<meta property="article:tag" content="글쓰기">
+<meta property="article:tag" content="소프트웨어">
+<meta property="article:tag" content="테스팅">
+<meta property="article:tag" content="실무">
+<meta property="article:tag" content="버그보고">
+<meta property="article:tag" content="한글">
+<meta property="article:tag" content="한국어">
+<meta property="article:tag" content="맞춤법">
+<meta property="article:tag" content="글 잘 쓰는 방법">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xeppetto.github.io/thumbnails/Software/Writing.png">
+    -->
+    <!-- 아래 내용을 추가 : is_home check -->
+    
+      <meta name="description" content="이번 편은 좋은 글을 쓰는 방법에 대해 세 가지 정도를 소개한다. 모두 글쓰기 시 알고 있으면 좋은 내용들이다.  필자는 실무에서 Technical Writer(테크니컬 라이터)로서 혹은 다른 여러 직무를 수행하면서 업무에 필요한 글쓰기를 하거나, 개인 취미로 블로그에 글쓰기를 하는 사람이다. 그러니 필자가 하는 조언만으로 글쓰기를 잘 할 수는 없다. 이렇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[테스팅 실무] 더 나은 버그 보고를 위한 테스터의 글쓰기 3편">
+<meta property="og:url" content="https://xeppetto.github.io/Software-Testing-and-QA/%ED%85%8C%EC%8A%A4%ED%8C%85-%EC%8B%A4%EB%AC%B4/%ED%85%8C%EC%8A%A4%ED%8C%85-%EB%B2%84%EA%B7%B8%EB%B3%B4%EA%B3%A0/%ED%85%8C%EC%8A%A4%ED%84%B0%EC%9D%98%EA%B8%80%EC%93%B0%EA%B8%B0-03%ED%8E%B8/index.html">
+<meta property="og:site_name" content="천년나무 블로그">
+<meta property="og:description" content="이번 편은 좋은 글을 쓰는 방법에 대해 세 가지 정도를 소개한다. 모두 글쓰기 시 알고 있으면 좋은 내용들이다.  필자는 실무에서 Technical Writer(테크니컬 라이터)로서 혹은 다른 여러 직무를 수행하면서 업무에 필요한 글쓰기를 하거나, 개인 취미로 블로그에 글쓰기를 하는 사람이다. 그러니 필자가 하는 조언만으로 글쓰기를 잘 할 수는 없다. 이렇">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xeppetto.github.io/thumbnails/Software/Writing.png">
+<meta property="article:published_time" content="2022-05-01T08:01:00.000Z">
+<meta property="article:modified_time" content="2022-05-01T08:01:00.000Z">
+<meta property="article:author" content="Xeppetto">
+<meta property="article:tag" content="글쓰기">
+<meta property="article:tag" content="소프트웨어">
+<meta property="article:tag" content="테스팅">
+<meta property="article:tag" content="실무">
+<meta property="article:tag" content="버그보고">
+<meta property="article:tag" content="한글">
+<meta property="article:tag" content="한국어">
+<meta property="article:tag" content="맞춤법">
+<meta property="article:tag" content="글 잘 쓰는 방법">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xeppetto.github.io/thumbnails/Software/Writing.png">
+    
+    <!-- 추가 내용 끝 -->
+
+    
+
+    <link rel="canonical" href="https://xeppetto.github.io/software-testing-and-qa/테스팅-실무/테스팅-버그보고/테스터의글쓰기-03편/"/><!-- canonical 추가 -->
+
+    
+
+    
+        <link rel="icon" href="/css/images/flower_favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-191955640-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/rss2.xml" title="천년나무 블로그" type="application/rss+xml">
+</head>
+
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="jake-header-title"> <!-- jake-header-title로 상단 이미지 추가 -->
+        <div class="jake-header-title-inner"></div>
+    </div> 
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <!-- 필요에 의해 숨기기
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1> 
+                   
+                    
+                -->   
+                </div> 
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/">X의話</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/Lv8-%E3%81%AE%EA%BD%83%E6%80%AA%E7%8D%B8/">Lv8+の꽃怪獸</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/X%EC%9D%98-%E6%96%B7%E6%83%B3/">X의 斷想</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/%E6%97%A5%E6%96%B0%E5%8F%88%E6%97%A5%E6%96%B0/">日新又日新</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%9D%B4%EC%95%BC%EA%B8%B0/">블로그 이야기</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EB%B0%B0%EC%9B%80/">배움</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/">독서</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EB%B0%B0%EC%9B%80/%EB%AA%85%EC%96%B8/">명언</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/">소프트웨어</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Operating-Systems/">Operating Systems</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Tools/">Tools</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-Docker/">WSL & Docker</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%EA%B2%8C%EC%9E%84/">게임</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%EB%8F%84%EA%B5%AC%EA%B0%9C%EB%B0%9C/">도구개발</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%ED%85%8C%EC%8A%A4%ED%8C%85/">테스팅</a></li></ul></li></ul>
+                                    
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="찾아보기" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="검색하실 단어를 입력하세요." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '블로그 포스트 검색',
+            PAGES: '특정 페이지',
+            CATEGORIES: '카테고리 별 검색',
+            TAGS: '태그 검색',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/">소프트웨어</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%ED%85%8C%EC%8A%A4%ED%8C%85/">테스팅</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%ED%85%8C%EC%8A%A4%ED%8C%85/%EB%B2%84%EA%B7%B8-%EB%B3%B4%EA%B3%A0/">버그 보고</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <script data-ad-client="ca-pub-4791569760042130" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- Google Adsense 삽입 : layout과 article에 삽입 -->
+                            <article id="post-Software-Testing-and-QA/테스팅-실무/테스팅-버그보고/테스터의글쓰기-03편" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        [테스팅 실무] 더 나은 버그 보고를 위한 테스터의 글쓰기 3편
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/Software-Testing-and-QA/%ED%85%8C%EC%8A%A4%ED%8C%85-%EC%8B%A4%EB%AC%B4/%ED%85%8C%EC%8A%A4%ED%8C%85-%EB%B2%84%EA%B7%B8%EB%B3%B4%EA%B3%A0/%ED%85%8C%EC%8A%A4%ED%84%B0%EC%9D%98%EA%B8%80%EC%93%B0%EA%B8%B0-03%ED%8E%B8/" class="article-date">
+       <time datetime="2022-05-01T08:01:00.000Z" itemprop="datePublished">2022년 05월 01일</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/Software-Testing-and-QA/%ED%85%8C%EC%8A%A4%ED%8C%85-%EC%8B%A4%EB%AC%B4/%ED%85%8C%EC%8A%A4%ED%8C%85-%EB%B2%84%EA%B7%B8%EB%B3%B4%EA%B3%A0/%ED%85%8C%EC%8A%A4%ED%84%B0%EC%9D%98%EA%B8%80%EC%93%B0%EA%B8%B0-03%ED%8E%B8/" class="article-date">
+     <time datetime="2022-05-01T08:01:00.000Z" itemprop="dateModified">2022년 05월 01일</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%EA%B8%80-%EC%9E%98-%EC%93%B0%EB%8A%94-%EB%B0%A9%EB%B2%95/" rel="tag">글 잘 쓰는 방법</a>, <a class="tag-link-link" href="/tags/%EA%B8%80%EC%93%B0%EA%B8%B0/" rel="tag">글쓰기</a>, <a class="tag-link-link" href="/tags/%EB%A7%9E%EC%B6%A4%EB%B2%95/" rel="tag">맞춤법</a>, <a class="tag-link-link" href="/tags/%EB%B2%84%EA%B7%B8%EB%B3%B4%EA%B3%A0/" rel="tag">버그보고</a>, <a class="tag-link-link" href="/tags/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/" rel="tag">소프트웨어</a>, <a class="tag-link-link" href="/tags/%EC%8B%A4%EB%AC%B4/" rel="tag">실무</a>, <a class="tag-link-link" href="/tags/%ED%85%8C%EC%8A%A4%ED%8C%85/" rel="tag">테스팅</a>, <a class="tag-link-link" href="/tags/%ED%95%9C%EA%B5%AD%EC%96%B4/" rel="tag">한국어</a>, <a class="tag-link-link" href="/tags/%ED%95%9C%EA%B8%80/" rel="tag">한글</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <p>이번 편은 좋은 글을 쓰는 방법에 대해 세 가지 정도를 소개한다. 모두 글쓰기 시 알고 있으면 좋은 내용들이다. </p>
+<p>필자는 실무에서 Technical Writer(테크니컬 라이터)로서 혹은 다른 여러 직무를 수행하면서 업무에 필요한 글쓰기를 하거나, 개인 취미로 블로그에 글쓰기를 하는 사람이다. 그러니 필자가 하는 조언만으로 글쓰기를 잘 할 수는 없다. 이렇게 미리 한 발 빼는 이유는 겸손한 척 하려는게 아니라 필자는 전문적으로 국어를 연구하거나, 학문적으로 글쓰기에 대해 연구해서 남을 가르치는 사람이 아니라는 이야기를 하고 싶은 거다. 그러므로, 더 전문적인 지식이 필요한 경우 본 포스팅 하단의 참고 자료를 참고하거나, 서점에서 더 좋은 글쓰기 관련 책들을 찾아  보시기를 권장한다.</p>
+<p>3편을 시작하기 전에… 1편, 2편도 되게 흥미진진-스펙타클하지는 않았지만, 3편은 특히 더 어렵거나 지루하게 느껴질 수 있다. 하지만 3편의 내용을 명확히 습득하지 않고 이후로 넘어가면 결국 또 기본기 없이 요령만 배우는 꼴이 될 수 있으니, 어렵고 지루하더라도 3편을 꼭 잘 읽어보시기를 바란다.</p>
+<br>
+
+<h2 id="좋은-문장-만들기"><a href="#좋은-문장-만들기" class="headerlink" title="좋은 문장 만들기"></a>좋은 문장 만들기</h2><p>한국어는 문장 구성이 다른 언어에 비해 굉장히 자유로운 편에 속한다. 한국어의 문장은 주어, 동사, 목적어의 전후 위치를 변경해도 말이 잘 통한다. 그럼에도 불구하고 어느 정도 일반적이라고 통용되는 ‘좋은 글쓰기’의 규칙은 당연히 존재한다. 일단, 국어의 문장은 일반적으로 주어-목적어-서술어의 구조로 구성된다. 이런 기본적인 구조의 틀에 맞는 문장을 쓰는 게 좋은 문장을 만드는 핵심이다. </p>
+<p>한국어라는 언어가 워낙 문장 구성이 다채롭게 변할 수 있는 유연성을 가진 언어이다 보니 그 사회의 글쓰기 문화에 따라 글의 형태가 많이 바뀌는 현상이 보인다. 인터넷이나 메신저에서 글 쓰는 데에 익숙해진 사람들은 본인의 주장이나 글의 목적을 문장의 서두에 배치해서 글의 구조가 복잡해지거나, 혹은 남을 불필요하게 지적하는 방식의 글쓰기 성향을 보인다. 혹은 (토론할 상황이 전혀 아닌 데도 불구하고) 남과 토론하듯이 따지고 드는 듯한 느낌의 글쓰기를 많이 하는 현상이 보이는데 이는 정말 좋지 않은 글쓰기 습관이다.</p>
+<p>자, 글쓰기에 대한 기본기를 잘 갖추고 있다면, 회사에 다니며 사회생활을 할 때 많은 도움이 된다. 특히 외부의 고객과 글을 주고받아야 하는 회사의 직무를 수행하고 있다면 좋은 문장을 만들어 글을 쓰는 능력은 정말 중요한 핵심 역량이다. 그 회사에서는 그런 역량을 갖춘 사람들이 쓰는 글이 고객들에게 가치를 전달하며 수익을 창출할 수 있기 때문이다. 가치가 전달되어야 고객들이 지갑을 열고, 결과적으로 회사의 매출을 높이도록 하는 데 일조할 수 있는 중요한 인력이 바로 글쓰기를 잘하는 인력이다.</p>
+<p>회사에서 ‘돈을 번다’는 행위는 고객에게 가치를 전달하고, 그 가치만큼의 금전적 재화를 청구하여 회사로 가져오는 활동을 말한다. 그러므로 돈을 벌기 위한 행위를 하는 모든 사람은 자신의 업무 성과를 글로 표현해야 할 필요가 있다. 돈 벌기를 위한 글쓰기를 할 때는 네 가지를 명심해야 좋은 문장을 만들 수 있다. ①정확하고, ②명료하게 그리고 ③간결하고, ④전문성을 담고 있도록 문장을 구성해야 한다. 그리고 본인의 글을 읽을 ‘대상 독자’가 누구인지를 명확히 해야 한다. 이에 대한 부분은 이후 <a href="../%ED%85%8C%EC%8A%A4%ED%84%B0%EC%9D%98%EA%B8%80%EC%93%B0%EA%B8%B0-04%ED%8E%B8">4편</a>, <a href="../%ED%85%8C%EC%8A%A4%ED%84%B0%EC%9D%98%EA%B8%80%EC%93%B0%EA%B8%B0-05%ED%8E%B8">5편</a>에서 추가로 언급하겠다.</p>
+<p>2022년, 너무나도 편리한 세상이다. 디지털 문화는 세상을 뒤덮고, 인류는 전에 볼 수 없던 속도로 온갖 새롭고 훌륭한 신문물들을 창조해내고 있다. 책 대신 좋은 영상들이 사람들의 여가를 차지했고, 뭔가를 정리하는 글쓰기 대신 댓글로 짤막하게 본인의 의견을 표출해낸다. 좋은 문장은 점점 그 가치를 잃어가고 메신저의 짤막한 글들이 대신 그 가치의 지위를 얻었다.</p>
+<p>그렇게 변해간 세상에서 그에 대한 반대급부로 사람들은 점점 더 책을 읽지 않게 되는 듯하다. 책을 많이 읽어 좋은 문장을 만들어 낼 수 있는 사람과 그렇지 않은 사람 간의 차이는 21세기 중반으로 넘어가면서 점점 벌어질 것이고, 이는 결국 머지않은 미래에 임금 격차와 빈부격차로 나타날 것이라 필자는 예상한다.</p>
+<br>
+
+<h2 id="‘대상-독자’를-명확히-파악하고-글쓰기"><a href="#‘대상-독자’를-명확히-파악하고-글쓰기" class="headerlink" title="‘대상 독자’를 명확히 파악하고 글쓰기"></a>‘대상 독자’를 명확히 파악하고 글쓰기</h2><p>회사에서 쓰는 글은 본인이 쓰고 싶은 대로 쓰는 게 아니다. 그렇게 글을 쓰고 싶다면 필자처럼 개인 블로그를 하는 쪽을 추천한다. 지금 필자가 블로그에 글을 쓰듯이, 이 글을 누가 읽을지 알 수 없는 상태에서 글을 쓰는 것과는 다르게 대부분 회사 업무에서 글쓰기를 할 때는 그 글을 읽게 될 「독자」가 명확하다. 그리고 그 ‘회사 내의 독자’들은 대부분 본인의 업무와 연봉을 결정짓는 의사결정권자들 혹은 본인을 평가하는 사람들인 경우가 상당히 많다.</p>
+<p>회사에 입사하기 전 학교에서 배우는 대부분의 글쓰기라는 게 에세이, 논술, 특정 주제에 대한 글짓기 정도에 한정되다 보니 특정 독자, 아니 정확히 표현해서 ‘보고 받을 사람’을 명확히 하고 글쓰기 하는 연습이 되어 있지 않은 상태에서 사회에 첫걸음을 하게 되는 경우가 대다수다. 그래서 이전 방식의 글쓰기 버릇을 쉽게 버리지 못하는 상태에서 발생하는 실수들이 많이 보인다. 다시 한번 강조하건대, 회사에서 글쓰기를 하는 경우 그 글을 읽는 사람, 혹은 독자를 명확히 파악하는 게 중요하다. 대부분 당신을 평가하는 사람들일 것이므로.</p>
+<p>어떤 문서를 작성하든 독자를 명확히 정하고 글을 쓰는 건 중요하다. 문서를 읽는 사람도 그 사람의 살아온 배경에 따라 쌓여 있는 지식의 종류가 모두 다르기 때문에 글 쓰는 사람이 독자를 상정하고 독자가 읽고 이해할 수 있도록 글을 쓰는 게 좋다.</p>
+<p>필자와 (같이 나이가 좀 있는 선배들과) 함께 일하는 사람들이라면 (소량의 혼남과 함께) 첨삭지도를 받을 수 있겠지만, 요새는 다양한 회사에서 다양한 환경에서 일을 하고, 평등함을 강조하고 있으며, 또 그래서 특정 부서가 유닛 형태로 1~2명만 존재하는 경우가 많아 이런 글쓰기를 배우기에 어려움을 이해한다.</p>
+<p>회사에서 문서를 만들 때는 문서 서두에 ‘문서 소개’에 해당 문서의 독자가 누구인지 명시하는 게 매우 좋은 방법이다. 본인이 누가 이 문서를 읽을지에 대해 가정했다는 걸 명시하는 게 좋다.</p>
+<p>예를 들어, 이런 경우를 상정해 보자. 만약 아래와 같은 상황이 고민이 된다면 어떻게 해야 할까?</p>
+<ul>
+<li>문서로 API 연동에 대해 설명해야 한다.</li>
+<li>보고를 받을 사람들 중에는 개발 전문가도 있지만, 비-전문가(의사결정권자)들도 있다.</li>
+</ul>
+<p>이런 경우 문서는 누구에 맞춰서 써야 할까? 대부분의 개발 문서들은 이런 경우 개발 전문가들이 읽을 것임을 상정하여 쓰인다. 그리고 이런 걸로 고민하는 직원을 대하게 되면 대부분 그냥 “그냥 다 해~” 라고 하곤 한다. “다 해라” 라니. 너무 무책임하게 들릴 수도 있다. 근데 이게 무슨 소리냐면, 이런 상황에서 API 문서를 만들거나, API와 관련한 보고서를 써야 한다면 고민하지 말고 그냥 두 개 모두 쓰고 난 후 목차에서 읽을 사람을 가릴 수 있도록 하거나, 혹은 문서의 서두에 ‘누구누구, 혹은 무슨무슨 역할은 여기저기만 읽으시오’ 하고 소개하면 된다는 이야기다. 문서를 별도로 두 개 이상 만들 이유도 없고, 그럴 필요도 없다. 기술 문서를 만들어야 한다면 API 연동 부분과 API에 대한 배경 설명을 분리해서 작성하면 된다.</p>
+<p>또 다른 예로, 꽤 비싼 가격의 소프트웨어 도구를 도입해야 하는 경우라면?</p>
+<p>이런 의사결정은 대부분 소프트웨어에 비-전문가들인 경영진들에 의해 결정되게 된다. 소프트웨어의 가치를 명확하게 이해하지 못하는 사람들에게 투자를 요청하는 과정에서의 글쓰기는 당연히 소프트웨어적인 관점 보다는 투자 대비 효율에 대한 관점으로 글쓰기 해야 한다. 큰 비용이지만, 이를 투자함으로 인해 얻어지는 결과를 명확히 설명할 수 있다면, 내부 업무 개선과 영업 이익 개선으로 이어짐을 설득해야 하는 것이다.</p>
+<p>그 외에도 회사 대 회사로 Business To Business(B2B) 사업을 하는 업무를 담당하고 있다면, 테크니컬 라이팅(Technical Writing) 역량이 매우 중요한 핵심 기술임을 이해해야 한다. 우리 회사에서는 당연한 것들이 상대 회사에는 당연하지 않을 수 있다는 점을 이해해야 하며, 명료하고 정확한 글쓰기를 할 줄 알아야 한다. (이에 대해서는 테크니컬 라이팅 강의를 듣거나, 도서를 구입하여 공부하시기를 추천한다.)</p>
+<p>같은 선상에서 엔지니어 대 개발자로 Engineer To Developer 업무를 수행해야 하는 프로젝트 조직 내에서 기획, 설계, 버그 리포팅 등 내부 인원들이 보는 문서를 작성해야 한다면, 이 또한 내부 인원들의 수준과 용어에 대한 이해, 내부 조직 문화 등 여러 상황을 고려하여 문서를 작성해야 한다.</p>
+<br>
+
+<h2 id="좋은-보고서-쓰기"><a href="#좋은-보고서-쓰기" class="headerlink" title="좋은 보고서 쓰기"></a>좋은 보고서 쓰기</h2><p>좋은 글쓰기 중 사회생활을 하는 우리가 알아야 하는 결정적인 지식은 ‘보고서 작성 방법’과 관련한 내용들이다. 인터넷 검색을 하면 다양한 주제와 많은 전문가가 각기 다른 관점으로 써둔 훌륭한 지식이 있다. 그러므로 필자의 글도 간단히 그 정도로 참고만 해 주시면 좋겠다.</p>
+<ol>
+<li><p>독자<br> • 보고서 작성 시 일한 사람 중심이 아닌 보고서를 읽을 사람(의사결정권자) 중심으로 써야 한다.</p>
+<br>
+</li>
+<li><p>결과의 위치와 성격<br> • 보고서는 두괄식으로 작성해야 한다. 보고 결과는 앞쪽에 표시되어야 한다. 결과를 뒤로 숨기지 않도록 한다.<br> • 보고 결과의 핵심을 요약해라. 어떻게 일했고, 뭐를 개선해야 하는지는 나중에 따로 정리해도 된다.</p>
+<br>
+</li>
+<li><p>초안<br> • 처음부터 완벽하게 쓰려고 하지 말고, 초안을 쓰고 고치는 방식으로 접근해라<br> • 초안을 쓰는 동안은 고치지 마라. 고치는 동안 뭘 작성하려 했는지 잊어버린다.<br> • 초안은 문서의 전체적인 구조를 잡는 데에만 집중하면서 작성하면 된다.</p>
+<br>
+</li>
+<li><p>본 작성<br> • 작성 시 초안을 고치면서 데이터가 정확한지 확인해라.<br> • 의사결정에 필요한 내용이라면 첨부해야 할 내용들을 모두 의사결정권자들이 알게 해야 한다.<br> • 읽기 쉽게, 읽는 사람이 재미를 느끼게 쓰는게 좋다.</p>
+<br>
+</li>
+<li><p>교정<br> • 초안-본 작성 후 교정 시에는 보고서를 쓰고, 고치다 보니 원래 목적했던 독자인 의사결정권자에게 필요하지 않은 내용이 있는지 확인한다.<br> • 교정 시에는 서두에 작성한 결과와 다른 데이터가 있는지, 있다면 왜인지 명확히 분석하고 다듬어야 한다.<br> • 보고서에는 절대 외국어, 줄임말, 유행어를 함부로 쓰지 마라. 교정 시 이 부분을 모두 명확한 용어로 변경하자.<br> • 10년 뒤에 보고서를 읽어도, 무슨 소린지 알 수 있도록 명확하게, 명료하게 작성하라.</p>
+<br>
+</li>
+<li><p>검토<br> • 보고하기 전에 주변에 검토해줄 사람을 찾아라. 직장 상사라는 건 그럴 때 쓰라고 있는 거다.<br> • 맞춤법 검사기 많으니 제발 검사 좀 해라.<br> • 보고서에 존재하는 잦은 오탈자는 보고서 데이터 전체의 신뢰를 망가뜨린다.</p>
+<br>
+</li>
+<li><p>마무리<br> • 문서 끝부분에는 결과 보고서와 관련한 참고 자료를 동봉하자. 예를 들어, 버그 리포트라면 버그 목록을 참고 자료로 첨부하는 식이다.<br> • 문서 마지막에는 함께 일한 동료들을 모두 언급하자. 함께 일한 우리 모두의 성과임을 잊지 말자. 성과를 독점하는 건 정말 나쁜 짓이다.</p>
+</li>
+</ol>
+<br>
+
+<p>3편 끝. <a href="../%ED%85%8C%EC%8A%A4%ED%84%B0%EC%9D%98%EA%B8%80%EC%93%B0%EA%B8%B0-04%ED%8E%B8">4편</a>에서 계속.</p>
+<br>
+
+<hr>
+<h2 id="참고-자료"><a href="#참고-자료" class="headerlink" title="참고 자료"></a>참고 자료</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.korean.go.kr/nkview/nklife/1999_4/1999_0405.pdf">https://www.korean.go.kr/nkview/nklife/1999_4/1999_0405.pdf</a></li>
+<li><a target="_blank" rel="noopener" href="https://plainkorean.kr/ko/index.do">https://plainkorean.kr/ko/index.do</a></li>
+<li><a target="_blank" rel="noopener" href="https://m.blog.naver.com/pinkbiru/221566511577">https://m.blog.naver.com/pinkbiru/221566511577</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.naver.com/sshhllee/220967390624">https://blog.naver.com/sshhllee/220967390624</a></li>
+<li><a target="_blank" rel="noopener" href="https://tech.kakaoenterprise.com/105">https://tech.kakaoenterprise.com/105</a></li>
+<li><a target="_blank" rel="noopener" href="https://papasean.tistory.com/13">https://papasean.tistory.com/13</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.hansol.com/369">https://blog.hansol.com/369</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.saysamyang.com/73">https://www.saysamyang.com/73</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.pressian.com/pages/articles/222110">https://www.pressian.com/pages/articles/222110</a></li>
+<li><a target="_blank" rel="noopener" href="https://m.thesingle.co.kr/article/599845/THESINGLE">https://m.thesingle.co.kr/article/599845/THESINGLE</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.daum.net/sikdang/372">https://blog.daum.net/sikdang/372</a></li>
+<li><a target="_blank" rel="noopener" href="https://brunch.co.kr/@photothink/73">https://brunch.co.kr/@photothink/73</a></li>
+<li><a target="_blank" rel="noopener" href="https://pajustory.tistory.com/1486">https://pajustory.tistory.com/1486</a></li>
+<li>Thumbnail image : <a target="_blank" rel="noopener" href="https://unsplash.com/photos/s9CC2SKySJM">https://unsplash.com/photos/s9CC2SKySJM</a></li>
+</ul>
+<br>
+
+        </div>
+        <script data-ad-client="ca-pub-4791569760042130" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- Google Adsense 삽입 : layout과 article에 삽입 -->
+        <footer class="article-footer">
+            <!-- 
+
+
+
+    <a data-url="https://xeppetto.github.io/Software-Testing-and-QA/%ED%85%8C%EC%8A%A4%ED%8C%85-%EC%8B%A4%EB%AC%B4/%ED%85%8C%EC%8A%A4%ED%8C%85-%EB%B2%84%EA%B7%B8%EB%B3%B4%EA%B3%A0/%ED%85%8C%EC%8A%A4%ED%84%B0%EC%9D%98%EA%B8%80%EC%93%B0%EA%B8%B0-03%ED%8E%B8/" data-id="cl9155lzo005y13rd94k21oc6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            /* 
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="KakaoTalk"></a>',
+                            */
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+ -->
+            <!-- hexo에서 redirection 오류가 나기도 하고, 굳이 온갖 Social Media를 다 Share 관리하는 것도 의미 없다고 생각해서 comment out -->
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Xeppetto"
+        },
+        "headline": "[테스팅 실무] 더 나은 버그 보고를 위한 테스터의 글쓰기 3편",
+        "image": "https://xeppetto.github.io/thumbnails/Software/Writing.png",
+        "keywords": "글쓰기 소프트웨어 테스팅 실무 버그보고 한글 한국어 맞춤법 글 잘 쓰는 방법",
+        "genre": "소프트웨어 테스팅 버그 보고",
+        "datePublished": "2022-05-01",
+        "dateCreated": "2022-05-01",
+        "dateModified": "2022-05-01",
+        "url": "https://xeppetto.github.io/Software-Testing-and-QA/테스팅-실무/테스팅-버그보고/테스터의글쓰기-03편/",
+        "description": "이번 편은 좋은 글을 쓰는 방법에 대해 세 가지 정도를 소개한다. 모두 글쓰기 시 알고 있으면 좋은 내용들이다. 
+필자는 실무에서 Technical Writer(테크니컬 라이터)로서 혹은 다른 여러 직무를 수행하면서 업무에 필요한 글쓰기를 하거나, 개인 취미로 블로그에 글쓰기를 하는 사람이다. 그러니 필자가 하는 조언만으로 글쓰기를 잘 할 수는 없다. 이렇",
+        "wordCount": 1370
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        <script src="https://utteranc.es/client.js"
+        repo="Xeppetto/xeppetto.github.io_comment"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <div id="jake-sidebar">
+            <a href="/" class="jake-sidebar-logo"></a>
+    </div>
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>CONTACT:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Xeppetto" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/jake.junghoon.park/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/xeppetto/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/Software-Testing-and-QA/%ED%85%8C%EC%8A%A4%ED%8C%85-%EC%8B%A4%EB%AC%B4/%ED%85%8C%EC%8A%A4%ED%8C%85-%EB%B2%84%EA%B7%B8%EB%B3%B4%EA%B3%A0/%ED%85%8C%EC%8A%A4%ED%84%B0%EC%9D%98%EA%B8%80%EC%93%B0%EA%B8%B0-04%ED%8E%B8/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">다음</strong>
+        <p class="article-nav-title">
+        
+            [테스팅 실무] 더 나은 버그 보고를 위한 테스터의 글쓰기 4편
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/Xeppetto/ThisBlog/20220430-localhost%EC%97%90%EC%84%9C-%EC%97%B4%EC%8B%AC%ED%9E%88-%EC%9E%91%EC%84%B1-%EC%A4%91/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">이전</strong>
+        <p class="article-nav-title">Localhost에서 블로그 글쓰기</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">RECENT POSTS</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-and-Docker/20-WSL2-Docker-React/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Software/react.png)" alt="[WSL] WSL2 - Docker - React 설치" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/">소프트웨어</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-Docker/">WSL & Docker</a></p>
+                            <p class="item-title"><a href="/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-and-Docker/20-WSL2-Docker-React/" class="title">[WSL] WSL2 - Docker - React 설치</a></p>
+                            <p class="item-date"><time datetime="2022-09-09T00:09:00.000Z" itemprop="datePublished">2022년 09월 09일</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/Xeppetto/%EB%8B%A8%EC%83%81(%E6%96%B7%E6%83%B3)/20220806-the-art-of-problem-solving/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Xeppetto/2022/the-art-of-problem-solving.png)" alt="[斷想] 문제해결의 기술(The Art of Problem Solving)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/X%EC%9D%98%E8%A9%B1/">X의話</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/X%EC%9D%98%E8%A9%B1/X%EC%9D%98-%E6%96%B7%E6%83%B3/">X의 斷想</a></p>
+                            <p class="item-title"><a href="/Xeppetto/%EB%8B%A8%EC%83%81(%E6%96%B7%E6%83%B3)/20220806-the-art-of-problem-solving/" class="title">[斷想] 문제해결의 기술(The Art of Problem Solving)</a></p>
+                            <p class="item-date"><time datetime="2022-08-06T11:06:00.000Z" itemprop="datePublished">2022년 08월 06일</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/Xeppetto/About-Me-and-My-thought/20220629-my-first-product-manager-role-ended/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/AboutMeAndMyThought/2022/20220628_product_manager.png)" alt="프로덕트 매니저 역할, 하나의 마침표" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/X%EC%9D%98%E8%A9%B1/">X의話</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/X%EC%9D%98%E8%A9%B1/Lv8-%E3%81%AE%EA%BD%83%E6%80%AA%E7%8D%B8/">Lv8+の꽃怪獸</a></p>
+                            <p class="item-title"><a href="/Xeppetto/About-Me-and-My-thought/20220629-my-first-product-manager-role-ended/" class="title">프로덕트 매니저 역할, 하나의 마침표</a></p>
+                            <p class="item-date"><time datetime="2022-06-29T09:29:00.000Z" itemprop="datePublished">2022년 06월 29일</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/%EB%AC%B4%EC%97%87%EC%9D%B4-%EC%98%B3%EC%9D%80%EA%B0%80/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Learning/book-and-library.png)" alt="[책과 생각] 무엇이 옳은가" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%EB%B0%B0%EC%9B%80/">배움</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/">독서</a></p>
+                            <p class="item-title"><a href="/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/%EB%AC%B4%EC%97%87%EC%9D%B4-%EC%98%B3%EC%9D%80%EA%B0%80/" class="title">[책과 생각] 무엇이 옳은가</a></p>
+                            <p class="item-date"><time datetime="2022-06-26T21:27:00.000Z" itemprop="datePublished">2022년 06월 27일</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/%EB%A7%8C%EB%93%A4%EB%A9%B4%EC%84%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EC%9B%8C%EB%93%9C%ED%94%84%EB%A0%88%EC%8A%A4/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Learning/book-and-library.png)" alt="[책과 생각] 만들면서 배우는 워드프레스" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%EB%B0%B0%EC%9B%80/">배움</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/">독서</a></p>
+                            <p class="item-title"><a href="/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/%EB%A7%8C%EB%93%A4%EB%A9%B4%EC%84%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EC%9B%8C%EB%93%9C%ED%94%84%EB%A0%88%EC%8A%A4/" class="title">[책과 생각] 만들면서 배우는 워드프레스</a></p>
+                            <p class="item-date"><time datetime="2022-06-16T21:17:00.000Z" itemprop="datePublished">2022년 06월 17일</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">STORIES</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/">X의話</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/Lv8-%E3%81%AE%EA%BD%83%E6%80%AA%E7%8D%B8/">Lv8+の꽃怪獸</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/X%EC%9D%98-%E6%96%B7%E6%83%B3/">X의 斷想</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/%E6%97%A5%E6%96%B0%E5%8F%88%E6%97%A5%E6%96%B0/">日新又日新</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%9D%B4%EC%95%BC%EA%B8%B0/">블로그 이야기</a><span class="category-list-count">10</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EB%B0%B0%EC%9B%80/">배움</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/">독서</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EB%B0%B0%EC%9B%80/%EB%AA%85%EC%96%B8/">명언</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/">소프트웨어</a><span class="category-list-count">50</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Markdown/">Markdown</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Operating-Systems/">Operating Systems</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Operating-Systems/Windows/">Windows</a><span class="category-list-count">12</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Tools/">Tools</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-Docker/">WSL & Docker</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%EA%B2%8C%EC%9E%84/">게임</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%EB%8F%84%EA%B5%AC%EA%B0%9C%EB%B0%9C/">도구개발</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%ED%85%8C%EC%8A%A4%ED%8C%85/">테스팅</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%ED%85%8C%EC%8A%A4%ED%8C%85/%EB%B2%84%EA%B7%B8-%EB%B3%B4%EA%B3%A0/">버그 보고</a><span class="category-list-count">6</span></li></ul></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/AMD/" style="font-size: 10.71px;">AMD</a> <a href="/tags/About/" style="font-size: 15.71px;">About</a> <a href="/tags/Address/" style="font-size: 10px;">Address</a> <a href="/tags/Apt/" style="font-size: 10px;">Apt</a> <a href="/tags/Blog/" style="font-size: 17.86px;">Blog</a> <a href="/tags/Browser/" style="font-size: 10px;">Browser</a> <a href="/tags/CommonMark/" style="font-size: 10px;">CommonMark</a> <a href="/tags/Compatibility/" style="font-size: 10px;">Compatibility</a> <a href="/tags/Computer/" style="font-size: 10px;">Computer</a> <a href="/tags/Context-Menu/" style="font-size: 13.57px;">Context Menu</a> <a href="/tags/Database/" style="font-size: 12.86px;">Database</a> <a href="/tags/Decoding/" style="font-size: 10px;">Decoding</a> <a href="/tags/Development/" style="font-size: 19.29px;">Development</a> <a href="/tags/Docker/" style="font-size: 17.86px;">Docker</a> <a href="/tags/Encoding/" style="font-size: 10px;">Encoding</a> <a href="/tags/Environment/" style="font-size: 19.29px;">Environment</a> <a href="/tags/GFM/" style="font-size: 15.71px;">GFM</a> <a href="/tags/GPT/" style="font-size: 10px;">GPT</a> <a href="/tags/Github/" style="font-size: 16.43px;">Github</a> <a href="/tags/Grammar/" style="font-size: 12.14px;">Grammar</a> <a href="/tags/HTML/" style="font-size: 16.43px;">HTML</a> <a href="/tags/Install/" style="font-size: 10px;">Install</a> <a href="/tags/Installation/" style="font-size: 10px;">Installation</a> <a href="/tags/Learning/" style="font-size: 10.71px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.86px;">Linux</a> <a href="/tags/MBR/" style="font-size: 10px;">MBR</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 16.43px;">Markdown</a> <a href="/tags/Markup/" style="font-size: 16.43px;">Markup</a> <a href="/tags/Microsoft-Office/" style="font-size: 10px;">Microsoft Office</a> <a href="/tags/Music/" style="font-size: 10.71px;">Music</a> <a href="/tags/No-Code/" style="font-size: 10px;">No Code</a> <a href="/tags/Notepad/" style="font-size: 10px;">Notepad</a> <a href="/tags/Notepad/" style="font-size: 10px;">Notepad++</a> <a href="/tags/OSX/" style="font-size: 10px;">OSX</a> <a href="/tags/Operating-System/" style="font-size: 20px;">Operating System</a> <a href="/tags/Package-Manager/" style="font-size: 10px;">Package Manager</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Problem-Solving/" style="font-size: 10px;">Problem Solving</a> <a href="/tags/Product-Manager/" style="font-size: 10px;">Product Manager</a> <a href="/tags/QA/" style="font-size: 10px;">QA</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/SCM-Music-Player/" style="font-size: 10.71px;">SCM Music Player</a> <a href="/tags/SQLServer/" style="font-size: 10px;">SQLServer</a> <a href="/tags/Secure-Boot/" style="font-size: 10px;">Secure Boot</a> <a href="/tags/Storage/" style="font-size: 10px;">Storage</a> <a href="/tags/TPM/" style="font-size: 10px;">TPM</a> <a href="/tags/Tester/" style="font-size: 10px;">Tester</a> <a href="/tags/Testing/" style="font-size: 10px;">Testing</a> <a href="/tags/Tibero/" style="font-size: 10px;">Tibero</a> <a href="/tags/Tool/" style="font-size: 10.71px;">Tool</a> <a href="/tags/Update/" style="font-size: 10px;">Update</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/WSL/" style="font-size: 18.57px;">WSL</a> <a href="/tags/WSL1/" style="font-size: 11.43px;">WSL1</a> <a href="/tags/WSL2/" style="font-size: 11.43px;">WSL2</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Web-Standard/" style="font-size: 10px;">Web Standard</a> <a href="/tags/Windows/" style="font-size: 19.29px;">Windows</a> <a href="/tags/Windows10/" style="font-size: 15px;">Windows10</a> <a href="/tags/Windows11/" style="font-size: 12.86px;">Windows11</a> <a href="/tags/Writer/" style="font-size: 15.71px;">Writer</a> <a href="/tags/Xeppetto/" style="font-size: 15.71px;">Xeppetto</a> <a href="/tags/Youtube/" style="font-size: 10.71px;">Youtube</a> <a href="/tags/convert/" style="font-size: 10px;">convert</a> <a href="/tags/fTPM/" style="font-size: 10px;">fTPM</a> <a href="/tags/mySQL/" style="font-size: 10px;">mySQL</a> <a href="/tags/%EA%B0%84%EB%94%94/" style="font-size: 10px;">간디</a> <a href="/tags/%EA%B0%90%EC%82%AC%EC%9D%B8%EC%82%AC/" style="font-size: 10px;">감사인사</a> <a href="/tags/%EA%B0%95%ED%95%9C-%EA%B2%83/" style="font-size: 10px;">강한 것</a> <a href="/tags/%EA%B0%9C%EB%B0%9C%EC%9E%90/" style="font-size: 10px;">개발자</a> <a href="/tags/%EA%B0%9C%EC%9D%B8-%EC%82%AC%EC%A7%84/" style="font-size: 10px;">개인 사진</a> <a href="/tags/%EA%B0%9C%EC%9D%B8-%EC%83%9D%EA%B0%81/" style="font-size: 15px;">개인 생각</a> <a href="/tags/%EA%B0%9C%EC%9D%B8-%EC%9D%98%EA%B2%AC/" style="font-size: 12.86px;">개인 의견</a> <a href="/tags/%EA%B0%9C%EC%9D%B8-%EC%B7%A8%ED%96%A5/" style="font-size: 10.71px;">개인 취향</a> <a href="/tags/%EA%B1%B0%EC%A7%93/" style="font-size: 10px;">거짓</a> <a href="/tags/%EA%B1%B4%EA%B0%95%ED%95%98%EA%B2%8C-%EC%82%B4%EA%B8%B0/" style="font-size: 13.57px;">건강하게 살기</a> <a href="/tags/%EA%B2%8C%EC%9E%84/" style="font-size: 12.86px;">게임</a> <a href="/tags/%EA%B2%BD%EB%A0%A5/" style="font-size: 10px;">경력</a> <a href="/tags/%EA%B3%A0%EB%AF%BC/" style="font-size: 10px;">고민</a> <a href="/tags/%EA%B3%BC%EA%B1%B0/" style="font-size: 10px;">과거</a> <a href="/tags/%EA%B5%AD%EB%82%B4%EB%8F%84%EC%84%9C/" style="font-size: 12.86px;">국내도서</a> <a href="/tags/%EA%B5%AD%EC%96%B4%EB%A5%BC-%EC%A6%90%EA%B2%81%EA%B2%8C/" style="font-size: 11.43px;">국어를 즐겁게</a> <a href="/tags/%EA%B7%B8%EB%83%A5-%EC%9D%B4%EB%9F%B0-%EB%86%88%EC%9D%B4%EA%B5%AC%EB%82%98/" style="font-size: 10.71px;">그냥 이런 놈이구나</a> <a href="/tags/%EA%B7%B9%EB%B3%B5/" style="font-size: 10px;">극복</a> <a href="/tags/%EA%B8%80-%EC%9E%98-%EC%93%B0%EB%8A%94-%EB%B0%A9%EB%B2%95/" style="font-size: 14.29px;">글 잘 쓰는 방법</a> <a href="/tags/%EA%B8%80%EC%93%B0%EA%B8%B0/" style="font-size: 15px;">글쓰기</a> <a href="/tags/%EA%B8%B0%ED%9A%8C/" style="font-size: 10px;">기회</a> <a href="/tags/%EA%B9%83%ED%97%99/" style="font-size: 16.43px;">깃헙</a> <a href="/tags/%EA%B9%A8%EB%8B%AB%EB%8A%94-%EA%B2%83/" style="font-size: 10px;">깨닫는 것</a> <a href="/tags/%EB%82%98/" style="font-size: 10px;">나</a> <a href="/tags/%EB%82%98%EC%9D%B4-%EB%93%A4%EC%96%B4%EA%B0%90/" style="font-size: 10px;">나이 들어감</a> <a href="/tags/%EB%82%98%ED%98%BC%EC%9E%90-%EB%86%80%EA%B8%B0/" style="font-size: 10px;">나혼자 놀기</a> <a href="/tags/%EB%82%B4-%EA%B2%BD%ED%97%98/" style="font-size: 10px;">내 경험</a> <a href="/tags/%EB%82%B4%EA%B0%80-%EC%8B%AB%EC%96%B4%ED%95%98%EB%8A%94-%EA%B2%83/" style="font-size: 10px;">내가 싫어하는 것</a> <a href="/tags/%EB%82%B4%EA%B0%80-%EC%A2%8B%EC%95%84%ED%95%98%EB%8A%94-%EA%B2%83/" style="font-size: 10px;">내가 좋아하는 것</a> <a href="/tags/%EB%86%80%EC%9E%90/" style="font-size: 12.86px;">놀자</a> <a href="/tags/%EB%89%B4%EC%8A%A4/" style="font-size: 10px;">뉴스</a> <a href="/tags/%EB%8B%A8%EC%83%81/" style="font-size: 15px;">단상</a> <a href="/tags/%EB%8C%80%ED%95%9C%EC%9D%98%EA%B5%B0-%EC%B0%B8%EB%AA%A8%EC%A4%91%EC%9E%A5/" style="font-size: 10px;">대한의군 참모중장</a> <a href="/tags/%EB%8C%93%EA%B8%80-%EA%B8%88%EC%A7%80/" style="font-size: 10.71px;">댓글 금지</a> <a href="/tags/%EB%8F%84%EB%84%A4%EB%A6%AC%EC%B9%B4%EB%85%B8/" style="font-size: 10.71px;">도네리카노</a> <a href="/tags/%EB%8F%84%EC%84%9C/" style="font-size: 10px;">도서</a> <a href="/tags/%EB%8F%85%EC%84%9C/" style="font-size: 12.86px;">독서</a> <a href="/tags/%EB%8F%85%ED%9B%84%EA%B0%90/" style="font-size: 12.86px;">독후감</a> <a href="/tags/%EB%9E%84%ED%94%84-%EC%97%90%EB%A8%B8%EC%8A%A8/" style="font-size: 10px;">랄프 에머슨</a> <a href="/tags/%EB%A7%88%EC%9A%B0%EC%8A%A4-%EC%9A%B0%ED%81%B4%EB%A6%AD-%EB%A9%94%EB%89%B4/" style="font-size: 13.57px;">마우스 우클릭 메뉴</a> <a href="/tags/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/" style="font-size: 16.43px;">마크다운</a> <a href="/tags/%EB%A7%8C%EB%93%A4%EA%B8%B0/" style="font-size: 10px;">만들기</a> <a href="/tags/%EB%A7%9E%EC%B6%A4%EB%B2%95/" style="font-size: 14.29px;">맞춤법</a> <a href="/tags/%EB%A7%A4%EB%89%B4%EC%96%BC/" style="font-size: 12.86px;">매뉴얼</a> <a href="/tags/%EB%A7%A4%EC%9D%BC-%EA%B8%80%EC%93%B0%EA%B8%B0/" style="font-size: 10px;">매일 글쓰기</a> <a href="/tags/%EB%AA%85%EC%82%AC%ED%99%94/" style="font-size: 10px;">명사화</a> <a href="/tags/%EB%AA%85%EC%96%B8/" style="font-size: 12.86px;">명언</a> <a href="/tags/%EB%AA%A8%EB%A5%B4%EB%8A%94-%EA%B2%83/" style="font-size: 10px;">모르는 것</a> <a href="/tags/%EB%AA%A8%EC%9C%BC%EA%B8%B0/" style="font-size: 10px;">모으기</a> <a href="/tags/%EB%AC%B4%EC%97%87%EC%9D%B4-%EC%98%B3%EC%9D%80%EA%B0%80/" style="font-size: 10px;">무엇이 옳은가</a> <a href="/tags/%EB%AC%B8%EC%A0%9C/" style="font-size: 10px;">문제</a> <a href="/tags/%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0/" style="font-size: 10px;">문제 해결</a> <a href="/tags/%EB%AF%B8%EB%9E%98/" style="font-size: 10px;">미래</a> <a href="/tags/%EB%B0%B0%EA%B2%BD%EC%9D%8C%EC%95%85/" style="font-size: 10.71px;">배경음악</a> <a href="/tags/%EB%B0%B0%EC%9B%80/" style="font-size: 14.29px;">배움</a> <a href="/tags/%EB%B2%84%EA%B7%B8%EB%B3%B4%EA%B3%A0/" style="font-size: 14.29px;">버그보고</a> <a href="/tags/%EB%B3%80%ED%99%94/" style="font-size: 10px;">변화</a> <a href="/tags/%EB%B8%94%EB%A1%9C%EA%B7%B8/" style="font-size: 10.71px;">블로그</a> <a href="/tags/%EC%82%AC%EB%9E%8C%EC%9E%84/" style="font-size: 10px;">사람임</a> <a href="/tags/%EC%82%AC%EC%97%85/" style="font-size: 10px;">사업</a> <a href="/tags/%EC%83%88-%ED%95%B4-%EA%B3%84%ED%9A%8D/" style="font-size: 10.71px;">새 해 계획</a> <a href="/tags/%EC%83%9D%EA%B0%81/" style="font-size: 10px;">생각</a> <a href="/tags/%EC%84%B1%EA%B3%B5/" style="font-size: 10px;">성공</a> <a href="/tags/%EC%84%B8%EC%83%81/" style="font-size: 10.71px;">세상</a> <a href="/tags/%EC%86%8C%EA%B0%9C/" style="font-size: 10px;">소개</a> <a href="/tags/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/" style="font-size: 17.14px;">소프트웨어</a> <a href="/tags/%EC%8B%9C/" style="font-size: 10px;">시</a> <a href="/tags/%EC%8B%9C%EC%9E%91/" style="font-size: 10px;">시작</a> <a href="/tags/%EC%8B%A0%EB%A2%B0/" style="font-size: 10px;">신뢰</a> <a href="/tags/%EC%8B%A4%EB%AC%B4/" style="font-size: 14.29px;">실무</a> <a href="/tags/%EC%95%84%EB%8A%94-%EA%B2%83/" style="font-size: 10px;">아는 것</a> <a href="/tags/%EC%95%85/" style="font-size: 10px;">악</a> <a href="/tags/%EC%95%88%EB%82%B4%EC%84%9C/" style="font-size: 12.86px;">안내서</a> <a href="/tags/%EC%95%88%EC%A4%91%EA%B7%BC/" style="font-size: 10px;">안중근</a> <a href="/tags/%EC%95%A0%EC%9E%90%EC%9D%BC/" style="font-size: 10px;">애자일</a> <a href="/tags/%EC%95%A0%EC%9E%90%EC%9D%BC-%EA%B0%9C%EB%B0%9C/" style="font-size: 10px;">애자일 개발</a> <a href="/tags/%EC%95%A0%EC%9E%90%EC%9D%BC-%EA%B0%9C%EB%B0%9C%EC%9D%B4%EB%8B%A4/" style="font-size: 10px;">애자일 개발이다</a> <a href="/tags/%EC%95%A0%EC%9E%90%EC%9D%BC%EC%9D%80-%EC%97%86%EB%8B%A4/" style="font-size: 10px;">애자일은 없다</a> <a href="/tags/%EC%95%BD%ED%95%9C-%EA%B2%83/" style="font-size: 10px;">약한 것</a> <a href="/tags/%EC%96%B4%EB%A0%A4%EC%9B%80/" style="font-size: 10px;">어려움</a> <a href="/tags/%EC%97%B4%EC%A0%95/" style="font-size: 10px;">열정</a> <a href="/tags/%EC%9B%8C%EB%93%9C%ED%94%84%EB%A0%88%EC%8A%A4/" style="font-size: 10px;">워드프레스</a> <a href="/tags/%EC%9D%8C%EC%95%85/" style="font-size: 10.71px;">음악</a> <a href="/tags/%EC%9D%98%EC%82%AC/" style="font-size: 10px;">의사</a> <a href="/tags/%EC%9D%B8/" style="font-size: 10px;">인</a> <a href="/tags/%EC%9D%B8%EA%B0%84%EB%8B%B5%EA%B2%8C-%EC%82%B4%EA%B8%B0/" style="font-size: 12.14px;">인간답게 살기</a> <a href="/tags/%EC%9D%B8%EC%83%9D/" style="font-size: 16.43px;">인생</a> <a href="/tags/%EC%9D%B8%EC%83%9D-%EB%85%B8%EB%9E%98/" style="font-size: 10.71px;">인생 노래</a> <a href="/tags/%EC%9D%B8%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8/" style="font-size: 10px;">인스타그램</a> <a href="/tags/%EC%9D%B8%EC%9C%BC%EB%A1%9C-%EC%95%85%EC%97%90-%EB%8C%80%EC%A0%81%ED%95%9C%EB%8B%A4/" style="font-size: 10px;">인으로 악에 대적한다</a> <a href="/tags/%EC%9E%90%EA%B8%B0%EA%B3%84%EB%B0%9C/" style="font-size: 10px;">자기계발</a> <a href="/tags/%EC%9E%90%EB%8F%99%EC%99%84%EC%84%B1/" style="font-size: 10px;">자동완성</a> <a href="/tags/%EC%9E%90%EC%84%B8/" style="font-size: 10px;">자세</a> <a href="/tags/%EC%9E%90%EC%95%84/" style="font-size: 10px;">자아</a> <a href="/tags/%EC%9E%AC%EB%B0%8B%EB%8B%A4/" style="font-size: 12.86px;">재밋다</a> <a href="/tags/%EC%9E%AC%EB%B0%8B%EC%9C%BC%EB%A9%B4-%EA%B7%B8%EB%A7%8C/" style="font-size: 10px;">재밋으면 그만</a> <a href="/tags/%EC%A0%95%EC%B2%B4%EC%84%B1/" style="font-size: 10px;">정체성</a> <a href="/tags/%EC%A0%9C%ED%92%88-%EA%B4%80%EB%A6%AC%EC%9E%90/" style="font-size: 10px;">제품 관리자</a> <a href="/tags/%EC%A2%8B%EC%9D%80-%ED%9A%8C%EC%82%AC/" style="font-size: 10px;">좋은 회사</a> <a href="/tags/%EC%A6%90%EA%B2%81%EA%B2%8C-%EA%B8%80%EC%93%B0%EA%B8%B0/" style="font-size: 10.71px;">즐겁게 글쓰기</a> <a href="/tags/%EC%A6%90%EA%B2%81%EA%B2%8C-%EC%82%B4%EA%B8%B0/" style="font-size: 15px;">즐겁게 살기</a> <a href="/tags/%EC%A6%90%EA%B8%B0%EC%9E%90/" style="font-size: 12.86px;">즐기자</a> <a href="/tags/%EC%B0%BD%EC%A1%B0/" style="font-size: 10px;">창조</a> <a href="/tags/%EC%B1%85%EA%B3%BC-%EB%82%B4-%EC%83%9D%EA%B0%81/" style="font-size: 12.86px;">책과 내 생각</a> <a href="/tags/%EC%B2%9C%EB%85%84%EB%82%98%EB%AC%B4/" style="font-size: 17.86px;">천년나무</a> <a href="/tags/%EC%B7%A8%EB%AF%B8/" style="font-size: 10px;">취미</a> <a href="/tags/%EC%BB%A4%ED%94%BC/" style="font-size: 10.71px;">커피</a> <a href="/tags/%EC%BF%A0%ED%82%A4-%EC%95%84%EB%8B%98/" style="font-size: 10px;">쿠키 아님</a> <a href="/tags/%ED%85%8C%EC%8A%A4%ED%8C%85/" style="font-size: 14.29px;">테스팅</a> <a href="/tags/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%9D%98-%EA%B5%AC%EC%A1%B0%EB%A5%BC-%ED%8C%8C%EC%95%85%ED%95%98%EA%B8%B0/" style="font-size: 10px;">프로세스의 구조를 파악하기</a> <a href="/tags/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/" style="font-size: 10px;">프로젝트</a> <a href="/tags/%ED%94%8C%EB%A6%BD%EC%82%AC%EC%9D%B4%EB%93%9C/" style="font-size: 10px;">플립사이드</a> <a href="/tags/%ED%95%99%EC%8A%B5/" style="font-size: 10.71px;">학습</a> <a href="/tags/%ED%95%9C%EA%B5%AD%EC%96%B4/" style="font-size: 14.29px;">한국어</a> <a href="/tags/%ED%95%9C%EA%B8%80/" style="font-size: 14.29px;">한글</a> <a href="/tags/%ED%95%A8%EA%BB%98-%EC%82%AC%EB%8A%94-%EC%84%B8%EC%83%81/" style="font-size: 10px;">함께 사는 세상</a> <a href="/tags/%ED%95%B4%EA%B2%B0%EC%9D%98-%ED%96%89%EC%9C%84/" style="font-size: 10px;">해결의 행위</a> <a href="/tags/%ED%98%84%EC%9E%AC/" style="font-size: 10px;">현재</a> <a href="/tags/%ED%98%BC%EC%9E%A3%EB%A7%90/" style="font-size: 13.57px;">혼잣말</a> <a href="/tags/%ED%9B%84%EC%9B%90/" style="font-size: 11.43px;">후원</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">ALLIANCES &amp; BRETHRENS</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://cafe.naver.com/swtester">소프트웨어 테스트와 품질 카페</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://softwaretestingreference.tistory.com/">소프트웨어 테스팅 참고서</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://blog.naver.com/mibbeuda">복어수 블로그</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://blog.naver.com/cysdma">아이티마니 블로그</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://softwareqalab.tistory.com/">아이티마니 성능테스트 블로그</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://qa-testing.tistory.com/">품생품사 블로그</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://qa-linesong.netlify.app/">현의노래 블로그</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                <!-- I am collecting songs I've heard from my childhood -->
+<!-- SCM Music Player https://www.scmplayer.net -->
+<script type="text/javascript" src="https://www.scmplayer.net/script.js" 
+data-config="{
+'skin': 'skins/scmGreen/skin.css',
+'volume': 50,
+'autoplay': false,
+'shuffle': true,
+'repeat': 1,
+'placement': 'bottom',
+'showplaylist': false,
+'playlist':[
+  {'title':'4 Non Blondes - What\'s Up','url':'https://youtu.be/6NXnxTNIWkc'},
+  {'title':'Alanis Morissette - You Oughta Know','url':'https://youtu.be/NPcyTyilmYY'},
+  {'title':'Barbra Streisand - The Way We Were','url':'https://youtu.be/uBPQT2Ia8fU'},
+  {'title':'Bee Gees - How Deep Is Your Love','url':'https://youtu.be/XpqqjU7u5Yc'},
+  {'title':'Ben E. King - Stand By Me','url':'https://youtu.be/z5i9vT8wGY8'},
+  {'title':'Bertie Higgins - Casablanca','url':'https://youtu.be/JNL337qKC5s'},
+  {'title':'Blur - Song 2','url':'https://youtu.be/Wc18xt5wQnk'},
+  {'title':'Carpenters - Top Of The World','url':'https://youtu.be/dewlH6HSDzk'},
+  {'title':'Dooley Wilson - As Time Goes By','url':'https://youtu.be/d22CiKMPpaY'},
+  {'title':'Eric Clapton - Autumn Leaves','url':'https://youtu.be/UQlFOX0YKlQ'},
+  {'title':'Green Days - Basket Case','url':'https://youtu.be/NUTGr5t3MoY'},
+  {'title':'Hugh Grant and Haley Bennett - Way Back Into Love','url':'https://youtu.be/0bwWy67MsOU'},
+  {'title':'Imagine - Johnlennon','url':'https://youtu.be/YkgkThdzX-8'},
+  {'title':'Lady Gaga, Bradley Cooper - Shallow','url':'https://youtu.be/bo_efYhYU2A'},
+  {'title':'Lori Lieberman - Killing Me Softly','url':'https://youtu.be/qRXrNPSwX20'},
+  {'title':'Louis Armstrong - What A Wonderful World','url':'https://youtu.be/A3yCcXgbKrE'},
+  {'title':'Michael Buble - Quando Quando (Feat. Nelly Furtado)','url':'https://youtu.be/tTYzGEvLvMc'},
+  {'title':'Michael Jackson - Billie Jean','url':'https://youtu.be/Zi_XLOBDo_Y'},
+  {'title':'Michael Jackson - Heal the world','url':'https://youtu.be/BWf-eARnf6U'},
+  {'title':'Nathan Evans - Wellerman','url':'https://youtu.be/M26V1IWAP-E'},
+  {'title':'Nirvana - Smells Like Teen Spirit','url':'https://youtu.be/hTWKbfoikeg'},
+  {'title':'The Carpenters - Yesterday Once More','url':'https://youtu.be/YTaWayUE5XA'},
+  {'title':'Peggy March - I Will Follow Him ','url':'https://youtu.be/jgPMYQTINNk'},
+  {'title':'Pharrell Williams - Happy ','url':'https://youtu.be/ZbZSe6N_BXs'},
+  {'title':'Queen - Bohemian Rapsody','url':'https://youtu.be/fJ9rUzIMcZQ'},
+  {'title':'Queen - Love of my life','url':'https://youtu.be/sUJkCXE4sAA'},
+  {'title':'Ricky Martin - Livin\' La Vida Loca', 'url':'https://youtu.be/p47fEXGabaY'},
+  {'title':'Robert Palmer - Bad Case Of Loving You','url':'https://youtu.be/87hAnSXfMRQ'},
+  {'title':'Stevie Wonder - Isn\'t She Lovely','url':'https://youtu.be/oE56g61mW44'},
+  {'title':'The Beatles - Yesyerday','url':'https://youtu.be/NrgmdOz227I'},
+  {'title':'The Temptaions - My girl','url':'https://youtu.be/qEztui18cA8'},
+  {'title':'김광석 - 잊어야 한다는 마음으로','url':'https://youtu.be/3RBKFgsZPJQ'},
+  {'title':'김범준 - 벚꽃엔딩','url':'https://youtu.be/tXV7dfvSefo'},
+  {'title':'김현식 - 내 사랑 내 곁에','url':'https://youtu.be/iJ6ThgYyhSs'},
+  {'title':'듀스 - 고고고','url':'https://youtu.be/BNX_yl5-pp8'},
+  {'title':'듀스 - 우리는','url':'https://youtu.be/YMxwa6Ssl-c'},
+  {'title':'방탄소년단 - Butter','url':'https://youtu.be/WMweEpGlu_U'},
+  {'title':'방탄소년단 - Dynamite','url':'https://youtu.be/gdZLi9oWNZg'},
+  {'title':'방탄소년단 - Permission to dance','url':'https://youtu.be/CuklIb9d3fI'},
+  {'title':'방탄소년단 - 피땀눈물','url':'https://youtu.be/hmE9f-TEutc'},
+  {'title':'봄여름가을겨울 - 어떤 이의 꿈','url':'https://youtu.be/oAggLD932IU'},
+  {'title':'브레이브걸스 - 롤링 (Original)','url':'https://youtu.be/3cZrxpK2EAQ'},
+  {'title':'브레이브걸스 - 롤링 (New Version)','url':'https://youtu.be/MthLgPs7oU4'},
+  {'title':'브레이브걸스 - 운전만해','url':'https://youtu.be/4HjcypoChfQ'},
+  {'title':'브레이브걸스 - 치맛바람','url':'https://youtu.be/e70PkoJhQYM'},
+  {'title':'빅마마 - Break Away','url':'https://youtu.be/NFqE2NkJYjo'},
+  {'title':'서태지와 아이들 - 난 알아요','url':'  https://youtu.be/t475OpPObSg'},
+  {'title':'서태지와 아이들 - 하여가(何如歌)','url':'https://youtu.be/z9ZZ_4Jcrx4'},
+  {'title':'서태지와 아이들 - Come Back Home','url':'https://youtu.be/q3xy4p2JTfU'},
+  {'title':'신승훈 - 그 후로 오랫동안','url':'https://youtu.be/x2PSGpkwyXk'},
+  {'title':'신승훈 - 미소 속에 비친 그대','url':'https://youtu.be/k4X0z_LvDDs'},
+  {'title':'신승훈 - I believe','url':'https://youtu.be/qRvTNLpXAm0'},
+  {'title':'신해철 - 민물장어의 꿈','url':'https://youtu.be/J2t9zR8hihw'},
+  {'title':'양정승 - 밤하늘의 별을','url':'https://youtu.be/zgvI5Jqph08'},
+  {'title':'에픽하이 - 우산','url':'https://youtu.be/NIPtyAKxlRs'},
+  {'title':'왁스 - 화장을 고치고','url':'https://youtu.be/tJlaGA7AT3E'},
+  {'title':'윤종신 - 좋니', 'url':'https://youtu.be/jy_UiIQn_d0'},
+  {'title':'이날치 - 범 내려온다','url':'https://youtu.be/SmTRaSg2fTQ'},
+  {'title':'이선희 - J에게','url':'https://youtu.be/sxWiPHuaBLI'},
+  {'title':'이선희 - 그 중에 그대를 만나','url':'https://youtu.be/IAyMtl9FRHI'},
+  {'title':'이소라 - 바람이 분다','url':'https://youtu.be/pv6qFKM5y_A'},
+  {'title':'조용필 - Hello','url':'https://youtu.be/GG6X3bH80l8'},
+  {'title':'조용필 - Bounce','url':'https://youtu.be/_uYx13TPm-A'},
+  {'title':'프리스타일 - Y','url':'https://youtu.be/dYIT_jeUBKg'},
+  {'title':'Crash - 내가 그린 원안에서','url':'https://youtu.be/s-OgCzpLI7A'},
+  {'title':'Drunken Tiger - 난 널 원해','url':'https://youtu.be/Qr3o9xMaIcc'},
+  {'title':'Drunken Tiger - 너희가 힙합을 아느냐','url':'https://youtu.be/I3q7Up-UjJk'},
+  {'title':'Drunken Tiger - 소외된 모두 왼발을 한 보 앞으로','url':'https://youtu.be/co6VdhK3lpU'},
+  {'title':'KCM - 썸데이','url':'https://youtu.be/8z1IRq9GWa4'},
+  {'title':'SG워너비 - 내 사람','url':'https://youtu.be/G5hbOrbfSRY'},
+  {'title':'SG워너비 - 라라라','url':'https://youtu.be/hPoRgIzXm5o'},
+  {'title':'W&Whale - R.P.G. Shine','url':'https://youtu.be/4HcCzZlP2Nw'},
+]}" ></script>
+<!-- 
+  {'title':'title','url':'address'},
+-->
+<!-- SCM Music Player script end -->
+<!-- {'title':'[Playlist] 기분이 좋아지는 진짜 좋은 상쾌한 팝송','url':'https://youtu.be/kL1oyIm1_FU'}-->
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <!-- 로고 감춤
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                -->
+                <!-- <p>&copy; 2022 Xeppetto</p> -->
+                <p>Copyright 2022년, 천년나무 - All rights reserved &copy; Xeppetto since February, 1997</p>
+                
+                <p>Powered by <a href="https://pages.github.com/" target="_blank">Github Pages</a> & <a href="https://hexo.io/" target="_blank">Hexo</a> || Hueman theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a> and modified by <a href="https://Xeppetto.github.io">Xeppetto</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

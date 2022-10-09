@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!-- 웹폰트 추가 : 2021-01-28-->
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/font-iropke-batang/1.2/font-iropke-batang.css">
+
+    
+<link rel="stylesheet" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.css">
+
+    
+    
+
+    
+    <title>[Docker] Docker에 Tibero 설치하기 | 천년나무 블로그</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Operating System,Development,Environment,WSL,Docker,Windows,Linux,Database,Tibero" />
+    
+    <!-- 도메인 주소 자체를 걸었을 때 image가 표시되지 않는 문제가 있어서 변경
+    <meta name="description" content="본 글은 Windows10 WSL2 - Docker 시스템에 Tibero를 설치하여 테스트하는 내용을 소개한다. 고지1 : 기술 내용 변경이 될 가능성본 글은 2021년 5월에 퇴고를 완료하였다. 그 시점을 기준으로 Windows10에서 제공하는 WSL2, 그리고 Docker를 이용하여 Ubuntu image에서 Tibero를 설치하는 방법을 담고 있다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Docker] Docker에 Tibero 설치하기">
+<meta property="og:url" content="https://xeppetto.github.io/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-and-Docker/16-Docker-Tibero/index.html">
+<meta property="og:site_name" content="천년나무 블로그">
+<meta property="og:description" content="본 글은 Windows10 WSL2 - Docker 시스템에 Tibero를 설치하여 테스트하는 내용을 소개한다. 고지1 : 기술 내용 변경이 될 가능성본 글은 2021년 5월에 퇴고를 완료하였다. 그 시점을 기준으로 Windows10에서 제공하는 WSL2, 그리고 Docker를 이용하여 Ubuntu image에서 Tibero를 설치하는 방법을 담고 있다.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xeppetto.github.io/thumbnails/Software/WSL2-Docker-thumbnail.png">
+<meta property="article:published_time" content="2021-05-08T05:53:00.000Z">
+<meta property="article:modified_time" content="2021-05-08T05:53:00.000Z">
+<meta property="article:author" content="Xeppetto">
+<meta property="article:tag" content="Operating System">
+<meta property="article:tag" content="Development">
+<meta property="article:tag" content="Environment">
+<meta property="article:tag" content="WSL">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Windows">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Database">
+<meta property="article:tag" content="Tibero">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xeppetto.github.io/thumbnails/Software/WSL2-Docker-thumbnail.png">
+    -->
+    <!-- 아래 내용을 추가 : is_home check -->
+    
+      <meta name="description" content="본 글은 Windows10 WSL2 - Docker 시스템에 Tibero를 설치하여 테스트하는 내용을 소개한다. 고지1 : 기술 내용 변경이 될 가능성본 글은 2021년 5월에 퇴고를 완료하였다. 그 시점을 기준으로 Windows10에서 제공하는 WSL2, 그리고 Docker를 이용하여 Ubuntu image에서 Tibero를 설치하는 방법을 담고 있다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Docker] Docker에 Tibero 설치하기">
+<meta property="og:url" content="https://xeppetto.github.io/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-and-Docker/16-Docker-Tibero/index.html">
+<meta property="og:site_name" content="천년나무 블로그">
+<meta property="og:description" content="본 글은 Windows10 WSL2 - Docker 시스템에 Tibero를 설치하여 테스트하는 내용을 소개한다. 고지1 : 기술 내용 변경이 될 가능성본 글은 2021년 5월에 퇴고를 완료하였다. 그 시점을 기준으로 Windows10에서 제공하는 WSL2, 그리고 Docker를 이용하여 Ubuntu image에서 Tibero를 설치하는 방법을 담고 있다.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xeppetto.github.io/thumbnails/Software/WSL2-Docker-thumbnail.png">
+<meta property="article:published_time" content="2021-05-08T05:53:00.000Z">
+<meta property="article:modified_time" content="2021-05-08T05:53:00.000Z">
+<meta property="article:author" content="Xeppetto">
+<meta property="article:tag" content="Operating System">
+<meta property="article:tag" content="Development">
+<meta property="article:tag" content="Environment">
+<meta property="article:tag" content="WSL">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Windows">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Database">
+<meta property="article:tag" content="Tibero">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xeppetto.github.io/thumbnails/Software/WSL2-Docker-thumbnail.png">
+    
+    <!-- 추가 내용 끝 -->
+
+    
+
+    <link rel="canonical" href="https://xeppetto.github.io/소프트웨어/wsl-and-docker/16-docker-tibero/"/><!-- canonical 추가 -->
+
+    
+
+    
+        <link rel="icon" href="/css/images/flower_favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-191955640-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/rss2.xml" title="천년나무 블로그" type="application/rss+xml">
+</head>
+
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="jake-header-title"> <!-- jake-header-title로 상단 이미지 추가 -->
+        <div class="jake-header-title-inner"></div>
+    </div> 
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <!-- 필요에 의해 숨기기
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1> 
+                   
+                    
+                -->   
+                </div> 
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/">X의話</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/Lv8-%E3%81%AE%EA%BD%83%E6%80%AA%E7%8D%B8/">Lv8+の꽃怪獸</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/X%EC%9D%98-%E6%96%B7%E6%83%B3/">X의 斷想</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/%E6%97%A5%E6%96%B0%E5%8F%88%E6%97%A5%E6%96%B0/">日新又日新</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%9D%B4%EC%95%BC%EA%B8%B0/">블로그 이야기</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EB%B0%B0%EC%9B%80/">배움</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/">독서</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EB%B0%B0%EC%9B%80/%EB%AA%85%EC%96%B8/">명언</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/">소프트웨어</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Operating-Systems/">Operating Systems</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Tools/">Tools</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-Docker/">WSL & Docker</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%EA%B2%8C%EC%9E%84/">게임</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%EB%8F%84%EA%B5%AC%EA%B0%9C%EB%B0%9C/">도구개발</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%ED%85%8C%EC%8A%A4%ED%8C%85/">테스팅</a></li></ul></li></ul>
+                                    
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="찾아보기" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="검색하실 단어를 입력하세요." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '블로그 포스트 검색',
+            PAGES: '특정 페이지',
+            CATEGORIES: '카테고리 별 검색',
+            TAGS: '태그 검색',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/">소프트웨어</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-Docker/">WSL & Docker</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <script data-ad-client="ca-pub-4791569760042130" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- Google Adsense 삽입 : layout과 article에 삽입 -->
+                            <article id="post-소프트웨어/WSL-and-Docker/16-Docker-Tibero" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        [Docker] Docker에 Tibero 설치하기
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-and-Docker/16-Docker-Tibero/" class="article-date">
+       <time datetime="2021-05-08T05:53:00.000Z" itemprop="datePublished">2021년 05월 08일</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-and-Docker/16-Docker-Tibero/" class="article-date">
+     <time datetime="2021-05-08T05:53:00.000Z" itemprop="dateModified">2021년 05월 08일</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Database/" rel="tag">Database</a>, <a class="tag-link-link" href="/tags/Development/" rel="tag">Development</a>, <a class="tag-link-link" href="/tags/Docker/" rel="tag">Docker</a>, <a class="tag-link-link" href="/tags/Environment/" rel="tag">Environment</a>, <a class="tag-link-link" href="/tags/Linux/" rel="tag">Linux</a>, <a class="tag-link-link" href="/tags/Operating-System/" rel="tag">Operating System</a>, <a class="tag-link-link" href="/tags/Tibero/" rel="tag">Tibero</a>, <a class="tag-link-link" href="/tags/WSL/" rel="tag">WSL</a>, <a class="tag-link-link" href="/tags/Windows/" rel="tag">Windows</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <blockquote>
+<p>본 글은 Windows10 WSL2 - Docker 시스템에 Tibero를 설치하여 테스트하는 내용을 소개한다.</p>
+<h5 id="고지1-기술-내용-변경이-될-가능성"><a href="#고지1-기술-내용-변경이-될-가능성" class="headerlink" title="고지1 : 기술 내용 변경이 될 가능성"></a>고지1 : 기술 내용 변경이 될 가능성</h5><p>본 글은 2021년 5월에 퇴고를 완료하였다. 그 시점을 기준으로 Windows10에서 제공하는 WSL2, 그리고 Docker를 이용하여 Ubuntu image에서 Tibero를 설치하는 방법을 담고 있다. 시간이 자나 본 글의 내용 중 Windows10, WSL 등의 변경 혹은 TMax 공식 홈페이지 변경 등이 발생하면 본 포스팅과 내용이 맞지 않을 수 있다.</p>
+<h5 id="고지2-라이선스-저작권자의-요청에-의한-변경"><a href="#고지2-라이선스-저작권자의-요청에-의한-변경" class="headerlink" title="고지2 : 라이선스 저작권자의 요청에 의한 변경"></a>고지2 : 라이선스 저작권자의 요청에 의한 변경</h5><p>TMaxSoft社가 사업상의 이유로 본 포스팅의 내용 중 특정 내용 변경&#x2F;삭제 요청 시 일부 내용이 변경될 수 있음을 미리 감안하시고, 필요한 내용은 바로 저장하시기를 추천드린다.</p>
+<h5 id="고지3-Docker와-WSL-사용법-숙지"><a href="#고지3-Docker와-WSL-사용법-숙지" class="headerlink" title="고지3 : Docker와 WSL 사용법 숙지"></a>고지3 : Docker와 WSL 사용법 숙지</h5><p>WSL의 사용 방법, Docker 사용 방법은 해당 내용이 설명된 페이지를 확인 부탁드린다. 해당 내용들에 대해서는 이미 어느 정도 숙지하고 있다고 가정하고 글을 작성하였다.</p>
+</blockquote>
+<hr>
+<br>
+
+<h3 id="Tibero-DB란"><a href="#Tibero-DB란" class="headerlink" title="Tibero DB란?"></a>Tibero DB란?</h3><p>이번 포스팅에서 Tibero DB란 무엇인가에 대해서는 다루지 않는다. 관련 내용은 <a target="_blank" rel="noopener" href="https://www.tmaxdata.com/product/productView.do?seq=&rnum=&prod_cd=tibero">Tibero 제품 공식 사이트</a>를 참고하시기 바란다.</p>
+<br>
+
+<h3 id="설치-환경"><a href="#설치-환경" class="headerlink" title="설치 환경"></a>설치 환경</h3><p>이번 포스팅은 Windows10의 WSL2 + Docker를 이용한 설치 환경에 대해 설명하였다. Mac이나 기타 OS에서 설치하는 방법은 요청이 있을 시 매뉴얼을 만들어 보는 걸로!</p>
+<br>
+
+<h3 id="Tibero-DB의-공식-이미지는-없음"><a href="#Tibero-DB의-공식-이미지는-없음" class="headerlink" title="Tibero DB의 공식 이미지는 없음"></a>Tibero DB의 공식 이미지는 없음</h3><p>2021년 4월 현재, Tibero DB의 공식 이미지는 없다. 일반적으로 Docker에 이미지를 찾을 때는 <a target="_blank" rel="noopener" href="https://hub.docker.com/">Docker Hub</a>로 이동하여 검색하여 내려 받게 되는데, Tibero는 공식 이미지랄게 없다. Docker Hub에서 Tibero를 검색하면 아래와 같이 그래도 몇 천 번 정도 데려간 흔적이 있는데 막상 실행해 보면 잘 안된다.</p>
+<p><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero-hub-no-official-image.png" alt="TiberoDB는 공식 이미지가 없다"></p>
+<p>이런 저런 Tibero DB 설치 관련 글들을 찾아 보고 이유를 알게 되었는데, 뒤에서 다시 설명하겠으나 <strong>Tibero는 라이선스(License) 발급 시 해당 컴퓨터의 정보를 가지고 활성화(Activation)하는 구조</strong>를 가지고 있기 때문이었다. 또, Demo 버전은 최대 6개월까지 발급받아 사용할 수 있으나 이를 고정된 Docker image로 만드는 건 어려웠다.</p>
+<p>그래서 필자가 한 번 정리해 보았다.</p>
+<br>
+
+<h3 id="일단-Docker에서-Ubuntu-이미지를-데려오기"><a href="#일단-Docker에서-Ubuntu-이미지를-데려오기" class="headerlink" title="일단 Docker에서 Ubuntu 이미지를 데려오기"></a>일단 Docker에서 Ubuntu 이미지를 데려오기</h3><p>필자가 다른 블로그들의 Tibero 관련 내용들을 살펴보고 설치하려 여러가지 삽질(?)을 해 보니, 결론적으로 Tibero의 경우는 각 개인이 따로 Docker Image를 보유하는 쪽이 더 나은 선택인거 같았다. </p>
+<ol>
+<li>먼저 Docker에서 <a target="_blank" rel="noopener" href="https://hub.docker.com/_/ubuntu">Ubuntu 공식 이미지</a>를 이용하여 Image를 생성해 보자.</li>
+</ol>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull ubuntu</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>생성된 이미지를 확인하자.</li>
+</ol>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<p>필자의 경우는 아래와 같다. 아래와 같이 Ubuntu 이미지가 생성되어 있으면 정상이다.</p>
+<p><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero-ubuntu-image.png" alt="Docker 내에 생성된 Ubuntu Image"></p>
+<br>
+
+<h3 id="Ubuntu-이미지를-이용하여-TiberoDB를-설치할-Container를-생성"><a href="#Ubuntu-이미지를-이용하여-TiberoDB를-설치할-Container를-생성" class="headerlink" title="Ubuntu 이미지를 이용하여 TiberoDB를 설치할 Container를 생성"></a>Ubuntu 이미지를 이용하여 TiberoDB를 설치할 Container를 생성</h3><p>아래의 Docker 컨테이너 생성 명령을 이용하여 TiberoDB를 설치할 컨테이너를 생성한다.</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="language-bash"> -i -t -p 8629:8629 --name tiberodb01 --hostname localhost ubuntu /bin/bash</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>8629는 TiberoDB의 공식 Port이므로 Forwarding 설정을 한다.</li>
+<li>Tibero는 라이선스 활성화 시 해당 컴퓨터의 Host Name과 Host ID 정보를 Mapping한다. 그러므로 hostname을 지정한다.</li>
+</ul>
+<p>위 명령어 실행 시 생성한 tiberodb01 컨테이너의 bash shell이 나타날 것이다. Docker에서 Ubuntu Image를 처음 컨테이너로 생성하신 분들은 바로 <a href="/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-and-Docker/10-Docker-System-Update/">Docker System Update하기</a> 페이지를 참고하셔야 한다.</p>
+<br>
+
+<h3 id="참고-컨테이너에서-나왔다가-다시-진입-할-때"><a href="#참고-컨테이너에서-나왔다가-다시-진입-할-때" class="headerlink" title="참고 : 컨테이너에서 나왔다가 다시 진입 할 때"></a>참고 : 컨테이너에서 나왔다가 다시 진입 할 때</h3><p>컨테이너에서 작업 후 나왔다가 다시 진입할 때는 아래와 같이 확인하여 진행하면 된다.</p>
+<ol>
+<li>Docker의 해당 컨테이너 상황을 확인한다.</li>
+</ol>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>해당 컨테이너가 stop&#x2F;exit된 상태라면 컨테이너를 실행시켜준다.</li>
+</ol>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start tiberodb01</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>해당 컨테이너가 start&#x2F;up된 상태라면 해당 컨테이너의 쉘로 진입한다.</li>
+</ol>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker exec --<span class="keyword">user</span>=<span class="string">&quot;root&quot;</span> -it tiberodb01 /bin/bash</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="현재-컨테이너-시스템의-bit를-확인"><a href="#현재-컨테이너-시스템의-bit를-확인" class="headerlink" title="현재 컨테이너 시스템의 bit를 확인"></a>현재 컨테이너 시스템의 bit를 확인</h3><p>Tibero는 x86 - 32 bit 버전과 64 bit 버전을 모두 지원한다. 그러므로, Ubuntu의 시스템 bit를 확인해야 한다. 아래의 명령을 사용하면 해당 컨테이너의 bit를 확인할 수 있다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -s libc6 | grep Arch</span><br></pre></td></tr></table></figure>
+
+<p>필자가 생성한 컨테이너의 경우는 아래와 같이 출력되었기 때문에 64 bit Tibero DB를 설치하기로 한다.</p>
+<p><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero-ubuntu-bit-check.png" alt="컨테이너 시스템의 bit 확인"></p>
+<br>
+
+<h3 id="현재-컨테이너-시스템의-host-name을-확인"><a href="#현재-컨테이너-시스템의-host-name을-확인" class="headerlink" title="현재 컨테이너 시스템의 host name을 확인"></a>현재 컨테이너 시스템의 host name을 확인</h3><p>계속 강조하지만 Tibero는 라이선스 활성화 시 컴퓨터의 이름 정보를 가지고 활성화하며, 컴퓨터의 여러 정보들을 가지고 라이선스 정보를 완성하는 걸로 보인다. 그래서 필자는 컨테이너 생성 시 –hostname localhost 라고 명시하여, 컨테이너의 host name을 localhost로 명명하였다. (컨테이너 생성 시 사용자 지정하지 않으면 Ubuntu 마음 대로 명명한다.)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostname</span><br></pre></td></tr></table></figure>
+
+<p>위 명령어로 생성한 컨테이너의 host name을 다시 한 번 확인한다.</p>
+<p><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero-ubuntu-hostname.png" alt="컨테이너 시스템의 host name 확인"></p>
+<br>
+
+<h3 id="Tibero-DB를-위한-시스템-환경-변수를-추가"><a href="#Tibero-DB를-위한-시스템-환경-변수를-추가" class="headerlink" title="Tibero DB를 위한 시스템 환경 변수를 추가"></a>Tibero DB를 위한 시스템 환경 변수를 추가</h3><p>이제 본격적으로 Tibero DB를 설치하기 전 시스템에서 사용할 환경 변수를 설정해야 한다. &#x2F;etc&#x2F;profile 파일을 열어서 맨 아랫부분에 아래 내용을 추가한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p>profile 파일이 열리면 가장 아래 쪽에 아래의 내용들을 추가한다. </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> TB_HOME=/usr/local/tibero6</span><br><span class="line"><span class="built_in">export</span> TB_SID=tibero</span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=<span class="variable">$TB_HOME</span>/lib:<span class="variable">$TB_HOME</span>/client/lib</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$TB_HOME</span>/bin:<span class="variable">$TB_HOME</span>/client/bin</span><br></pre></td></tr></table></figure>
+
+<p>필자의 설정은 대략 아래와 같다.</p>
+<p><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero-ubuntu-profile-setting.png" alt="Tibero DB 환경 변수 설정"></p>
+<p>환경 변수 설정을 시스템에 적용하기 위해서는 아래와 같이 수행하면 된다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$TB_HOME</span></span><br><span class="line">. /etc/profile </span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$TB_HOME</span></span><br></pre></td></tr></table></figure>
+
+<p>위를 1 ~ 3까지 한 줄씩 실행하면, 1번에서는 아무 것도 출력되지 않다가 3번에는 &#x2F;usr&#x2F;local&#x2F;tibero6 라고 나타날 것이다. </p>
+<p>2번째 줄에서 수행한 바와 같이 . &#x2F;etc&#x2F;profile 을 이용하여 변경 내역을 시스템 등록하면 환경 변수들이 정상적으로 적용된다.</p>
+<br>
+
+<h3 id="Tibero-DB를-다운로드하기"><a href="#Tibero-DB를-다운로드하기" class="headerlink" title="Tibero DB를 다운로드하기"></a>Tibero DB를 다운로드하기</h3><p>자, 이제 잠시 WSL을 내버려두고 웹브라우저에서 <a target="_blank" rel="noopener" href="https://technet.tmaxsoft.com/">TMaxSoft의 공식 웹사이트(https://technet.tmaxsoft.com)</a>로 이동한다.</p>
+<ol>
+<li><p>회원 가입을 진행하고, 완료되면 로그인한다.</p>
+</li>
+<li><p>다운로드 &gt; 데이터베이스 &gt; Tibero &gt; Tibero6 다운로드로 이동한다.<br><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero-official-download01.png" alt="Tibero6 DB 다운로드"><br></p>
+</li>
+<li><p>페이지 하단에 나타나는 OS 중 Linux 선택 &gt; 64 bit &gt; tar.gz를 클릭하여 다운로드한다.<br><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero-official-download02.png" alt="Tibero6 DB Linux 다운로드"></p>
+</li>
+</ol>
+<br>
+
+<h3 id="데모용-라이선스를-확보하기"><a href="#데모용-라이선스를-확보하기" class="headerlink" title="데모용 라이선스를 확보하기"></a>데모용 라이선스를 확보하기</h3><p><a target="_blank" rel="noopener" href="https://technet.tmaxsoft.com/">TMaxSoft의 공식 웹사이트(https://technet.tmaxsoft.com)</a>에 아래와 같이 “데모라이선스 신청”이라는 배너가 보이면 클릭한다. </p>
+<ol>
+<li><p>아래와 같은 배너가 나오면 클릭한다. 2021년 5월 기준, 공식 홈페이지의 첫 페이지에서도 볼 수 있고 다운로드 페이지에서도 볼 수 있다.<br><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero-demo-license01.png" alt="Tibero6 데모 라이선스 신청"><br></p>
+</li>
+<li><p>팝업 창이 나타나면 화면의 입력 항목들을 모두 기재한다. Host Name은 아까 컨테이너를 설정했단 localhost로 하고, 사용 용도를 반드시 기재해야 한다.<br><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero-demo-license02.png" alt="데모 라이선스 세부 정보 입력"><br></p>
+</li>
+</ol>
+<blockquote>
+<p>주의 : 데모 라이선스는 절대 상용 서비스에 사용하지 말라는 경고 문구를 꼭 숙지하시기 바란다. ‘실제 운영시스템’이라 함은 인터넷 상의 불특정 일반 사용자들에게 오픈하여 사용하는 유&#x2F;무료 서비스를 의미한다. 라이선스 고지 정책을 잘 지켜 국산 DB를 제작하는 회사에 피해 주는 일이 없도록 하자.</p>
+</blockquote>
+<ol start="3">
+<li>생성이 완료되면 본인의 이메일로 라이선스 파일이 도착한다. 첨부 파일을 다운로드 한다.<br>(필자가 국산이니 소중히 아끼자고 설레발 쳐 놨는데 쌩뚱 맞게 메일은 영어로 올 거다. 쌩큐~ 라니!)<br><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero-demo-license03.png" alt="데모 라이선스 첨부파일"></li>
+</ol>
+<br>
+
+<h3 id="다운로드-한-파일-2개를-확인-후-복사하기"><a href="#다운로드-한-파일-2개를-확인-후-복사하기" class="headerlink" title="다운로드 한 파일 2개를 확인 후 복사하기"></a>다운로드 한 파일 2개를 확인 후 복사하기</h3><ol>
+<li><p>Tibero DB의 Linux 버전 tar.gz 파일과 License.xml 파일이 정상적으로 다운로드 되었는 지 확인한다.<br><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero-demo-license04.png" alt="다운로드 한 파일 2개를 확인"></p>
+</li>
+<li><p>이 두 파일을 사용자의 Window 폴더로 이동한다. 예를 들어, 사용자의 Windows Login 아이디가 “JamesBond”라면 C:\Users\JamesBond 라는 폴더가 있을 것이다. 그 위치에 파일들을 복사한다.</p>
+</li>
+<li><p>WSL로 돌아가 list 명령을 실행해 보면 해당 파일 2개가 보여야 한다.</p>
+</li>
+<li><p>이 파일 2개를 생성한 tiberodb01 컨테이너 내로 복사해야 한다. 아래의 명령을 실행한다.</p>
+</li>
+</ol>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker cp ./license.xml tiberodb01:/usr/local/</span><br><span class="line">docker cp ./tibero6-bin-FS07_CS_2005-linux64-<span class="number">186930</span>-opt-tested.tar.gz tiberodb01:/usr/local/</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>다시 tiberodb01 컨테이너로 진입하여 &#x2F;usr&#x2F;local&#x2F; 디렉토리를 살펴보면 아래와 같이 파일 2개가 복사되어 있어야 한다.<br><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero-ubuntu-usr-local.png" alt="/usr/local/에 복사된 2개의 파일"></li>
+</ol>
+<p>자, 이제 설치 준비가 끝났다.</p>
+<br>
+
+<h3 id="본격적으로-Tibero-DB를-설치하기"><a href="#본격적으로-Tibero-DB를-설치하기" class="headerlink" title="본격적으로 Tibero DB를 설치하기"></a>본격적으로 Tibero DB를 설치하기</h3><ol>
+<li>Tibero DB 설치 및 실행 작업은 모두 root 계정으로 실행해야 한다. 먼저 root 권한을 획득한다.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su -</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>다운로드한 tar.gz 파일의 압축을 해제한다. &#x2F;usr&#x2F;local&#x2F; 디렉토리에서 아래의 명령을 실행하여 압축을 해제한다.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/ </span><br><span class="line">tar -xzvf tibero6-bin-FS07_CS_2005-linux64-186930-opt-tested.tar.gz</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>압축 해제 후 가장 먼저 할 일은 License.xml 파일을 라이선스 폴더에 이동하는 것이다. &#x2F;usr&#x2F;local&#x2F; 디렉토리에서 License.xml 파일을 이동한다.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/ </span><br><span class="line"><span class="built_in">mv</span> ./License.xml ./tibero6/license/</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>다음은 실행 시 사용할 환경 파일을 설정해야 한다. &#x2F;usr&#x2F;local&#x2F;tibero6&#x2F;config로 이동하여 gen_tip.sh 를 실행한다. 이 명령을 실행하면 tibero.tip, psm_commands, tbdsn.tbr 등의 환경 설정 파일들을 자동으로 생성한다.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/tibero6/config</span><br><span class="line">./gen_tip.sh</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>다음은 필자가 삽질(?)하여 찾은 의존성 패키지 모듈을 설치한다. 필자가 왜 이 패키지들을 설치했는지 궁금하신 분들은 아래를 건너 뛰고 진행하면 아시게 될 거다. 일단 모두의 안녕과 평화를 위해 설치하고 진행하기로 한다.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/tibero6/bin</span><br><span class="line">apt install libaio1 libncurses5</span><br></pre></td></tr></table></figure>
+
+<p>이제 Tibero6 DB의 기본 설치가 완료되었다.</p>
+<br>
+
+<h3 id="Tibero-DB를-실행하기"><a href="#Tibero-DB를-실행하기" class="headerlink" title="Tibero DB를 실행하기"></a>Tibero DB를 실행하기</h3><ol>
+<li>다음은 &#x2F;usr&#x2F;local&#x2F;tibero6&#x2F;bin 디렉토리로 이동하여 실제 실행 및 기본 Schema 설정을 해주어야 한다. 아래의 명령을 실행하여 Tibero DB를 실행시킨다. (이 경우에도 su -로 root 권한을 획득하여 진행해야 한다.)</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/tibero6/bin</span><br><span class="line">tbboot nomount</span><br></pre></td></tr></table></figure>
+
+<p>여기에서 다양한 종류의 오류가 발생할 수 있다. 필자의 Step을 그대로 따라왔다면 오류가 발생하지 않아야 한다. (필자는 이미 5번 넘게 컨테이너 통째로 설치&#x2F;삭제를 한 후 본 글을 정리하기 때문이다.) </p>
+<p>오류가 발생하는 경우 굉장히 난감할 것이다. TMaxSoft의 문서나 게시판에서 오류를 해결할 마땅한 방안들 혹은 정보들을 찾을 수 없기 때문이다. TMaxSoft의 사업 모델이 그러하니, 이해해야 한다. 그러므로, 일단 필자가 쓴 본 포스팅 대로 진행하는게 좋다. 이후 회사에서 Tibero DB 구입 결정이 나면 이후에 기술지원을 마음껏 이용할 수 있으니 그런 부분들(오류 메시지 해결이 어려운 부분)은 미리 양지하시기 바란다.</p>
+<p>여러 종류의 에러가 발생할 수 있지만, 필자가 모두 경험해 보지는 못했을 테니 필자가 경험한 내용 중 하나를 공유한다.</p>
+<p><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero_tbboot_nomount.png" alt="tbboot 이미 실행 중인 경우"></p>
+<blockquote>
+<p>※참고 : Mismatch host id 오류가 발생하는 경우 License 파일의 정보가 뭔가 문제가 있다는 소리다. 라이선스 파일을 다시 신청하여 다운로드해야 한다. 이때 꼭 host name을 확인하여 정확히 입력해야 한다.</p>
+</blockquote>
+<ol start="2">
+<li>tbboot를 nomount 모드로 실행에 성공했다면, 다음은 Database를 구동해야 한다. 아래의 명령을 수행한다.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/tibero6/bin</span><br><span class="line">tbsql sys/tibero</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>tbsql이 성공적으로 실행되면 다음은 기본 Schema를 설정해줘야 한다. Tibero는 왜 이 작업을 사용자들이 수동으로 하도록 했는 지 잘 모르겠지만, 아무튼… 해야 한다. 필자가 웹을 뒤져 얻은 정보는 아래와 같다.</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SQL</span> <span class="operator">&gt;</span> <span class="keyword">create</span> database &quot;tibero&quot; </span><br><span class="line">  <span class="keyword">user</span> sys identified <span class="keyword">by</span> tibero </span><br><span class="line">  maxinstances <span class="number">8</span> </span><br><span class="line">  maxdatafiles <span class="number">100</span> <span class="type">character</span> <span class="keyword">set</span> MSWIN949 </span><br><span class="line">  <span class="type">national</span> <span class="type">character</span> <span class="keyword">set</span> UTF16 </span><br><span class="line">  logfile </span><br><span class="line">    <span class="keyword">group</span> <span class="number">1</span> <span class="string">&#x27;log001.log&#x27;</span> size <span class="number">100</span>M, </span><br><span class="line">    <span class="keyword">group</span> <span class="number">2</span> <span class="string">&#x27;log002.log&#x27;</span> size <span class="number">100</span>M, </span><br><span class="line">    <span class="keyword">group</span> <span class="number">3</span> <span class="string">&#x27;log003.log&#x27;</span> size <span class="number">100</span>M </span><br><span class="line">  maxloggroups <span class="number">255</span> </span><br><span class="line">  maxlogmembers <span class="number">8</span> </span><br><span class="line">  noarchivelog </span><br><span class="line">    datafile <span class="string">&#x27;system001.dtf&#x27;</span> size <span class="number">100</span>M autoextend <span class="keyword">on</span> next <span class="number">100</span>M maxsize unlimited </span><br><span class="line">    <span class="keyword">default</span> temporary tablespace TEMP </span><br><span class="line">      tempfile <span class="string">&#x27;temp001.dtf&#x27;</span> size <span class="number">100</span>M autoextend <span class="keyword">on</span> next <span class="number">100</span>M maxsize unlimited </span><br><span class="line">      extent management <span class="keyword">local</span> autoallocate </span><br><span class="line">    undo tablespace UNDO </span><br><span class="line">      datafile <span class="string">&#x27;undo001.dtf&#x27;</span> size <span class="number">100</span>M autoextend <span class="keyword">on</span> next <span class="number">100</span>M maxsize unlimited </span><br><span class="line">      extent management <span class="keyword">local</span> autoallocate;</span><br></pre></td></tr></table></figure>
+
+<p>모두 한 줄 씩 입력해야 하는 고단한 여정이지만, 잘 수행하면 아래 그림과 같이 성공적으로 database를 생성할 수 있다. 아래는 실제로 필자가 진행한 create database 및 schema 설정이다. Database created가 출력되면 성공이다.</p>
+<p><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero_create_default_db_schema.png" alt="tibero라는 이름의 database 생성"></p>
+<blockquote>
+<p>※참고 : Tiebro DB의 Demo 라이선스에서는 Database 이름을 tibero만 허용하는 듯하다. 다른 이름으로 생성 시도 시 에러가 발생한다.</p>
+</blockquote>
+<ol start="4">
+<li>Schema 설정을 하고 나면 quit 명령으로 Database에서 일단 나와야 한다.</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SQL</span> <span class="operator">&gt;</span> quit;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>다음은 Tibero에 기본 탑재된 SQL을 실행하여 Role, User, View 등을 생성해야 한다.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su -</span><br><span class="line">/usr/local/tibero6/scripts</span><br><span class="line">./system.sh</span><br></pre></td></tr></table></figure>
+
+<p>system.sh를 실행하면 두 번의 암호를 입력하라는 프롬프트가 나타난다. 아래를 참고하여 진행한다.</p>
+<ul>
+<li>sys의 기본 암호 : tibero </li>
+<li>syscat의 기본 암호 : syscat</li>
+</ul>
+<p>위 패스워드들을 입력하고 나면, 3 ~ 4 차례 선택이 나타나는데 모두 Y를 입력하고 실행을 완료하면 된다.</p>
+<br>
+
+<h3 id="Tibero-Database에-테이블을-생성하고-데이터를-입력-x2F-조회하기"><a href="#Tibero-Database에-테이블을-생성하고-데이터를-입력-x2F-조회하기" class="headerlink" title="Tibero Database에 테이블을 생성하고, 데이터를 입력&#x2F;조회하기"></a>Tibero Database에 테이블을 생성하고, 데이터를 입력&#x2F;조회하기</h3><ol>
+<li>Tibero DB에서 tbboot의 nomount 모드는 database를 설정할 때 사용하는 듯 하다. 테이블을 생성하고, 데이터를 다룰 때는 nomount 모드가 아니라 normal 모드를 사용해야 한다.</li>
+</ol>
+<p>필자도 자세한 세부 내용은 숙지하지 못하였으므로, 자세한 내용은 <a target="_blank" rel="noopener" href="https://technet.tmaxsoft.com/upload/download/online/tibero/pver-20140808-000002/tibero_admin/ch_01.html">Tibero DB 사용자 매뉴얼</a>을 참고한다.</p>
+<ol start="2">
+<li>이제 tbboot의 normal mode로 Tibero DB에 진입해야 한다. 위에서 진행했던 내용이므로 이번엔 한 번에 진행한다. 일단 tbboot시 nomount를 사용하지 않고 실행한다. 이후 tbsql을 실행한다.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/tibero6/bin</span><br><span class="line">tbboot</span><br><span class="line">tbsql sys/tibero</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>먼저 CREATE TABLE로 데이터테이블을 생성한다.</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SQL</span> <span class="operator">&gt;</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> TiberoTableTest</span><br><span class="line">   <span class="number">2</span> (ID NUMBER, NAME <span class="type">VARCHAR</span>(<span class="number">20</span>));</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>TiberoTableTest 데이터테이블에 테스트 데이터를 추가한다.</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SQL</span> <span class="operator">&gt;</span> <span class="keyword">INSERT</span> <span class="keyword">INTO</span> TiberoTableTest(ID, NAME) <span class="keyword">VALUES</span>(<span class="number">1</span>, <span class="string">&#x27;name1&#x27;</span>);</span><br><span class="line"><span class="keyword">SQL</span> <span class="operator">&gt;</span> <span class="keyword">INSERT</span> <span class="keyword">INTO</span> TiberoTableTest(ID, NAME) <span class="keyword">VALUES</span>(<span class="number">2</span>, <span class="string">&#x27;name2&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>데이터 테이블을 조회한다.</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SQL</span> <span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> TiberoTableTest;</span><br></pre></td></tr></table></figure>
+
+<p>필자가 입력한 결과는 아래와 같다.</p>
+<p><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero_create_table.png" alt="테이블을 생성하고, 데이터 입력 및 조회"></p>
+<p>데이터테이블 조회가 잘 된다면 Tibero DB가 정상작동하고 있음을 알 수 있다.</p>
+<br>
+
+<h3 id="Tibero-Studio로-GUI를-만끽해보기"><a href="#Tibero-Studio로-GUI를-만끽해보기" class="headerlink" title="Tibero Studio로 GUI를 만끽해보기"></a>Tibero Studio로 GUI를 만끽해보기</h3><p>다른 Database들과 마찬가지로 Tibero 역시 GUI 관리 도구를 지원한다. GUI 관리도구를 이용해서 시스템의 세부 내용을 잘 모르는 사람이라도 Data Query를 할 줄 알면 내용을 볼 수 있다.</p>
+<ol>
+<li><p>먼저 <a target="_blank" rel="noopener" href="https://technet.tmaxsoft.com/">TMaxSoft의 공식 웹사이트(https://technet.tmaxsoft.com)</a>로 이동하여, 다운로드 &gt; 데이터베이스 &gt; Tibero 페이지로 이동한다.</p>
+</li>
+<li><p>아래와 같이 페이지 하단에 Tibero Studio가 표시된다. 티베로 스튜디오는 Windows용 Application이다.</p>
+</li>
+</ol>
+<p><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero-studio-download.png" alt="티베로 스튜디오 다운로드"></p>
+<ol start="3">
+<li>WSL과 Docker, 그리고 tiberodb01 컨테이너가 실행되고 있는 상태에서, 아래와 같이 해당 컨테이너에 접속하는 정보들을 입력한다.</li>
+</ol>
+<p><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero-studio_connection_made.png" alt="티베로 스튜디오 연결 정보 입력"></p>
+<ol start="4">
+<li>정상적으로 접속되면 아래와 같이 DB의 세부 내용이 표시된다.</li>
+</ol>
+<p><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero-studio_connected.png" alt="티베로 스튜디오 연결 성공"></p>
+<ol start="5">
+<li>SQL 구문들도 잘 작동한다.</li>
+</ol>
+<p><img src="/images/WSLnDocker/20210508-Docker-Tibero/tibero-studio-select.png" alt="SQL 구문도 잘 작동한다"></p>
+<br>
+
+<h3 id="이후-필자도-해봐야-아는-것들"><a href="#이후-필자도-해봐야-아는-것들" class="headerlink" title="이후 필자도 해봐야 아는 것들"></a>이후 필자도 해봐야 아는 것들</h3><ol>
+<li>Tibero의 기본 구문들은 Oracle과 같다는데… 음… 필자 입장에선 낯설었다. 조금 익숙해질 시간이 필요하다. 어쨌든 이제 아무때나 Docker를 켜서 Tibero를 구동시킬 수 있게 되었으니 일단 만족한다.</li>
+<li>TiberoDB 사용자 매뉴얼의 양이 너무 방대해서 찾아 보기가 어려웠다. Web App 개발을 위해 Data Connection을 사용하여 연동하는 방법, ODBC 연결하는 방법 등은 필자도 조금 더 멘땅에 헤딩을 해보고 확인하겠다.</li>
+</ol>
+<br>
+
+<h3 id="참고자료"><a href="#참고자료" class="headerlink" title="참고자료"></a>참고자료</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://sm987.blogspot.com/2019/10/centos7-tibero.html">https://sm987.blogspot.com/2019/10/centos7-tibero.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://webobj.tistory.com/22">https://webobj.tistory.com/22</a></li>
+<li><a target="_blank" rel="noopener" href="https://unluckyjung.github.io/cloud/2020/04/23/Docker_install/">https://unluckyjung.github.io/cloud/2020/04/23/Docker_install/</a></li>
+</ul>
+<br>
+
+        </div>
+        <script data-ad-client="ca-pub-4791569760042130" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- Google Adsense 삽입 : layout과 article에 삽입 -->
+        <footer class="article-footer">
+            <!-- 
+
+
+
+    <a data-url="https://xeppetto.github.io/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-and-Docker/16-Docker-Tibero/" data-id="cl9155lzf004o13rd3s5b6hc4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            /* 
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="KakaoTalk"></a>',
+                            */
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+ -->
+            <!-- hexo에서 redirection 오류가 나기도 하고, 굳이 온갖 Social Media를 다 Share 관리하는 것도 의미 없다고 생각해서 comment out -->
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Xeppetto"
+        },
+        "headline": "[Docker] Docker에 Tibero 설치하기",
+        "image": "https://xeppetto.github.io/thumbnails/Software/WSL2-Docker-thumbnail.png",
+        "keywords": "Operating System Development Environment WSL Docker Windows Linux Database Tibero",
+        "genre": "소프트웨어 WSL & Docker",
+        "datePublished": "2021-05-08",
+        "dateCreated": "2021-05-08",
+        "dateModified": "2021-05-08",
+        "url": "https://xeppetto.github.io/소프트웨어/WSL-and-Docker/16-Docker-Tibero/",
+        "description": "
+본 글은 Windows10 WSL2 - Docker 시스템에 Tibero를 설치하여 테스트하는 내용을 소개한다.
+고지1 : 기술 내용 변경이 될 가능성본 글은 2021년 5월에 퇴고를 완료하였다. 그 시점을 기준으로 Windows10에서 제공하는 WSL2, 그리고 Docker를 이용하여 Ubuntu image에서 Tibero를 설치하는 방법을 담고 있다.",
+        "wordCount": 2285
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        <script src="https://utteranc.es/client.js"
+        repo="Xeppetto/xeppetto.github.io_comment"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <div id="jake-sidebar">
+            <a href="/" class="jake-sidebar-logo"></a>
+    </div>
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>CONTACT:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Xeppetto" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/jake.junghoon.park/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/xeppetto/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/Xeppetto/%EB%8B%A8%EC%83%81(%E6%96%B7%E6%83%B3)/20210517-the-limitation-of-leadership/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">다음</strong>
+        <p class="article-nav-title">
+        
+            【斷想】 리더가 감싸줘야 할 「그릇」에 대하여
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/Xeppetto/ThisBlog/20210502-grit-for-every-day/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">이전</strong>
+        <p class="article-nav-title">매일 글쓰기를 위한 스스로의 다짐</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">RECENT POSTS</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-and-Docker/20-WSL2-Docker-React/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Software/react.png)" alt="[WSL] WSL2 - Docker - React 설치" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/">소프트웨어</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-Docker/">WSL & Docker</a></p>
+                            <p class="item-title"><a href="/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-and-Docker/20-WSL2-Docker-React/" class="title">[WSL] WSL2 - Docker - React 설치</a></p>
+                            <p class="item-date"><time datetime="2022-09-09T00:09:00.000Z" itemprop="datePublished">2022년 09월 09일</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/Xeppetto/%EB%8B%A8%EC%83%81(%E6%96%B7%E6%83%B3)/20220806-the-art-of-problem-solving/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Xeppetto/2022/the-art-of-problem-solving.png)" alt="[斷想] 문제해결의 기술(The Art of Problem Solving)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/X%EC%9D%98%E8%A9%B1/">X의話</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/X%EC%9D%98%E8%A9%B1/X%EC%9D%98-%E6%96%B7%E6%83%B3/">X의 斷想</a></p>
+                            <p class="item-title"><a href="/Xeppetto/%EB%8B%A8%EC%83%81(%E6%96%B7%E6%83%B3)/20220806-the-art-of-problem-solving/" class="title">[斷想] 문제해결의 기술(The Art of Problem Solving)</a></p>
+                            <p class="item-date"><time datetime="2022-08-06T11:06:00.000Z" itemprop="datePublished">2022년 08월 06일</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/Xeppetto/About-Me-and-My-thought/20220629-my-first-product-manager-role-ended/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/AboutMeAndMyThought/2022/20220628_product_manager.png)" alt="프로덕트 매니저 역할, 하나의 마침표" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/X%EC%9D%98%E8%A9%B1/">X의話</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/X%EC%9D%98%E8%A9%B1/Lv8-%E3%81%AE%EA%BD%83%E6%80%AA%E7%8D%B8/">Lv8+の꽃怪獸</a></p>
+                            <p class="item-title"><a href="/Xeppetto/About-Me-and-My-thought/20220629-my-first-product-manager-role-ended/" class="title">프로덕트 매니저 역할, 하나의 마침표</a></p>
+                            <p class="item-date"><time datetime="2022-06-29T09:29:00.000Z" itemprop="datePublished">2022년 06월 29일</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/%EB%AC%B4%EC%97%87%EC%9D%B4-%EC%98%B3%EC%9D%80%EA%B0%80/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Learning/book-and-library.png)" alt="[책과 생각] 무엇이 옳은가" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%EB%B0%B0%EC%9B%80/">배움</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/">독서</a></p>
+                            <p class="item-title"><a href="/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/%EB%AC%B4%EC%97%87%EC%9D%B4-%EC%98%B3%EC%9D%80%EA%B0%80/" class="title">[책과 생각] 무엇이 옳은가</a></p>
+                            <p class="item-date"><time datetime="2022-06-26T21:27:00.000Z" itemprop="datePublished">2022년 06월 27일</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/%EB%A7%8C%EB%93%A4%EB%A9%B4%EC%84%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EC%9B%8C%EB%93%9C%ED%94%84%EB%A0%88%EC%8A%A4/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Learning/book-and-library.png)" alt="[책과 생각] 만들면서 배우는 워드프레스" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%EB%B0%B0%EC%9B%80/">배움</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/">독서</a></p>
+                            <p class="item-title"><a href="/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/%EB%A7%8C%EB%93%A4%EB%A9%B4%EC%84%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EC%9B%8C%EB%93%9C%ED%94%84%EB%A0%88%EC%8A%A4/" class="title">[책과 생각] 만들면서 배우는 워드프레스</a></p>
+                            <p class="item-date"><time datetime="2022-06-16T21:17:00.000Z" itemprop="datePublished">2022년 06월 17일</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">STORIES</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/">X의話</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/Lv8-%E3%81%AE%EA%BD%83%E6%80%AA%E7%8D%B8/">Lv8+の꽃怪獸</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/X%EC%9D%98-%E6%96%B7%E6%83%B3/">X의 斷想</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/%E6%97%A5%E6%96%B0%E5%8F%88%E6%97%A5%E6%96%B0/">日新又日新</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%9D%B4%EC%95%BC%EA%B8%B0/">블로그 이야기</a><span class="category-list-count">10</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EB%B0%B0%EC%9B%80/">배움</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/">독서</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EB%B0%B0%EC%9B%80/%EB%AA%85%EC%96%B8/">명언</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/">소프트웨어</a><span class="category-list-count">50</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Markdown/">Markdown</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Operating-Systems/">Operating Systems</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Operating-Systems/Windows/">Windows</a><span class="category-list-count">12</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Tools/">Tools</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-Docker/">WSL & Docker</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%EA%B2%8C%EC%9E%84/">게임</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%EB%8F%84%EA%B5%AC%EA%B0%9C%EB%B0%9C/">도구개발</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%ED%85%8C%EC%8A%A4%ED%8C%85/">테스팅</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%ED%85%8C%EC%8A%A4%ED%8C%85/%EB%B2%84%EA%B7%B8-%EB%B3%B4%EA%B3%A0/">버그 보고</a><span class="category-list-count">6</span></li></ul></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/AMD/" style="font-size: 10.71px;">AMD</a> <a href="/tags/About/" style="font-size: 15.71px;">About</a> <a href="/tags/Address/" style="font-size: 10px;">Address</a> <a href="/tags/Apt/" style="font-size: 10px;">Apt</a> <a href="/tags/Blog/" style="font-size: 17.86px;">Blog</a> <a href="/tags/Browser/" style="font-size: 10px;">Browser</a> <a href="/tags/CommonMark/" style="font-size: 10px;">CommonMark</a> <a href="/tags/Compatibility/" style="font-size: 10px;">Compatibility</a> <a href="/tags/Computer/" style="font-size: 10px;">Computer</a> <a href="/tags/Context-Menu/" style="font-size: 13.57px;">Context Menu</a> <a href="/tags/Database/" style="font-size: 12.86px;">Database</a> <a href="/tags/Decoding/" style="font-size: 10px;">Decoding</a> <a href="/tags/Development/" style="font-size: 19.29px;">Development</a> <a href="/tags/Docker/" style="font-size: 17.86px;">Docker</a> <a href="/tags/Encoding/" style="font-size: 10px;">Encoding</a> <a href="/tags/Environment/" style="font-size: 19.29px;">Environment</a> <a href="/tags/GFM/" style="font-size: 15.71px;">GFM</a> <a href="/tags/GPT/" style="font-size: 10px;">GPT</a> <a href="/tags/Github/" style="font-size: 16.43px;">Github</a> <a href="/tags/Grammar/" style="font-size: 12.14px;">Grammar</a> <a href="/tags/HTML/" style="font-size: 16.43px;">HTML</a> <a href="/tags/Install/" style="font-size: 10px;">Install</a> <a href="/tags/Installation/" style="font-size: 10px;">Installation</a> <a href="/tags/Learning/" style="font-size: 10.71px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.86px;">Linux</a> <a href="/tags/MBR/" style="font-size: 10px;">MBR</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 16.43px;">Markdown</a> <a href="/tags/Markup/" style="font-size: 16.43px;">Markup</a> <a href="/tags/Microsoft-Office/" style="font-size: 10px;">Microsoft Office</a> <a href="/tags/Music/" style="font-size: 10.71px;">Music</a> <a href="/tags/No-Code/" style="font-size: 10px;">No Code</a> <a href="/tags/Notepad/" style="font-size: 10px;">Notepad</a> <a href="/tags/Notepad/" style="font-size: 10px;">Notepad++</a> <a href="/tags/OSX/" style="font-size: 10px;">OSX</a> <a href="/tags/Operating-System/" style="font-size: 20px;">Operating System</a> <a href="/tags/Package-Manager/" style="font-size: 10px;">Package Manager</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Problem-Solving/" style="font-size: 10px;">Problem Solving</a> <a href="/tags/Product-Manager/" style="font-size: 10px;">Product Manager</a> <a href="/tags/QA/" style="font-size: 10px;">QA</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/SCM-Music-Player/" style="font-size: 10.71px;">SCM Music Player</a> <a href="/tags/SQLServer/" style="font-size: 10px;">SQLServer</a> <a href="/tags/Secure-Boot/" style="font-size: 10px;">Secure Boot</a> <a href="/tags/Storage/" style="font-size: 10px;">Storage</a> <a href="/tags/TPM/" style="font-size: 10px;">TPM</a> <a href="/tags/Tester/" style="font-size: 10px;">Tester</a> <a href="/tags/Testing/" style="font-size: 10px;">Testing</a> <a href="/tags/Tibero/" style="font-size: 10px;">Tibero</a> <a href="/tags/Tool/" style="font-size: 10.71px;">Tool</a> <a href="/tags/Update/" style="font-size: 10px;">Update</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/WSL/" style="font-size: 18.57px;">WSL</a> <a href="/tags/WSL1/" style="font-size: 11.43px;">WSL1</a> <a href="/tags/WSL2/" style="font-size: 11.43px;">WSL2</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Web-Standard/" style="font-size: 10px;">Web Standard</a> <a href="/tags/Windows/" style="font-size: 19.29px;">Windows</a> <a href="/tags/Windows10/" style="font-size: 15px;">Windows10</a> <a href="/tags/Windows11/" style="font-size: 12.86px;">Windows11</a> <a href="/tags/Writer/" style="font-size: 15.71px;">Writer</a> <a href="/tags/Xeppetto/" style="font-size: 15.71px;">Xeppetto</a> <a href="/tags/Youtube/" style="font-size: 10.71px;">Youtube</a> <a href="/tags/convert/" style="font-size: 10px;">convert</a> <a href="/tags/fTPM/" style="font-size: 10px;">fTPM</a> <a href="/tags/mySQL/" style="font-size: 10px;">mySQL</a> <a href="/tags/%EA%B0%84%EB%94%94/" style="font-size: 10px;">간디</a> <a href="/tags/%EA%B0%90%EC%82%AC%EC%9D%B8%EC%82%AC/" style="font-size: 10px;">감사인사</a> <a href="/tags/%EA%B0%95%ED%95%9C-%EA%B2%83/" style="font-size: 10px;">강한 것</a> <a href="/tags/%EA%B0%9C%EB%B0%9C%EC%9E%90/" style="font-size: 10px;">개발자</a> <a href="/tags/%EA%B0%9C%EC%9D%B8-%EC%82%AC%EC%A7%84/" style="font-size: 10px;">개인 사진</a> <a href="/tags/%EA%B0%9C%EC%9D%B8-%EC%83%9D%EA%B0%81/" style="font-size: 15px;">개인 생각</a> <a href="/tags/%EA%B0%9C%EC%9D%B8-%EC%9D%98%EA%B2%AC/" style="font-size: 12.86px;">개인 의견</a> <a href="/tags/%EA%B0%9C%EC%9D%B8-%EC%B7%A8%ED%96%A5/" style="font-size: 10.71px;">개인 취향</a> <a href="/tags/%EA%B1%B0%EC%A7%93/" style="font-size: 10px;">거짓</a> <a href="/tags/%EA%B1%B4%EA%B0%95%ED%95%98%EA%B2%8C-%EC%82%B4%EA%B8%B0/" style="font-size: 13.57px;">건강하게 살기</a> <a href="/tags/%EA%B2%8C%EC%9E%84/" style="font-size: 12.86px;">게임</a> <a href="/tags/%EA%B2%BD%EB%A0%A5/" style="font-size: 10px;">경력</a> <a href="/tags/%EA%B3%A0%EB%AF%BC/" style="font-size: 10px;">고민</a> <a href="/tags/%EA%B3%BC%EA%B1%B0/" style="font-size: 10px;">과거</a> <a href="/tags/%EA%B5%AD%EB%82%B4%EB%8F%84%EC%84%9C/" style="font-size: 12.86px;">국내도서</a> <a href="/tags/%EA%B5%AD%EC%96%B4%EB%A5%BC-%EC%A6%90%EA%B2%81%EA%B2%8C/" style="font-size: 11.43px;">국어를 즐겁게</a> <a href="/tags/%EA%B7%B8%EB%83%A5-%EC%9D%B4%EB%9F%B0-%EB%86%88%EC%9D%B4%EA%B5%AC%EB%82%98/" style="font-size: 10.71px;">그냥 이런 놈이구나</a> <a href="/tags/%EA%B7%B9%EB%B3%B5/" style="font-size: 10px;">극복</a> <a href="/tags/%EA%B8%80-%EC%9E%98-%EC%93%B0%EB%8A%94-%EB%B0%A9%EB%B2%95/" style="font-size: 14.29px;">글 잘 쓰는 방법</a> <a href="/tags/%EA%B8%80%EC%93%B0%EA%B8%B0/" style="font-size: 15px;">글쓰기</a> <a href="/tags/%EA%B8%B0%ED%9A%8C/" style="font-size: 10px;">기회</a> <a href="/tags/%EA%B9%83%ED%97%99/" style="font-size: 16.43px;">깃헙</a> <a href="/tags/%EA%B9%A8%EB%8B%AB%EB%8A%94-%EA%B2%83/" style="font-size: 10px;">깨닫는 것</a> <a href="/tags/%EB%82%98/" style="font-size: 10px;">나</a> <a href="/tags/%EB%82%98%EC%9D%B4-%EB%93%A4%EC%96%B4%EA%B0%90/" style="font-size: 10px;">나이 들어감</a> <a href="/tags/%EB%82%98%ED%98%BC%EC%9E%90-%EB%86%80%EA%B8%B0/" style="font-size: 10px;">나혼자 놀기</a> <a href="/tags/%EB%82%B4-%EA%B2%BD%ED%97%98/" style="font-size: 10px;">내 경험</a> <a href="/tags/%EB%82%B4%EA%B0%80-%EC%8B%AB%EC%96%B4%ED%95%98%EB%8A%94-%EA%B2%83/" style="font-size: 10px;">내가 싫어하는 것</a> <a href="/tags/%EB%82%B4%EA%B0%80-%EC%A2%8B%EC%95%84%ED%95%98%EB%8A%94-%EA%B2%83/" style="font-size: 10px;">내가 좋아하는 것</a> <a href="/tags/%EB%86%80%EC%9E%90/" style="font-size: 12.86px;">놀자</a> <a href="/tags/%EB%89%B4%EC%8A%A4/" style="font-size: 10px;">뉴스</a> <a href="/tags/%EB%8B%A8%EC%83%81/" style="font-size: 15px;">단상</a> <a href="/tags/%EB%8C%80%ED%95%9C%EC%9D%98%EA%B5%B0-%EC%B0%B8%EB%AA%A8%EC%A4%91%EC%9E%A5/" style="font-size: 10px;">대한의군 참모중장</a> <a href="/tags/%EB%8C%93%EA%B8%80-%EA%B8%88%EC%A7%80/" style="font-size: 10.71px;">댓글 금지</a> <a href="/tags/%EB%8F%84%EB%84%A4%EB%A6%AC%EC%B9%B4%EB%85%B8/" style="font-size: 10.71px;">도네리카노</a> <a href="/tags/%EB%8F%84%EC%84%9C/" style="font-size: 10px;">도서</a> <a href="/tags/%EB%8F%85%EC%84%9C/" style="font-size: 12.86px;">독서</a> <a href="/tags/%EB%8F%85%ED%9B%84%EA%B0%90/" style="font-size: 12.86px;">독후감</a> <a href="/tags/%EB%9E%84%ED%94%84-%EC%97%90%EB%A8%B8%EC%8A%A8/" style="font-size: 10px;">랄프 에머슨</a> <a href="/tags/%EB%A7%88%EC%9A%B0%EC%8A%A4-%EC%9A%B0%ED%81%B4%EB%A6%AD-%EB%A9%94%EB%89%B4/" style="font-size: 13.57px;">마우스 우클릭 메뉴</a> <a href="/tags/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/" style="font-size: 16.43px;">마크다운</a> <a href="/tags/%EB%A7%8C%EB%93%A4%EA%B8%B0/" style="font-size: 10px;">만들기</a> <a href="/tags/%EB%A7%9E%EC%B6%A4%EB%B2%95/" style="font-size: 14.29px;">맞춤법</a> <a href="/tags/%EB%A7%A4%EB%89%B4%EC%96%BC/" style="font-size: 12.86px;">매뉴얼</a> <a href="/tags/%EB%A7%A4%EC%9D%BC-%EA%B8%80%EC%93%B0%EA%B8%B0/" style="font-size: 10px;">매일 글쓰기</a> <a href="/tags/%EB%AA%85%EC%82%AC%ED%99%94/" style="font-size: 10px;">명사화</a> <a href="/tags/%EB%AA%85%EC%96%B8/" style="font-size: 12.86px;">명언</a> <a href="/tags/%EB%AA%A8%EB%A5%B4%EB%8A%94-%EA%B2%83/" style="font-size: 10px;">모르는 것</a> <a href="/tags/%EB%AA%A8%EC%9C%BC%EA%B8%B0/" style="font-size: 10px;">모으기</a> <a href="/tags/%EB%AC%B4%EC%97%87%EC%9D%B4-%EC%98%B3%EC%9D%80%EA%B0%80/" style="font-size: 10px;">무엇이 옳은가</a> <a href="/tags/%EB%AC%B8%EC%A0%9C/" style="font-size: 10px;">문제</a> <a href="/tags/%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0/" style="font-size: 10px;">문제 해결</a> <a href="/tags/%EB%AF%B8%EB%9E%98/" style="font-size: 10px;">미래</a> <a href="/tags/%EB%B0%B0%EA%B2%BD%EC%9D%8C%EC%95%85/" style="font-size: 10.71px;">배경음악</a> <a href="/tags/%EB%B0%B0%EC%9B%80/" style="font-size: 14.29px;">배움</a> <a href="/tags/%EB%B2%84%EA%B7%B8%EB%B3%B4%EA%B3%A0/" style="font-size: 14.29px;">버그보고</a> <a href="/tags/%EB%B3%80%ED%99%94/" style="font-size: 10px;">변화</a> <a href="/tags/%EB%B8%94%EB%A1%9C%EA%B7%B8/" style="font-size: 10.71px;">블로그</a> <a href="/tags/%EC%82%AC%EB%9E%8C%EC%9E%84/" style="font-size: 10px;">사람임</a> <a href="/tags/%EC%82%AC%EC%97%85/" style="font-size: 10px;">사업</a> <a href="/tags/%EC%83%88-%ED%95%B4-%EA%B3%84%ED%9A%8D/" style="font-size: 10.71px;">새 해 계획</a> <a href="/tags/%EC%83%9D%EA%B0%81/" style="font-size: 10px;">생각</a> <a href="/tags/%EC%84%B1%EA%B3%B5/" style="font-size: 10px;">성공</a> <a href="/tags/%EC%84%B8%EC%83%81/" style="font-size: 10.71px;">세상</a> <a href="/tags/%EC%86%8C%EA%B0%9C/" style="font-size: 10px;">소개</a> <a href="/tags/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/" style="font-size: 17.14px;">소프트웨어</a> <a href="/tags/%EC%8B%9C/" style="font-size: 10px;">시</a> <a href="/tags/%EC%8B%9C%EC%9E%91/" style="font-size: 10px;">시작</a> <a href="/tags/%EC%8B%A0%EB%A2%B0/" style="font-size: 10px;">신뢰</a> <a href="/tags/%EC%8B%A4%EB%AC%B4/" style="font-size: 14.29px;">실무</a> <a href="/tags/%EC%95%84%EB%8A%94-%EA%B2%83/" style="font-size: 10px;">아는 것</a> <a href="/tags/%EC%95%85/" style="font-size: 10px;">악</a> <a href="/tags/%EC%95%88%EB%82%B4%EC%84%9C/" style="font-size: 12.86px;">안내서</a> <a href="/tags/%EC%95%88%EC%A4%91%EA%B7%BC/" style="font-size: 10px;">안중근</a> <a href="/tags/%EC%95%A0%EC%9E%90%EC%9D%BC/" style="font-size: 10px;">애자일</a> <a href="/tags/%EC%95%A0%EC%9E%90%EC%9D%BC-%EA%B0%9C%EB%B0%9C/" style="font-size: 10px;">애자일 개발</a> <a href="/tags/%EC%95%A0%EC%9E%90%EC%9D%BC-%EA%B0%9C%EB%B0%9C%EC%9D%B4%EB%8B%A4/" style="font-size: 10px;">애자일 개발이다</a> <a href="/tags/%EC%95%A0%EC%9E%90%EC%9D%BC%EC%9D%80-%EC%97%86%EB%8B%A4/" style="font-size: 10px;">애자일은 없다</a> <a href="/tags/%EC%95%BD%ED%95%9C-%EA%B2%83/" style="font-size: 10px;">약한 것</a> <a href="/tags/%EC%96%B4%EB%A0%A4%EC%9B%80/" style="font-size: 10px;">어려움</a> <a href="/tags/%EC%97%B4%EC%A0%95/" style="font-size: 10px;">열정</a> <a href="/tags/%EC%9B%8C%EB%93%9C%ED%94%84%EB%A0%88%EC%8A%A4/" style="font-size: 10px;">워드프레스</a> <a href="/tags/%EC%9D%8C%EC%95%85/" style="font-size: 10.71px;">음악</a> <a href="/tags/%EC%9D%98%EC%82%AC/" style="font-size: 10px;">의사</a> <a href="/tags/%EC%9D%B8/" style="font-size: 10px;">인</a> <a href="/tags/%EC%9D%B8%EA%B0%84%EB%8B%B5%EA%B2%8C-%EC%82%B4%EA%B8%B0/" style="font-size: 12.14px;">인간답게 살기</a> <a href="/tags/%EC%9D%B8%EC%83%9D/" style="font-size: 16.43px;">인생</a> <a href="/tags/%EC%9D%B8%EC%83%9D-%EB%85%B8%EB%9E%98/" style="font-size: 10.71px;">인생 노래</a> <a href="/tags/%EC%9D%B8%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8/" style="font-size: 10px;">인스타그램</a> <a href="/tags/%EC%9D%B8%EC%9C%BC%EB%A1%9C-%EC%95%85%EC%97%90-%EB%8C%80%EC%A0%81%ED%95%9C%EB%8B%A4/" style="font-size: 10px;">인으로 악에 대적한다</a> <a href="/tags/%EC%9E%90%EA%B8%B0%EA%B3%84%EB%B0%9C/" style="font-size: 10px;">자기계발</a> <a href="/tags/%EC%9E%90%EB%8F%99%EC%99%84%EC%84%B1/" style="font-size: 10px;">자동완성</a> <a href="/tags/%EC%9E%90%EC%84%B8/" style="font-size: 10px;">자세</a> <a href="/tags/%EC%9E%90%EC%95%84/" style="font-size: 10px;">자아</a> <a href="/tags/%EC%9E%AC%EB%B0%8B%EB%8B%A4/" style="font-size: 12.86px;">재밋다</a> <a href="/tags/%EC%9E%AC%EB%B0%8B%EC%9C%BC%EB%A9%B4-%EA%B7%B8%EB%A7%8C/" style="font-size: 10px;">재밋으면 그만</a> <a href="/tags/%EC%A0%95%EC%B2%B4%EC%84%B1/" style="font-size: 10px;">정체성</a> <a href="/tags/%EC%A0%9C%ED%92%88-%EA%B4%80%EB%A6%AC%EC%9E%90/" style="font-size: 10px;">제품 관리자</a> <a href="/tags/%EC%A2%8B%EC%9D%80-%ED%9A%8C%EC%82%AC/" style="font-size: 10px;">좋은 회사</a> <a href="/tags/%EC%A6%90%EA%B2%81%EA%B2%8C-%EA%B8%80%EC%93%B0%EA%B8%B0/" style="font-size: 10.71px;">즐겁게 글쓰기</a> <a href="/tags/%EC%A6%90%EA%B2%81%EA%B2%8C-%EC%82%B4%EA%B8%B0/" style="font-size: 15px;">즐겁게 살기</a> <a href="/tags/%EC%A6%90%EA%B8%B0%EC%9E%90/" style="font-size: 12.86px;">즐기자</a> <a href="/tags/%EC%B0%BD%EC%A1%B0/" style="font-size: 10px;">창조</a> <a href="/tags/%EC%B1%85%EA%B3%BC-%EB%82%B4-%EC%83%9D%EA%B0%81/" style="font-size: 12.86px;">책과 내 생각</a> <a href="/tags/%EC%B2%9C%EB%85%84%EB%82%98%EB%AC%B4/" style="font-size: 17.86px;">천년나무</a> <a href="/tags/%EC%B7%A8%EB%AF%B8/" style="font-size: 10px;">취미</a> <a href="/tags/%EC%BB%A4%ED%94%BC/" style="font-size: 10.71px;">커피</a> <a href="/tags/%EC%BF%A0%ED%82%A4-%EC%95%84%EB%8B%98/" style="font-size: 10px;">쿠키 아님</a> <a href="/tags/%ED%85%8C%EC%8A%A4%ED%8C%85/" style="font-size: 14.29px;">테스팅</a> <a href="/tags/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%9D%98-%EA%B5%AC%EC%A1%B0%EB%A5%BC-%ED%8C%8C%EC%95%85%ED%95%98%EA%B8%B0/" style="font-size: 10px;">프로세스의 구조를 파악하기</a> <a href="/tags/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/" style="font-size: 10px;">프로젝트</a> <a href="/tags/%ED%94%8C%EB%A6%BD%EC%82%AC%EC%9D%B4%EB%93%9C/" style="font-size: 10px;">플립사이드</a> <a href="/tags/%ED%95%99%EC%8A%B5/" style="font-size: 10.71px;">학습</a> <a href="/tags/%ED%95%9C%EA%B5%AD%EC%96%B4/" style="font-size: 14.29px;">한국어</a> <a href="/tags/%ED%95%9C%EA%B8%80/" style="font-size: 14.29px;">한글</a> <a href="/tags/%ED%95%A8%EA%BB%98-%EC%82%AC%EB%8A%94-%EC%84%B8%EC%83%81/" style="font-size: 10px;">함께 사는 세상</a> <a href="/tags/%ED%95%B4%EA%B2%B0%EC%9D%98-%ED%96%89%EC%9C%84/" style="font-size: 10px;">해결의 행위</a> <a href="/tags/%ED%98%84%EC%9E%AC/" style="font-size: 10px;">현재</a> <a href="/tags/%ED%98%BC%EC%9E%A3%EB%A7%90/" style="font-size: 13.57px;">혼잣말</a> <a href="/tags/%ED%9B%84%EC%9B%90/" style="font-size: 11.43px;">후원</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">ALLIANCES &amp; BRETHRENS</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://cafe.naver.com/swtester">소프트웨어 테스트와 품질 카페</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://softwaretestingreference.tistory.com/">소프트웨어 테스팅 참고서</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://blog.naver.com/mibbeuda">복어수 블로그</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://blog.naver.com/cysdma">아이티마니 블로그</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://softwareqalab.tistory.com/">아이티마니 성능테스트 블로그</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://qa-testing.tistory.com/">품생품사 블로그</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://qa-linesong.netlify.app/">현의노래 블로그</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                <!-- I am collecting songs I've heard from my childhood -->
+<!-- SCM Music Player https://www.scmplayer.net -->
+<script type="text/javascript" src="https://www.scmplayer.net/script.js" 
+data-config="{
+'skin': 'skins/scmGreen/skin.css',
+'volume': 50,
+'autoplay': false,
+'shuffle': true,
+'repeat': 1,
+'placement': 'bottom',
+'showplaylist': false,
+'playlist':[
+  {'title':'4 Non Blondes - What\'s Up','url':'https://youtu.be/6NXnxTNIWkc'},
+  {'title':'Alanis Morissette - You Oughta Know','url':'https://youtu.be/NPcyTyilmYY'},
+  {'title':'Barbra Streisand - The Way We Were','url':'https://youtu.be/uBPQT2Ia8fU'},
+  {'title':'Bee Gees - How Deep Is Your Love','url':'https://youtu.be/XpqqjU7u5Yc'},
+  {'title':'Ben E. King - Stand By Me','url':'https://youtu.be/z5i9vT8wGY8'},
+  {'title':'Bertie Higgins - Casablanca','url':'https://youtu.be/JNL337qKC5s'},
+  {'title':'Blur - Song 2','url':'https://youtu.be/Wc18xt5wQnk'},
+  {'title':'Carpenters - Top Of The World','url':'https://youtu.be/dewlH6HSDzk'},
+  {'title':'Dooley Wilson - As Time Goes By','url':'https://youtu.be/d22CiKMPpaY'},
+  {'title':'Eric Clapton - Autumn Leaves','url':'https://youtu.be/UQlFOX0YKlQ'},
+  {'title':'Green Days - Basket Case','url':'https://youtu.be/NUTGr5t3MoY'},
+  {'title':'Hugh Grant and Haley Bennett - Way Back Into Love','url':'https://youtu.be/0bwWy67MsOU'},
+  {'title':'Imagine - Johnlennon','url':'https://youtu.be/YkgkThdzX-8'},
+  {'title':'Lady Gaga, Bradley Cooper - Shallow','url':'https://youtu.be/bo_efYhYU2A'},
+  {'title':'Lori Lieberman - Killing Me Softly','url':'https://youtu.be/qRXrNPSwX20'},
+  {'title':'Louis Armstrong - What A Wonderful World','url':'https://youtu.be/A3yCcXgbKrE'},
+  {'title':'Michael Buble - Quando Quando (Feat. Nelly Furtado)','url':'https://youtu.be/tTYzGEvLvMc'},
+  {'title':'Michael Jackson - Billie Jean','url':'https://youtu.be/Zi_XLOBDo_Y'},
+  {'title':'Michael Jackson - Heal the world','url':'https://youtu.be/BWf-eARnf6U'},
+  {'title':'Nathan Evans - Wellerman','url':'https://youtu.be/M26V1IWAP-E'},
+  {'title':'Nirvana - Smells Like Teen Spirit','url':'https://youtu.be/hTWKbfoikeg'},
+  {'title':'The Carpenters - Yesterday Once More','url':'https://youtu.be/YTaWayUE5XA'},
+  {'title':'Peggy March - I Will Follow Him ','url':'https://youtu.be/jgPMYQTINNk'},
+  {'title':'Pharrell Williams - Happy ','url':'https://youtu.be/ZbZSe6N_BXs'},
+  {'title':'Queen - Bohemian Rapsody','url':'https://youtu.be/fJ9rUzIMcZQ'},
+  {'title':'Queen - Love of my life','url':'https://youtu.be/sUJkCXE4sAA'},
+  {'title':'Ricky Martin - Livin\' La Vida Loca', 'url':'https://youtu.be/p47fEXGabaY'},
+  {'title':'Robert Palmer - Bad Case Of Loving You','url':'https://youtu.be/87hAnSXfMRQ'},
+  {'title':'Stevie Wonder - Isn\'t She Lovely','url':'https://youtu.be/oE56g61mW44'},
+  {'title':'The Beatles - Yesyerday','url':'https://youtu.be/NrgmdOz227I'},
+  {'title':'The Temptaions - My girl','url':'https://youtu.be/qEztui18cA8'},
+  {'title':'김광석 - 잊어야 한다는 마음으로','url':'https://youtu.be/3RBKFgsZPJQ'},
+  {'title':'김범준 - 벚꽃엔딩','url':'https://youtu.be/tXV7dfvSefo'},
+  {'title':'김현식 - 내 사랑 내 곁에','url':'https://youtu.be/iJ6ThgYyhSs'},
+  {'title':'듀스 - 고고고','url':'https://youtu.be/BNX_yl5-pp8'},
+  {'title':'듀스 - 우리는','url':'https://youtu.be/YMxwa6Ssl-c'},
+  {'title':'방탄소년단 - Butter','url':'https://youtu.be/WMweEpGlu_U'},
+  {'title':'방탄소년단 - Dynamite','url':'https://youtu.be/gdZLi9oWNZg'},
+  {'title':'방탄소년단 - Permission to dance','url':'https://youtu.be/CuklIb9d3fI'},
+  {'title':'방탄소년단 - 피땀눈물','url':'https://youtu.be/hmE9f-TEutc'},
+  {'title':'봄여름가을겨울 - 어떤 이의 꿈','url':'https://youtu.be/oAggLD932IU'},
+  {'title':'브레이브걸스 - 롤링 (Original)','url':'https://youtu.be/3cZrxpK2EAQ'},
+  {'title':'브레이브걸스 - 롤링 (New Version)','url':'https://youtu.be/MthLgPs7oU4'},
+  {'title':'브레이브걸스 - 운전만해','url':'https://youtu.be/4HjcypoChfQ'},
+  {'title':'브레이브걸스 - 치맛바람','url':'https://youtu.be/e70PkoJhQYM'},
+  {'title':'빅마마 - Break Away','url':'https://youtu.be/NFqE2NkJYjo'},
+  {'title':'서태지와 아이들 - 난 알아요','url':'  https://youtu.be/t475OpPObSg'},
+  {'title':'서태지와 아이들 - 하여가(何如歌)','url':'https://youtu.be/z9ZZ_4Jcrx4'},
+  {'title':'서태지와 아이들 - Come Back Home','url':'https://youtu.be/q3xy4p2JTfU'},
+  {'title':'신승훈 - 그 후로 오랫동안','url':'https://youtu.be/x2PSGpkwyXk'},
+  {'title':'신승훈 - 미소 속에 비친 그대','url':'https://youtu.be/k4X0z_LvDDs'},
+  {'title':'신승훈 - I believe','url':'https://youtu.be/qRvTNLpXAm0'},
+  {'title':'신해철 - 민물장어의 꿈','url':'https://youtu.be/J2t9zR8hihw'},
+  {'title':'양정승 - 밤하늘의 별을','url':'https://youtu.be/zgvI5Jqph08'},
+  {'title':'에픽하이 - 우산','url':'https://youtu.be/NIPtyAKxlRs'},
+  {'title':'왁스 - 화장을 고치고','url':'https://youtu.be/tJlaGA7AT3E'},
+  {'title':'윤종신 - 좋니', 'url':'https://youtu.be/jy_UiIQn_d0'},
+  {'title':'이날치 - 범 내려온다','url':'https://youtu.be/SmTRaSg2fTQ'},
+  {'title':'이선희 - J에게','url':'https://youtu.be/sxWiPHuaBLI'},
+  {'title':'이선희 - 그 중에 그대를 만나','url':'https://youtu.be/IAyMtl9FRHI'},
+  {'title':'이소라 - 바람이 분다','url':'https://youtu.be/pv6qFKM5y_A'},
+  {'title':'조용필 - Hello','url':'https://youtu.be/GG6X3bH80l8'},
+  {'title':'조용필 - Bounce','url':'https://youtu.be/_uYx13TPm-A'},
+  {'title':'프리스타일 - Y','url':'https://youtu.be/dYIT_jeUBKg'},
+  {'title':'Crash - 내가 그린 원안에서','url':'https://youtu.be/s-OgCzpLI7A'},
+  {'title':'Drunken Tiger - 난 널 원해','url':'https://youtu.be/Qr3o9xMaIcc'},
+  {'title':'Drunken Tiger - 너희가 힙합을 아느냐','url':'https://youtu.be/I3q7Up-UjJk'},
+  {'title':'Drunken Tiger - 소외된 모두 왼발을 한 보 앞으로','url':'https://youtu.be/co6VdhK3lpU'},
+  {'title':'KCM - 썸데이','url':'https://youtu.be/8z1IRq9GWa4'},
+  {'title':'SG워너비 - 내 사람','url':'https://youtu.be/G5hbOrbfSRY'},
+  {'title':'SG워너비 - 라라라','url':'https://youtu.be/hPoRgIzXm5o'},
+  {'title':'W&Whale - R.P.G. Shine','url':'https://youtu.be/4HcCzZlP2Nw'},
+]}" ></script>
+<!-- 
+  {'title':'title','url':'address'},
+-->
+<!-- SCM Music Player script end -->
+<!-- {'title':'[Playlist] 기분이 좋아지는 진짜 좋은 상쾌한 팝송','url':'https://youtu.be/kL1oyIm1_FU'}-->
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <!-- 로고 감춤
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                -->
+                <!-- <p>&copy; 2022 Xeppetto</p> -->
+                <p>Copyright 2022년, 천년나무 - All rights reserved &copy; Xeppetto since February, 1997</p>
+                
+                <p>Powered by <a href="https://pages.github.com/" target="_blank">Github Pages</a> & <a href="https://hexo.io/" target="_blank">Hexo</a> || Hueman theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a> and modified by <a href="https://Xeppetto.github.io">Xeppetto</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

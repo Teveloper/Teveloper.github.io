@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /thumbnails/
+Disallow: /images_title/
+Disallow: /Xeppetto/About-Me-and-My-thought/
+Disallow: /admin/
+Allow: /
+Sitemap: https://xeppetto.github.io/sitemap.xml

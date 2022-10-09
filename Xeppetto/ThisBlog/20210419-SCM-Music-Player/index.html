@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!-- 웹폰트 추가 : 2021-01-28-->
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/font-iropke-batang/1.2/font-iropke-batang.css">
+
+    
+<link rel="stylesheet" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.css">
+
+    
+    
+
+    
+    <title>내 블로그에 음악을 넣어보자 - SCM Music Player | 천년나무 블로그</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="SCM Music Player,배경음악,음악,인생 노래,Music,Youtube" />
+    
+    <!-- 도메인 주소 자체를 걸었을 때 image가 표시되지 않는 문제가 있어서 변경
+    <meta name="description" content="블로그에 음악을 넣어볼까?본 블로그의 하단에는 SCM Music Player라는 음원 서비스가 탑재되어 있다. 대략 이렇게 생긴게 브라우저 하단에 위치해 있다. (아래는 캡쳐한 그림이다.)  처음엔 단순히 블로그에서 “싸이월드 때처럼 내가 듣고 싶은 음악들을 플레이해볼까?” 정도로 시작했는데, 검색해보니 SCM Music Player라는 오픈소스가 존재했다">
+<meta property="og:type" content="article">
+<meta property="og:title" content="내 블로그에 음악을 넣어보자 - SCM Music Player">
+<meta property="og:url" content="https://xeppetto.github.io/Xeppetto/ThisBlog/20210419-SCM-Music-Player/index.html">
+<meta property="og:site_name" content="천년나무 블로그">
+<meta property="og:description" content="블로그에 음악을 넣어볼까?본 블로그의 하단에는 SCM Music Player라는 음원 서비스가 탑재되어 있다. 대략 이렇게 생긴게 브라우저 하단에 위치해 있다. (아래는 캡쳐한 그림이다.)  처음엔 단순히 블로그에서 “싸이월드 때처럼 내가 듣고 싶은 음악들을 플레이해볼까?” 정도로 시작했는데, 검색해보니 SCM Music Player라는 오픈소스가 존재했다">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xeppetto.github.io/thumbnails/Xeppetto/scm-music-player.png">
+<meta property="article:published_time" content="2021-04-19T11:48:00.000Z">
+<meta property="article:modified_time" content="2021-04-19T11:48:00.000Z">
+<meta property="article:author" content="Xeppetto">
+<meta property="article:tag" content="SCM Music Player">
+<meta property="article:tag" content="배경음악">
+<meta property="article:tag" content="음악">
+<meta property="article:tag" content="인생 노래">
+<meta property="article:tag" content="Music">
+<meta property="article:tag" content="Youtube">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xeppetto.github.io/thumbnails/Xeppetto/scm-music-player.png">
+    -->
+    <!-- 아래 내용을 추가 : is_home check -->
+    
+      <meta name="description" content="블로그에 음악을 넣어볼까?본 블로그의 하단에는 SCM Music Player라는 음원 서비스가 탑재되어 있다. 대략 이렇게 생긴게 브라우저 하단에 위치해 있다. (아래는 캡쳐한 그림이다.)  처음엔 단순히 블로그에서 “싸이월드 때처럼 내가 듣고 싶은 음악들을 플레이해볼까?” 정도로 시작했는데, 검색해보니 SCM Music Player라는 오픈소스가 존재했다">
+<meta property="og:type" content="article">
+<meta property="og:title" content="내 블로그에 음악을 넣어보자 - SCM Music Player">
+<meta property="og:url" content="https://xeppetto.github.io/Xeppetto/ThisBlog/20210419-SCM-Music-Player/index.html">
+<meta property="og:site_name" content="천년나무 블로그">
+<meta property="og:description" content="블로그에 음악을 넣어볼까?본 블로그의 하단에는 SCM Music Player라는 음원 서비스가 탑재되어 있다. 대략 이렇게 생긴게 브라우저 하단에 위치해 있다. (아래는 캡쳐한 그림이다.)  처음엔 단순히 블로그에서 “싸이월드 때처럼 내가 듣고 싶은 음악들을 플레이해볼까?” 정도로 시작했는데, 검색해보니 SCM Music Player라는 오픈소스가 존재했다">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xeppetto.github.io/thumbnails/Xeppetto/scm-music-player.png">
+<meta property="article:published_time" content="2021-04-19T11:48:00.000Z">
+<meta property="article:modified_time" content="2021-04-19T11:48:00.000Z">
+<meta property="article:author" content="Xeppetto">
+<meta property="article:tag" content="SCM Music Player">
+<meta property="article:tag" content="배경음악">
+<meta property="article:tag" content="음악">
+<meta property="article:tag" content="인생 노래">
+<meta property="article:tag" content="Music">
+<meta property="article:tag" content="Youtube">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xeppetto.github.io/thumbnails/Xeppetto/scm-music-player.png">
+    
+    <!-- 추가 내용 끝 -->
+
+    
+
+    <link rel="canonical" href="https://xeppetto.github.io/xeppetto/thisblog/20210419-scm-music-player/"/><!-- canonical 추가 -->
+
+    
+
+    
+        <link rel="icon" href="/css/images/flower_favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-191955640-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/rss2.xml" title="천년나무 블로그" type="application/rss+xml">
+</head>
+
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="jake-header-title"> <!-- jake-header-title로 상단 이미지 추가 -->
+        <div class="jake-header-title-inner"></div>
+    </div> 
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <!-- 필요에 의해 숨기기
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1> 
+                   
+                    
+                -->   
+                </div> 
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/">X의話</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/Lv8-%E3%81%AE%EA%BD%83%E6%80%AA%E7%8D%B8/">Lv8+の꽃怪獸</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/X%EC%9D%98-%E6%96%B7%E6%83%B3/">X의 斷想</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/%E6%97%A5%E6%96%B0%E5%8F%88%E6%97%A5%E6%96%B0/">日新又日新</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%9D%B4%EC%95%BC%EA%B8%B0/">블로그 이야기</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EB%B0%B0%EC%9B%80/">배움</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/">독서</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EB%B0%B0%EC%9B%80/%EB%AA%85%EC%96%B8/">명언</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/">소프트웨어</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Operating-Systems/">Operating Systems</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Tools/">Tools</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-Docker/">WSL & Docker</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%EA%B2%8C%EC%9E%84/">게임</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%EB%8F%84%EA%B5%AC%EA%B0%9C%EB%B0%9C/">도구개발</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%ED%85%8C%EC%8A%A4%ED%8C%85/">테스팅</a></li></ul></li></ul>
+                                    
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="찾아보기" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="검색하실 단어를 입력하세요." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '블로그 포스트 검색',
+            PAGES: '특정 페이지',
+            CATEGORIES: '카테고리 별 검색',
+            TAGS: '태그 검색',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/X%EC%9D%98%E8%A9%B1/">X의話</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/X%EC%9D%98%E8%A9%B1/%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%9D%B4%EC%95%BC%EA%B8%B0/">블로그 이야기</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <script data-ad-client="ca-pub-4791569760042130" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- Google Adsense 삽입 : layout과 article에 삽입 -->
+                            <article id="post-Xeppetto/ThisBlog/20210419-SCM-Music-Player" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        내 블로그에 음악을 넣어보자 - SCM Music Player
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/Xeppetto/ThisBlog/20210419-SCM-Music-Player/" class="article-date">
+       <time datetime="2021-04-19T11:48:00.000Z" itemprop="datePublished">2021년 04월 19일</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/Xeppetto/ThisBlog/20210419-SCM-Music-Player/" class="article-date">
+     <time datetime="2021-04-19T11:48:00.000Z" itemprop="dateModified">2021년 04월 19일</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Music/" rel="tag">Music</a>, <a class="tag-link-link" href="/tags/SCM-Music-Player/" rel="tag">SCM Music Player</a>, <a class="tag-link-link" href="/tags/Youtube/" rel="tag">Youtube</a>, <a class="tag-link-link" href="/tags/%EB%B0%B0%EA%B2%BD%EC%9D%8C%EC%95%85/" rel="tag">배경음악</a>, <a class="tag-link-link" href="/tags/%EC%9D%8C%EC%95%85/" rel="tag">음악</a>, <a class="tag-link-link" href="/tags/%EC%9D%B8%EC%83%9D-%EB%85%B8%EB%9E%98/" rel="tag">인생 노래</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <h3 id="블로그에-음악을-넣어볼까"><a href="#블로그에-음악을-넣어볼까" class="headerlink" title="블로그에 음악을 넣어볼까?"></a>블로그에 음악을 넣어볼까?</h3><p>본 블로그의 하단에는 SCM Music Player라는 음원 서비스가 탑재되어 있다. 대략 이렇게 생긴게 브라우저 하단에 위치해 있다. (아래는 캡쳐한 그림이다.)</p>
+<p><img src="/images/ThisBlog/scm-music-player-greenskin.png" alt="SCM Music Player"></p>
+<p>처음엔 단순히 블로그에서 “싸이월드 때처럼 내가 듣고 싶은 음악들을 플레이해볼까?” 정도로 시작했는데, 검색해보니 SCM Music Player라는 오픈소스가 존재했다.</p>
+<p>▶ SCM Music Player의 공식 홈페이지 - <a target="_blank" rel="noopener" href="https://www.scmplayer.net/">https://www.scmplayer.net/</a><br>▶ SCM Music Player의 Github 페이지 - <a target="_blank" rel="noopener" href="https://github.com/cshum/scm-music-player">https://github.com/cshum/scm-music-player</a></p>
+<p>Github에 가면 제작자가 API를 공개해 두었으니 변형해서 쓰실 분들은 변경해서 사용하시면 된다.</p>
+<p>SCM Music Player는 Youtube, SoundCloud 혹은 어딘가에 업로드되어 있는 MP3의 링크를 이용해서 블로그에서 스트리밍할 수 있도록 해 주는 JavaScript로 만든 도구다. 누구든지 본인이 블로그의 소스코드를 수정할 수 있다면 자신의 블로그에 스트리밍 음원 목록을 만들어 둘 수 있다. (필자의 경우는 Youtube로 구성했다.)</p>
+<blockquote>
+<p>참고로 PC용 웹브라우저에서만 사용할 수 있으며 모바일 디바이스에서는 제공되지 않는다.</p>
+</blockquote>
+<p>SCM Music Player의 UI는 아래와 같이 구성되어 있다.</p>
+<p><img src="/images/ThisBlog/scm-music-player-installation00.png" alt="SCM Music Player"></p>
+<table>
+<thead>
+<tr>
+<th><center>구분</center></th>
+<th><center>설명</center></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>플레이 컨트롤</td>
+<td>음원의 실행, 중단, 이전 곡으로 가기, 다음 곡으로 가기 등을 할 수 있다.</td>
+</tr>
+<tr>
+<td>음원 제목 표시</td>
+<td>현재 진행 중인 음원의 제목이 표시되며, <br>제목을 클릭하면 Youtube의 해당 음원 페이지로 이동한다.</td>
+</tr>
+<tr>
+<td>플레이 진행 표시</td>
+<td>음원이 진행 중인 상태를 바(bar) 형태로 표시하며, <br>바의 위치를 옮기면 음원의 플레이 위치를 변경할 수 있다.</td>
+</tr>
+<tr>
+<td>SCM Music Player 링크</td>
+<td>이 음원 실행기의 이름을 표시함과 동시에 클릭 시 홈페이지로 이동하는 링크를 제공한다.</td>
+</tr>
+<tr>
+<td>음원 진행 상태 표시</td>
+<td>숫자로 음원의 진행 상태를 표시한다.</td>
+</tr>
+<tr>
+<td>볼륨 조정기</td>
+<td>음원 실행기의 볼륨을 조정할 수 있다.</td>
+</tr>
+<tr>
+<td>목록 표시 토글 버튼</td>
+<td>음원 전체 목록을 표시하거나, 표시를 끌 수 있다.</td>
+</tr>
+</tbody></table>
+<br>
+
+<h3 id="나만의-음원-실행기를-만들어보자"><a href="#나만의-음원-실행기를-만들어보자" class="headerlink" title="나만의 음원 실행기를 만들어보자"></a>나만의 음원 실행기를 만들어보자</h3><ol>
+<li><p>먼저 <a target="_blank" rel="noopener" href="https://www.scmplayer.net/">SCM Music Player의 공식 웹사이트로 이동</a>한다.</p>
+</li>
+<li><p>2021년 기준 공식 홈페이지에 들어가면 아래와 같은 ‘선택 화면’이 나타나는데, 구성은 아래와 같다.</p>
+</li>
+</ol>
+<p><img src="/images/ThisBlog/scm-music-player-installation01.png" alt="SCM Music Player"></p>
+<ol start="3">
+<li><p>먼저 ①스킨 선택은 그냥 색상과 모양의 선택일 뿐, 사용할 때 기능에는 아무런 차이가 없으니 아무거나 선택하시면 된다.</p>
+</li>
+<li><p>다음은 ②음원 편집이다. 음원 편집은 플레이할 목록을 구성하는 곳으로, 「제목」을 표시하는 란과 「실제 플레이될 음원의 URI」를 입력하는 란이 있다.</p>
+</li>
+</ol>
+<p><img src="/images/ThisBlog/scm-music-player-installation02.png" alt="SCM Music Player"></p>
+<ol start="5">
+<li>실제 플레이될 음원의 URI 중 대표적인 예는 바로 유투브의 ‘공유’ 버튼을 누르면 나오는 ‘줄인 주소’가 될 수 있다. 실제 필자의 블로그에 적용된 SCM Music Player 음원은 모두 이런 식으로 만들어 졌다.</li>
+</ol>
+<p><img src="/images/ThisBlog/scm-music-player-installation03.png" alt="SCM Music Player"><br><img src="/images/ThisBlog/scm-music-player-installation04.png" alt="SCM Music Player"></p>
+<ol start="6">
+<li>일단 음원 하나만 입력하고 다음으로 넘어가자.</li>
+</ol>
+<p><img src="/images/ThisBlog/scm-music-player-installation05.png" alt="SCM Music Player"></p>
+<ol start="7">
+<li><p>다음은 ③플레이어 속성 설정 화면이다. 여기에서는 음원 플레이어의 세부 설정을 할 수 있다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Auto Play</td>
+<td>페이지가 켜지면서 자동으로 재생할 것인지 여부.<br>체크 시 자동 실행된다.</td>
+</tr>
+<tr>
+<td>Suffle Playback</td>
+<td>음원을 차례 대로 실행할 지, Random으로 섞어 재생할 지 여부.<br>체크 시 무작위로 재생된다.</td>
+</tr>
+<tr>
+<td>Default Volumn</td>
+<td>기본 볼륨(음악 소리 크기) 설정.</td>
+</tr>
+<tr>
+<td>Repeat Mode</td>
+<td>음원을 반복적으로 재생할 지, 각 음원을 1회만 재생할 지 설정.</td>
+</tr>
+<tr>
+<td>Placement of Player Bar</td>
+<td>음원 플레이어의 위치를 결정한다.<br>페이지 상단과 하단을 선택할 수 있다.</td>
+</tr>
+<tr>
+<td>Show Playlist by Default</td>
+<td>음원 목록의 숨김&#x2F;보임 처리 여부를 설정.<br>숨김 상태로 두어도 사용자가 오른쪽 하단 버튼을 클릭하면 나타난다.</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>세부 설정을 완료하면 아래의 ‘DONE’ 버튼을 클릭하자.</p>
+</li>
+</ol>
+<p><img src="/images/ThisBlog/scm-music-player-installation06.png" alt="SCM Music Player"></p>
+<ol start="9">
+<li>아래와 같이 HTML 문서 내에 삽입할 수 있는 JavaScript 코드를 준다. 내용은 위에서 설정한 내용 그대로 보여준다. 이 코드를 원하는 위치에 삽입하면 블로그에 SCM Music Player가 나타난다.</li>
+</ol>
+<p><img src="/images/ThisBlog/scm-music-player-installation07.png" alt="SCM Music Player"></p>
+<br>
+
+<h3 id="음원-실행기의-소스코드는-대략-아래처럼-생겼다"><a href="#음원-실행기의-소스코드는-대략-아래처럼-생겼다" class="headerlink" title="음원 실행기의 소스코드는 대략 아래처럼 생겼다."></a>음원 실행기의 소스코드는 대략 아래처럼 생겼다.</h3><p>필자가 사용하고 있는 음원 실행기의 설정은 이렇다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- <span class="variable constant_">SCM</span> <span class="title class_">Music</span> <span class="title class_">Player</span> <span class="attr">https</span>:<span class="comment">//www.scmplayer.net --&gt;</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;https://www.scmplayer.net/script.js&quot;</span> </span></span></span><br><span class="line"><span class="tag"><span class="language-xml"><span class="attr">data-config</span>=<span class="string">&quot;&#123;&#x27;skin&#x27;:&#x27;skins/scmGreen/skin.css&#x27;,&#x27;volume&#x27;:50,&#x27;autoplay&#x27;:false,&#x27;shuffle&#x27;:true,&#x27;repeat&#x27;:1,&#x27;placement&#x27;:&#x27;bottom&#x27;,&#x27;showplaylist&#x27;:false,&#x27;playlist&#x27;:[</span></span></span></span><br><span class="line"><span class="string"><span class="tag"><span class="language-xml">&#123;&#x27;title&#x27;:&#x27;Imagine - Johnlennon&#x27;,&#x27;url&#x27;:&#x27;https://youtu.be/YkgkThdzX-8&#x27;&#125;,</span></span></span></span><br><span class="line"><span class="string"><span class="tag"><span class="language-xml">&#123;&#x27;title&#x27;:&#x27;Eric Clapton - Autumn Leaves&#x27;,&#x27;url&#x27;:&#x27;https://youtu.be/UQlFOX0YKlQ&#x27;&#125;,</span></span></span></span><br><span class="line"><span class="string"><span class="tag"><span class="language-xml">&#123;&#x27;title&#x27;:&#x27;The Beatles - Yesyerday&#x27;,&#x27;url&#x27;:&#x27;https://youtu.be/NrgmdOz227I&#x27;&#125;,</span></span></span></span><br><span class="line"><span class="string"><span class="tag"><span class="language-xml">]&#125;&quot;</span> &gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;!-- <span class="variable constant_">SCM</span> <span class="title class_">Music</span> <span class="title class_">Player</span> script end --&gt;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.scmplayer.net/script.js">https://www.scmplayer.net/script.js</a> 는 음원 실행기의 API가 들어 있는 실제 js 파일인데 자세한 내용의 설명은 생략하겠다. 일반 사용자가 알아야 할 내용은 없다.</p>
+<p>data-config의 설정은 아래와 같다.</p>
+<table>
+<thead>
+<tr>
+<th><center>구분</center></th>
+<th><center>설명</center></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>skin</td>
+<td>맨 처럼 SCM Music Player의 스킨 색상을 표시한다.</td>
+</tr>
+<tr>
+<td>volume</td>
+<td>기본 볼륨을 표시 0 ~ 99까지 조정하면 된다.</td>
+</tr>
+<tr>
+<td>autoplay</td>
+<td>자동 실행할 것인지 여부이며 true면 자동 실행, false면 수동 실행이다.</td>
+</tr>
+<tr>
+<td>shuffle</td>
+<td>실행 중 음원을 무작위로 건너 뛸 것인지 결정한다. <br>true면 무작위로 건너뛰고, false면 순차적으로 실행한다.</td>
+</tr>
+<tr>
+<td>repeat</td>
+<td>음원 실행을 전체 몇 번 할 것이냐를 설정한다. <br>만약 1로 설정했다면 모든 음원을 1번씩 실행 후 종료한다.</td>
+</tr>
+<tr>
+<td>placement</td>
+<td>음원 실행기를 어디에 위치시킬 것이냐를 결정한다. <br>top으로 하면 화면 상단, bottom으로 하면 화면 하단에 나타난다.</td>
+</tr>
+<tr>
+<td>showplaylist</td>
+<td>음원 목록을 기본적으로 표시할 것이냐를 설정한다. <br>false일 경우 숨긴 상태로 실행하고, true일 경우 보여지는 상태로 실행한다.</td>
+</tr>
+</tbody></table>
+<p>필자의 경우는 현재 사용하고 있는 Hexo라는 프레임워크에 위젯(Widget) 형태로 SCM Music Player를 넣어뒀다. 본 블로그 페이지의 소스코드 보기를 하면 소스코드 제일 하단에 전체 음원 목록이 나타난다.</p>
+<p>아래와 같은 방식이므로 Youtube 등을 돌아다니다가 좋은 노래가 있다 싶으면 ‘제목’과 ‘주소’를 변경해서 생성된 코드에 추가하면 된다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&#x27;title&#x27;</span>:<span class="string">&#x27;제목&#x27;</span>,<span class="string">&#x27;url&#x27;</span>:<span class="string">&#x27;주소&#x27;</span>&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>필자의 블로그의 하단에는 SCM Music player가 설치되어 있다. 브라우저 하단에 나타나므로 필자 취향의 음원들을 들으실 수 있다. 필자의 경우 Hexo에 Widget으로 넣었는데, Hexo에 Widget으로 설정하여 블로그 전체에 넣는 방법은 향후 본 블로그에서 Hexo를 설명할 때 추가하기로 하겠다.</p>
+<br>
+
+<h3 id="광고-차단-프로그램은-해제하자"><a href="#광고-차단-프로그램은-해제하자" class="headerlink" title="광고 차단 프로그램은 해제하자"></a>광고 차단 프로그램은 해제하자</h3><p>모든 음원은 사실 유투브에서 화면을 제거하고 음원만 가져오는 방식이기 때문에 그냥 유투브를 영상을 보이지 않는 상태에서 음원만 사용한다고 생각하면 된다. 그래서 광고 차단 프로그램을 사용하면 음원이 플레이되지 않는다. SCM Music Player를 본인의 블로그에 설치하려 한다면, 본인 블로그에는 광고차단을 해제해야 음원을 들을 수 있다. </p>
+<br>
+
+<h3 id="자동-실행은-왠만하면-꺼두자"><a href="#자동-실행은-왠만하면-꺼두자" class="headerlink" title="자동 실행은 왠만하면 꺼두자"></a>자동 실행은 왠만하면 꺼두자</h3><p>많은 사용자들이 웹 서핑 시 유투브나 기타 서비스로 음악을 틀어두는 경우가 많으므로, 굳이 SCM Music Player의 자동 실행을 켜두지 않아도 되지 않을까 싶어 필자는 바로는 이를 꺼두기를 제안한다. 본인의 음악적 취향을 알리는 정도로 충분하지 않을까?</p>
+<p>필자는 기본 autoplay를 false로 설정해놨다. 필자의 가요&#x2F;팝 취향이 궁금하신 분들은 아래쪽에서 플레이 리스트를 선택해서 시작하시면 된다. (가요&#x2F;팝 외 장르들을 넣기는 좀 애매했다. 클래식이나 재즈 같은 것들.)</p>
+<br>
+
+<h3 id="참고-실제-script-js-내용-2021년-4월-19일-기준"><a href="#참고-실제-script-js-내용-2021년-4월-19일-기준" class="headerlink" title="참고 : 실제 script.js 내용 (2021년 4월 19일 기준)"></a>참고 : 실제 script.js 내용 (2021년 4월 19일 기준)</h3><p>아래를 클릭하면 필자가 본 글을 쓰는 시점에서의 SCM player의 js script를 볼 수 있다. 그냥 한 번 설정해 두면 알아서 반영되므로, 업데이트 주기 등을 신경 쓸 필요가 없다.</p>
+<details>
+  <summary>SCM Music Player의 script.js 보기/닫기</summary>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> hasFrame = <span class="variable language_">window</span>.<span class="property">parent</span> != <span class="variable language_">window</span>,</span><br><span class="line">        scripts = <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&#x27;script&#x27;</span>),</span><br><span class="line">        current = scripts[scripts.<span class="property">length</span> - <span class="number">1</span>],</span><br><span class="line">        config = current.<span class="title function_">getAttribute</span>(<span class="string">&#x27;data-config&#x27;</span>),</span><br><span class="line">        head = <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;head&quot;</span>)[<span class="number">0</span>],</span><br><span class="line">        dest = location.<span class="property">href</span>.<span class="title function_">replace</span>(<span class="regexp">/scmplayer\=true/g</span>, <span class="string">&#x27;scmplayer=false&#x27;</span>),</span><br><span class="line">        destHost = dest.<span class="title function_">substr</span>(<span class="number">0</span>, dest.<span class="title function_">indexOf</span>(<span class="string">&#x27;/&#x27;</span>, <span class="number">10</span>)),</span><br><span class="line">        scm = current.<span class="title function_">getAttribute</span>(<span class="string">&#x27;src&#x27;</span>).<span class="title function_">replace</span>(<span class="regexp">/(www.)?(scmplayer.co|scmplayer.net)/</span>, <span class="string">&#x27;scmplayer.net&#x27;</span>).<span class="title function_">replace</span>(<span class="string">&#x27;https:&#x27;</span>, location.<span class="property">protocol</span>).<span class="title function_">replace</span>(<span class="string">&#x27;http:&#x27;</span>, location.<span class="property">protocol</span>).<span class="title function_">replace</span>(<span class="regexp">/script\.js.*/g</span>, <span class="string">&#x27;scm.html&#x27;</span>) + <span class="string">&#x27;#&#x27;</span> + dest,</span><br><span class="line">        scmHost = scm.<span class="title function_">substr</span>(<span class="number">0</span>, scm.<span class="title function_">indexOf</span>(<span class="string">&#x27;/&#x27;</span>, <span class="number">10</span>)),</span><br><span class="line">        isOutside = !hasFrame || location.<span class="property">href</span>.<span class="title function_">indexOf</span>(<span class="string">&quot;scmplayer=true&quot;</span>) &gt; <span class="number">0</span>,</span><br><span class="line">        postMessage = <span class="keyword">function</span>(<span class="params">msg</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">window</span>.<span class="property">top</span>.<span class="property">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;scmframe&#x27;</span>).<span class="property">contentWindow</span>.<span class="title function_">postMessage</span>(msg, scmHost);</span><br><span class="line">        &#125;,</span><br><span class="line">        postFactory = <span class="keyword">function</span>(<span class="params">obj, keys</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> keys = keys.<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>),</span><br><span class="line">                post = <span class="keyword">function</span>(<span class="params">key</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">arg</span>) &#123;</span><br><span class="line">                        <span class="keyword">var</span> argStr = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">                        <span class="keyword">if</span> (<span class="title function_">typeof</span>(arg) != <span class="string">&#x27;undefined&#x27;</span>)</span><br><span class="line">                            argStr = (key.<span class="title function_">match</span>(<span class="regexp">/(play|queue)/</span>) ? <span class="string">&#x27;new Song(&#x27;</span> : <span class="string">&#x27;(&#x27;</span>) +</span><br><span class="line">                            <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(arg) + <span class="string">&#x27;)&#x27;</span>;</span><br><span class="line">                        <span class="title function_">postMessage</span>(<span class="string">&#x27;SCM.&#x27;</span> + key + <span class="string">&#x27;(&#x27;</span> + argStr + <span class="string">&#x27;)&#x27;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; keys.<span class="property">length</span>; i++) &#123;</span><br><span class="line">                <span class="keyword">var</span> key = keys[i];</span><br><span class="line">                obj[key] = <span class="title function_">post</span>(key);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        postConfig = <span class="keyword">function</span>(<span class="params">config</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!isOutside)</span><br><span class="line">                <span class="title function_">postMessage</span>(<span class="string">&#x27;SCM.config(&#x27;</span> + config + <span class="string">&#x27;)&#x27;</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">        addEvent = <span class="keyword">function</span>(<span class="params">elm, evType, fn</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (elm.<span class="property">addEventListener</span>)</span><br><span class="line">                elm.<span class="title function_">addEventListener</span>(evType, fn);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (elm.<span class="property">attachEvent</span>)</span><br><span class="line">                elm.<span class="title function_">attachEvent</span>(<span class="string">&#x27;on&#x27;</span> + evType, fn);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                elm[<span class="string">&#x27;on&#x27;</span> + evType] = fn;</span><br><span class="line">        &#125;,</span><br><span class="line">        isIE = (<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> undef, v = <span class="number">3</span>,</span><br><span class="line">                div = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;div&#x27;</span>),</span><br><span class="line">                all = div.<span class="title function_">getElementsByTagName</span>(<span class="string">&#x27;i&#x27;</span>);</span><br><span class="line">            <span class="keyword">while</span> (div.<span class="property">innerHTML</span> = <span class="string">&#x27;&lt;!--[if gt IE &#x27;</span> + (++v) + <span class="string">&#x27;]&gt;&lt;i&gt;&lt;/i&gt;&lt;![endif]--&gt;&#x27;</span>, all[<span class="number">0</span>]);</span><br><span class="line">            <span class="keyword">return</span> v &gt; <span class="number">4</span> ? v : undef;</span><br><span class="line">        &#125;)(),</span><br><span class="line">        isMobile = navigator.<span class="property">userAgent</span>.<span class="title function_">match</span>(<span class="regexp">/iPad|iPhone|Android|Blackberry/i</span>),</span><br><span class="line">        isIPad = navigator.<span class="property">userAgent</span>.<span class="title function_">match</span>(<span class="regexp">/iPad/i</span>),</span><br><span class="line">        init = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!<span class="variable language_">document</span>.<span class="property">body</span>) &#123;</span><br><span class="line">                <span class="built_in">setTimeout</span>(init, <span class="number">10</span>);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (isOutside) <span class="title function_">outside</span>();</span><br><span class="line">            <span class="keyword">else</span> <span class="title function_">inside</span>();</span><br><span class="line">        &#125;,</span><br><span class="line">        outside = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> css = <span class="string">&#x27;html,body&#123;overflow:hidden;&#125; body&#123;margin:0;padding:0;border:0;&#125; img,a,embed,object,div,address,table,iframe,p,span,form,header,section,footer&#123; display:none;border:0;margin:0;padding:0; &#125;  #tumblr_controls&#123;display:none;&#125; #scmframe&#123;display:block; background-color:transparent; position:fixed; top:0px; left:0px; width:100%; height:100%; z-index:1667;&#125; &#x27;</span>;</span><br><span class="line">            <span class="keyword">var</span> style = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;style&#x27;</span>);</span><br><span class="line">            style.<span class="property">type</span> = <span class="string">&#x27;text/css&#x27;</span>;</span><br><span class="line">            style.<span class="property">id</span> = <span class="string">&#x27;scmcss&#x27;</span>;</span><br><span class="line">            <span class="keyword">if</span> (style.<span class="property">styleSheet</span>) style.<span class="property">styleSheet</span>.<span class="property">cssText</span> = css;</span><br><span class="line">            <span class="keyword">else</span> style.<span class="title function_">appendChild</span>(<span class="variable language_">document</span>.<span class="title function_">createTextNode</span>(css));</span><br><span class="line">            head.<span class="title function_">appendChild</span>(style);</span><br><span class="line">            <span class="keyword">var</span> scmframe = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;iframe&#x27;</span>);</span><br><span class="line">            scmframe.<span class="property">frameBorder</span> = <span class="number">0</span>;</span><br><span class="line">            scmframe.<span class="property">id</span> = <span class="string">&quot;scmframe&quot;</span>;</span><br><span class="line">            scmframe.<span class="property">allowTransparency</span> = <span class="literal">true</span>;</span><br><span class="line">            scmframe.<span class="property">src</span> = scm;</span><br><span class="line">            <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">insertBefore</span>(scmframe, <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">firstChild</span>);</span><br><span class="line">            <span class="keyword">var</span> resize = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">                scmframe.<span class="property">style</span>.<span class="property">height</span> = (<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (<span class="title function_">typeof</span>(<span class="variable language_">window</span>.<span class="property">innerHeight</span>) == <span class="string">&#x27;number&#x27;</span>)</span><br><span class="line">                        <span class="keyword">return</span> <span class="variable language_">window</span>.<span class="property">innerHeight</span>;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="property">documentElement</span> &amp;&amp; <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientHeight</span>)</span><br><span class="line">                        <span class="keyword">return</span> <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientHeight</span>;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="property">body</span> &amp;&amp; <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">clientHeight</span>)</span><br><span class="line">                        <span class="keyword">return</span> <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">clientHeight</span>;</span><br><span class="line">                &#125;)();</span><br><span class="line">            &#125;;</span><br><span class="line">            <span class="title function_">addEvent</span>(<span class="variable language_">window</span>, <span class="string">&#x27;load&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">                <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">                    <span class="keyword">while</span> (<span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">firstChild</span> != scmframe)</span><br><span class="line">                        <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">removeChild</span>(<span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">firstChild</span>);</span><br><span class="line">                    <span class="keyword">while</span> (<span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">lastChild</span> != scmframe)</span><br><span class="line">                        <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">removeChild</span>(<span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">lastChild</span>);</span><br><span class="line">                    <span class="title function_">resize</span>();</span><br><span class="line">                &#125;, <span class="number">0</span>);</span><br><span class="line">            &#125;);</span><br><span class="line">            <span class="title function_">addEvent</span>(<span class="variable language_">window</span>, <span class="string">&#x27;resize&#x27;</span>, resize);</span><br><span class="line">            <span class="keyword">var</span> getPath = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> location.<span class="property">href</span>.<span class="title function_">replace</span>(<span class="regexp">/#.*/</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">                &#125;,</span><br><span class="line">                path = <span class="title function_">getPath</span>(),</span><br><span class="line">                hash = location.<span class="property">hash</span>;</span><br><span class="line">            <span class="built_in">setInterval</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="title function_">getPath</span>() != path) &#123;</span><br><span class="line">                    path = <span class="title function_">getPath</span>();</span><br><span class="line">                    <span class="variable language_">window</span>.<span class="property">scminside</span>.<span class="property">location</span>.<span class="title function_">replace</span>(path);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (location.<span class="property">hash</span> != hash) &#123;</span><br><span class="line">                    hash = location.<span class="property">hash</span>;</span><br><span class="line">                    <span class="variable language_">window</span>.<span class="property">scminside</span>.<span class="property">location</span>.<span class="property">hash</span> = hash;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, <span class="number">100</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">        inside = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="variable language_">window</span>.<span class="property">top</span>.<span class="property">document</span>.<span class="property">title</span> = <span class="variable language_">document</span>.<span class="property">title</span>;</span><br><span class="line">            <span class="keyword">var</span> filter = <span class="keyword">function</span>(<span class="params">host</span>) &#123;</span><br><span class="line">                host = host.<span class="title function_">replace</span>(<span class="regexp">/blogspot.[a-z.]*/i</span>, <span class="string">&#x27;blogspot.com&#x27;</span>);</span><br><span class="line">                host = host.<span class="title function_">replace</span>(<span class="regexp">/^(http(s)?:\/\/)?(www.)?/i</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">                <span class="keyword">return</span> host;</span><br><span class="line">            &#125;;</span><br><span class="line">            <span class="title function_">addEvent</span>(<span class="variable language_">document</span>.<span class="property">body</span>, <span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">                <span class="keyword">var</span> tar = e.<span class="property">target</span>;</span><br><span class="line">                <span class="keyword">while</span> (!tar.<span class="property">tagName</span>.<span class="title function_">match</span>(<span class="regexp">/^(a|area)$/i</span>) &amp;&amp; tar != <span class="variable language_">document</span>.<span class="property">body</span>)</span><br><span class="line">                    tar = tar.<span class="property">parentNode</span>;</span><br><span class="line">                <span class="keyword">if</span> (tar.<span class="property">tagName</span>.<span class="title function_">match</span>(<span class="regexp">/^(a|area)$/i</span>) &amp;&amp; !tar.<span class="property">href</span>.<span class="title function_">match</span>(<span class="regexp">/.(jpg|png)$/i</span>) &amp;&amp; !tar.<span class="property">href</span>.<span class="title function_">match</span>(<span class="regexp">/^javascript:/</span>)) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (tar.<span class="property">href</span>.<span class="title function_">indexOf</span>(<span class="string">&#x27;#&#x27;</span>) == <span class="number">0</span>) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (tar.<span class="property">href</span> != <span class="string">&quot;#&quot;</span>) &#123;</span><br><span class="line">                            <span class="variable language_">window</span>.<span class="property">top</span>.<span class="property">scminside</span> = <span class="variable language_">window</span>;</span><br><span class="line">                            <span class="variable language_">window</span>.<span class="property">top</span>.<span class="property">location</span>.<span class="property">hash</span> = location.<span class="property">hash</span>;</span><br><span class="line">                            e.<span class="title function_">preventDefault</span>();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (tar.<span class="property">title</span>.<span class="title function_">match</span>(<span class="regexp">/^(SCM:|\[SCM\])/i</span>)) &#123;</span><br><span class="line">                        <span class="keyword">var</span> title = tar.<span class="property">title</span>.<span class="title function_">replace</span>(<span class="regexp">/^(SCM:|\[SCM\])( )?/i</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">                        <span class="keyword">var</span> url = tar.<span class="property">href</span>;</span><br><span class="line">                        <span class="variable constant_">SCM</span>.<span class="title function_">play</span>(&#123;</span><br><span class="line">                            <span class="attr">title</span>: title,</span><br><span class="line">                            <span class="attr">url</span>: url</span><br><span class="line">                        &#125;);</span><br><span class="line">                        e.<span class="title function_">preventDefault</span>();</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (tar.<span class="property">href</span>.<span class="title function_">match</span>(<span class="regexp">/\.css$/</span>)) &#123;</span><br><span class="line">                        <span class="variable language_">window</span>.<span class="title function_">open</span>(<span class="string">&#x27;http://scmplayer.net/#skin=&#x27;</span> + tar.<span class="property">href</span>, <span class="string">&#x27;_blank&#x27;</span>);</span><br><span class="line">                        <span class="variable language_">window</span>.<span class="title function_">focus</span>();</span><br><span class="line">                        e.<span class="title function_">preventDefault</span>();</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="title function_">filter</span>(tar.<span class="property">href</span>).<span class="title function_">indexOf</span>(<span class="title function_">filter</span>(location.<span class="property">host</span>)) == -<span class="number">1</span>) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (tar.<span class="property">href</span>.<span class="title function_">match</span>(<span class="regexp">/^http(s)?/</span>)) &#123;</span><br><span class="line">                            <span class="variable language_">window</span>.<span class="title function_">open</span>(tar.<span class="property">href</span>, <span class="string">&#x27;_blank&#x27;</span>);</span><br><span class="line">                            <span class="variable language_">window</span>.<span class="title function_">focus</span>();</span><br><span class="line">                            e.<span class="title function_">preventDefault</span>();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (history.<span class="property">pushState</span>) &#123;</span><br><span class="line">                        <span class="keyword">var</span> url = <span class="title function_">filter</span>(tar.<span class="property">href</span>).<span class="title function_">replace</span>(<span class="title function_">filter</span>(destHost), <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">                        <span class="variable language_">window</span>.<span class="property">top</span>.<span class="property">scminside</span> = <span class="variable language_">window</span>;</span><br><span class="line">                        <span class="variable language_">window</span>.<span class="property">top</span>.<span class="property">history</span>.<span class="title function_">pushState</span>(<span class="literal">null</span>, <span class="literal">null</span>, url);</span><br><span class="line">                        e.<span class="title function_">preventDefault</span>();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;;</span><br><span class="line">    <span class="keyword">var</span> <span class="variable constant_">SCM</span> = &#123;&#125;;</span><br><span class="line">    <span class="title function_">postFactory</span>(<span class="variable constant_">SCM</span>, <span class="string">&#x27;queue,play,pause,next,previous,volume,skin,placement,&#x27;</span> +</span><br><span class="line">        <span class="string">&#x27;loadPlaylist,repeatMode,isShuffle,showPlaylist,&#x27;</span> +</span><br><span class="line">        <span class="string">&#x27;togglePlaylist,toggleShuffle,changeRepeatMode&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">SCM</span> &amp;&amp; <span class="variable language_">window</span>.<span class="property">SCMMusicPlayer</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (!isMobile) &#123;</span><br><span class="line">        <span class="title function_">init</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (config) <span class="title function_">postConfig</span>(config);</span><br><span class="line">    <span class="variable constant_">SCM</span>.<span class="property">init</span> = postConfig;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">SCMMusicPlayer</span> = <span class="variable language_">window</span>.<span class="property">SCMMusicPlayer</span> || <span class="variable constant_">SCM</span>;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">SCM</span> = <span class="variable language_">window</span>.<span class="property">SCM</span> || <span class="variable constant_">SCM</span>;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+</details>
+
+<br>
+
+        </div>
+        <script data-ad-client="ca-pub-4791569760042130" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- Google Adsense 삽입 : layout과 article에 삽입 -->
+        <footer class="article-footer">
+            <!-- 
+
+
+
+    <a data-url="https://xeppetto.github.io/Xeppetto/ThisBlog/20210419-SCM-Music-Player/" data-id="cl9155ly4000h13rdcfb543n2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            /* 
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="KakaoTalk"></a>',
+                            */
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+ -->
+            <!-- hexo에서 redirection 오류가 나기도 하고, 굳이 온갖 Social Media를 다 Share 관리하는 것도 의미 없다고 생각해서 comment out -->
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Xeppetto"
+        },
+        "headline": "내 블로그에 음악을 넣어보자 - SCM Music Player",
+        "image": "https://xeppetto.github.io/thumbnails/Xeppetto/scm-music-player.png",
+        "keywords": "SCM Music Player 배경음악 음악 인생 노래 Music Youtube",
+        "genre": "X의話 블로그 이야기",
+        "datePublished": "2021-04-19",
+        "dateCreated": "2021-04-19",
+        "dateModified": "2021-04-19",
+        "url": "https://xeppetto.github.io/Xeppetto/ThisBlog/20210419-SCM-Music-Player/",
+        "description": "블로그에 음악을 넣어볼까?본 블로그의 하단에는 SCM Music Player라는 음원 서비스가 탑재되어 있다. 대략 이렇게 생긴게 브라우저 하단에 위치해 있다. (아래는 캡쳐한 그림이다.)
+
+처음엔 단순히 블로그에서 “싸이월드 때처럼 내가 듣고 싶은 음악들을 플레이해볼까?” 정도로 시작했는데, 검색해보니 SCM Music Player라는 오픈소스가 존재했다",
+        "wordCount": 4729
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        <script src="https://utteranc.es/client.js"
+        repo="Xeppetto/xeppetto.github.io_comment"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <div id="jake-sidebar">
+            <a href="/" class="jake-sidebar-logo"></a>
+    </div>
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>CONTACT:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Xeppetto" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/jake.junghoon.park/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="instagram" href="https://www.instagram.com/xeppetto/" target="_blank" rel="noopener">
+                        <i class="icon fa fa-instagram"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-and-Docker/12-Docker-mySQL/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">다음</strong>
+        <p class="article-nav-title">
+        
+            [Docker] Docker에 mySQL 설치하기
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/Xeppetto/ThisBlog/20210430-The-Reason-I-Started-Blogging-Again/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">이전</strong>
+        <p class="article-nav-title">내가 블로그를 다시 시작한 이유에 대한 재미없는 긴 이야기</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">RECENT POSTS</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-and-Docker/20-WSL2-Docker-React/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Software/react.png)" alt="[WSL] WSL2 - Docker - React 설치" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/">소프트웨어</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-Docker/">WSL & Docker</a></p>
+                            <p class="item-title"><a href="/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-and-Docker/20-WSL2-Docker-React/" class="title">[WSL] WSL2 - Docker - React 설치</a></p>
+                            <p class="item-date"><time datetime="2022-09-09T00:09:00.000Z" itemprop="datePublished">2022년 09월 09일</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/Xeppetto/%EB%8B%A8%EC%83%81(%E6%96%B7%E6%83%B3)/20220806-the-art-of-problem-solving/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Xeppetto/2022/the-art-of-problem-solving.png)" alt="[斷想] 문제해결의 기술(The Art of Problem Solving)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/X%EC%9D%98%E8%A9%B1/">X의話</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/X%EC%9D%98%E8%A9%B1/X%EC%9D%98-%E6%96%B7%E6%83%B3/">X의 斷想</a></p>
+                            <p class="item-title"><a href="/Xeppetto/%EB%8B%A8%EC%83%81(%E6%96%B7%E6%83%B3)/20220806-the-art-of-problem-solving/" class="title">[斷想] 문제해결의 기술(The Art of Problem Solving)</a></p>
+                            <p class="item-date"><time datetime="2022-08-06T11:06:00.000Z" itemprop="datePublished">2022년 08월 06일</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/Xeppetto/About-Me-and-My-thought/20220629-my-first-product-manager-role-ended/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/AboutMeAndMyThought/2022/20220628_product_manager.png)" alt="프로덕트 매니저 역할, 하나의 마침표" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/X%EC%9D%98%E8%A9%B1/">X의話</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/X%EC%9D%98%E8%A9%B1/Lv8-%E3%81%AE%EA%BD%83%E6%80%AA%E7%8D%B8/">Lv8+の꽃怪獸</a></p>
+                            <p class="item-title"><a href="/Xeppetto/About-Me-and-My-thought/20220629-my-first-product-manager-role-ended/" class="title">프로덕트 매니저 역할, 하나의 마침표</a></p>
+                            <p class="item-date"><time datetime="2022-06-29T09:29:00.000Z" itemprop="datePublished">2022년 06월 29일</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/%EB%AC%B4%EC%97%87%EC%9D%B4-%EC%98%B3%EC%9D%80%EA%B0%80/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Learning/book-and-library.png)" alt="[책과 생각] 무엇이 옳은가" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%EB%B0%B0%EC%9B%80/">배움</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/">독서</a></p>
+                            <p class="item-title"><a href="/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/%EB%AC%B4%EC%97%87%EC%9D%B4-%EC%98%B3%EC%9D%80%EA%B0%80/" class="title">[책과 생각] 무엇이 옳은가</a></p>
+                            <p class="item-date"><time datetime="2022-06-26T21:27:00.000Z" itemprop="datePublished">2022년 06월 27일</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/%EB%A7%8C%EB%93%A4%EB%A9%B4%EC%84%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EC%9B%8C%EB%93%9C%ED%94%84%EB%A0%88%EC%8A%A4/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/thumbnails/Learning/book-and-library.png)" alt="[책과 생각] 만들면서 배우는 워드프레스" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%EB%B0%B0%EC%9B%80/">배움</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/">독서</a></p>
+                            <p class="item-title"><a href="/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/%EB%A7%8C%EB%93%A4%EB%A9%B4%EC%84%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EC%9B%8C%EB%93%9C%ED%94%84%EB%A0%88%EC%8A%A4/" class="title">[책과 생각] 만들면서 배우는 워드프레스</a></p>
+                            <p class="item-date"><time datetime="2022-06-16T21:17:00.000Z" itemprop="datePublished">2022년 06월 17일</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">STORIES</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/">X의話</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/Lv8-%E3%81%AE%EA%BD%83%E6%80%AA%E7%8D%B8/">Lv8+の꽃怪獸</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/X%EC%9D%98-%E6%96%B7%E6%83%B3/">X의 斷想</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/%E6%97%A5%E6%96%B0%E5%8F%88%E6%97%A5%E6%96%B0/">日新又日新</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/X%EC%9D%98%E8%A9%B1/%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%9D%B4%EC%95%BC%EA%B8%B0/">블로그 이야기</a><span class="category-list-count">10</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EB%B0%B0%EC%9B%80/">배움</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%EB%B0%B0%EC%9B%80/%EB%8F%85%EC%84%9C/">독서</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EB%B0%B0%EC%9B%80/%EB%AA%85%EC%96%B8/">명언</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/">소프트웨어</a><span class="category-list-count">50</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Markdown/">Markdown</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Operating-Systems/">Operating Systems</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Operating-Systems/Windows/">Windows</a><span class="category-list-count">12</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/Tools/">Tools</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/WSL-Docker/">WSL & Docker</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%EA%B2%8C%EC%9E%84/">게임</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%EB%8F%84%EA%B5%AC%EA%B0%9C%EB%B0%9C/">도구개발</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%ED%85%8C%EC%8A%A4%ED%8C%85/">테스팅</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/%ED%85%8C%EC%8A%A4%ED%8C%85/%EB%B2%84%EA%B7%B8-%EB%B3%B4%EA%B3%A0/">버그 보고</a><span class="category-list-count">6</span></li></ul></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/AMD/" style="font-size: 10.71px;">AMD</a> <a href="/tags/About/" style="font-size: 15.71px;">About</a> <a href="/tags/Address/" style="font-size: 10px;">Address</a> <a href="/tags/Apt/" style="font-size: 10px;">Apt</a> <a href="/tags/Blog/" style="font-size: 17.86px;">Blog</a> <a href="/tags/Browser/" style="font-size: 10px;">Browser</a> <a href="/tags/CommonMark/" style="font-size: 10px;">CommonMark</a> <a href="/tags/Compatibility/" style="font-size: 10px;">Compatibility</a> <a href="/tags/Computer/" style="font-size: 10px;">Computer</a> <a href="/tags/Context-Menu/" style="font-size: 13.57px;">Context Menu</a> <a href="/tags/Database/" style="font-size: 12.86px;">Database</a> <a href="/tags/Decoding/" style="font-size: 10px;">Decoding</a> <a href="/tags/Development/" style="font-size: 19.29px;">Development</a> <a href="/tags/Docker/" style="font-size: 17.86px;">Docker</a> <a href="/tags/Encoding/" style="font-size: 10px;">Encoding</a> <a href="/tags/Environment/" style="font-size: 19.29px;">Environment</a> <a href="/tags/GFM/" style="font-size: 15.71px;">GFM</a> <a href="/tags/GPT/" style="font-size: 10px;">GPT</a> <a href="/tags/Github/" style="font-size: 16.43px;">Github</a> <a href="/tags/Grammar/" style="font-size: 12.14px;">Grammar</a> <a href="/tags/HTML/" style="font-size: 16.43px;">HTML</a> <a href="/tags/Install/" style="font-size: 10px;">Install</a> <a href="/tags/Installation/" style="font-size: 10px;">Installation</a> <a href="/tags/Learning/" style="font-size: 10.71px;">Learning</a> <a href="/tags/Linux/" style="font-size: 17.86px;">Linux</a> <a href="/tags/MBR/" style="font-size: 10px;">MBR</a> <a href="/tags/MariaDB/" style="font-size: 10px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 16.43px;">Markdown</a> <a href="/tags/Markup/" style="font-size: 16.43px;">Markup</a> <a href="/tags/Microsoft-Office/" style="font-size: 10px;">Microsoft Office</a> <a href="/tags/Music/" style="font-size: 10.71px;">Music</a> <a href="/tags/No-Code/" style="font-size: 10px;">No Code</a> <a href="/tags/Notepad/" style="font-size: 10px;">Notepad</a> <a href="/tags/Notepad/" style="font-size: 10px;">Notepad++</a> <a href="/tags/OSX/" style="font-size: 10px;">OSX</a> <a href="/tags/Operating-System/" style="font-size: 20px;">Operating System</a> <a href="/tags/Package-Manager/" style="font-size: 10px;">Package Manager</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Problem-Solving/" style="font-size: 10px;">Problem Solving</a> <a href="/tags/Product-Manager/" style="font-size: 10px;">Product Manager</a> <a href="/tags/QA/" style="font-size: 10px;">QA</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/SCM-Music-Player/" style="font-size: 10.71px;">SCM Music Player</a> <a href="/tags/SQLServer/" style="font-size: 10px;">SQLServer</a> <a href="/tags/Secure-Boot/" style="font-size: 10px;">Secure Boot</a> <a href="/tags/Storage/" style="font-size: 10px;">Storage</a> <a href="/tags/TPM/" style="font-size: 10px;">TPM</a> <a href="/tags/Tester/" style="font-size: 10px;">Tester</a> <a href="/tags/Testing/" style="font-size: 10px;">Testing</a> <a href="/tags/Tibero/" style="font-size: 10px;">Tibero</a> <a href="/tags/Tool/" style="font-size: 10.71px;">Tool</a> <a href="/tags/Update/" style="font-size: 10px;">Update</a> <a href="/tags/Upgrade/" style="font-size: 10px;">Upgrade</a> <a href="/tags/WSL/" style="font-size: 18.57px;">WSL</a> <a href="/tags/WSL1/" style="font-size: 11.43px;">WSL1</a> <a href="/tags/WSL2/" style="font-size: 11.43px;">WSL2</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Web-Standard/" style="font-size: 10px;">Web Standard</a> <a href="/tags/Windows/" style="font-size: 19.29px;">Windows</a> <a href="/tags/Windows10/" style="font-size: 15px;">Windows10</a> <a href="/tags/Windows11/" style="font-size: 12.86px;">Windows11</a> <a href="/tags/Writer/" style="font-size: 15.71px;">Writer</a> <a href="/tags/Xeppetto/" style="font-size: 15.71px;">Xeppetto</a> <a href="/tags/Youtube/" style="font-size: 10.71px;">Youtube</a> <a href="/tags/convert/" style="font-size: 10px;">convert</a> <a href="/tags/fTPM/" style="font-size: 10px;">fTPM</a> <a href="/tags/mySQL/" style="font-size: 10px;">mySQL</a> <a href="/tags/%EA%B0%84%EB%94%94/" style="font-size: 10px;">간디</a> <a href="/tags/%EA%B0%90%EC%82%AC%EC%9D%B8%EC%82%AC/" style="font-size: 10px;">감사인사</a> <a href="/tags/%EA%B0%95%ED%95%9C-%EA%B2%83/" style="font-size: 10px;">강한 것</a> <a href="/tags/%EA%B0%9C%EB%B0%9C%EC%9E%90/" style="font-size: 10px;">개발자</a> <a href="/tags/%EA%B0%9C%EC%9D%B8-%EC%82%AC%EC%A7%84/" style="font-size: 10px;">개인 사진</a> <a href="/tags/%EA%B0%9C%EC%9D%B8-%EC%83%9D%EA%B0%81/" style="font-size: 15px;">개인 생각</a> <a href="/tags/%EA%B0%9C%EC%9D%B8-%EC%9D%98%EA%B2%AC/" style="font-size: 12.86px;">개인 의견</a> <a href="/tags/%EA%B0%9C%EC%9D%B8-%EC%B7%A8%ED%96%A5/" style="font-size: 10.71px;">개인 취향</a> <a href="/tags/%EA%B1%B0%EC%A7%93/" style="font-size: 10px;">거짓</a> <a href="/tags/%EA%B1%B4%EA%B0%95%ED%95%98%EA%B2%8C-%EC%82%B4%EA%B8%B0/" style="font-size: 13.57px;">건강하게 살기</a> <a href="/tags/%EA%B2%8C%EC%9E%84/" style="font-size: 12.86px;">게임</a> <a href="/tags/%EA%B2%BD%EB%A0%A5/" style="font-size: 10px;">경력</a> <a href="/tags/%EA%B3%A0%EB%AF%BC/" style="font-size: 10px;">고민</a> <a href="/tags/%EA%B3%BC%EA%B1%B0/" style="font-size: 10px;">과거</a> <a href="/tags/%EA%B5%AD%EB%82%B4%EB%8F%84%EC%84%9C/" style="font-size: 12.86px;">국내도서</a> <a href="/tags/%EA%B5%AD%EC%96%B4%EB%A5%BC-%EC%A6%90%EA%B2%81%EA%B2%8C/" style="font-size: 11.43px;">국어를 즐겁게</a> <a href="/tags/%EA%B7%B8%EB%83%A5-%EC%9D%B4%EB%9F%B0-%EB%86%88%EC%9D%B4%EA%B5%AC%EB%82%98/" style="font-size: 10.71px;">그냥 이런 놈이구나</a> <a href="/tags/%EA%B7%B9%EB%B3%B5/" style="font-size: 10px;">극복</a> <a href="/tags/%EA%B8%80-%EC%9E%98-%EC%93%B0%EB%8A%94-%EB%B0%A9%EB%B2%95/" style="font-size: 14.29px;">글 잘 쓰는 방법</a> <a href="/tags/%EA%B8%80%EC%93%B0%EA%B8%B0/" style="font-size: 15px;">글쓰기</a> <a href="/tags/%EA%B8%B0%ED%9A%8C/" style="font-size: 10px;">기회</a> <a href="/tags/%EA%B9%83%ED%97%99/" style="font-size: 16.43px;">깃헙</a> <a href="/tags/%EA%B9%A8%EB%8B%AB%EB%8A%94-%EA%B2%83/" style="font-size: 10px;">깨닫는 것</a> <a href="/tags/%EB%82%98/" style="font-size: 10px;">나</a> <a href="/tags/%EB%82%98%EC%9D%B4-%EB%93%A4%EC%96%B4%EA%B0%90/" style="font-size: 10px;">나이 들어감</a> <a href="/tags/%EB%82%98%ED%98%BC%EC%9E%90-%EB%86%80%EA%B8%B0/" style="font-size: 10px;">나혼자 놀기</a> <a href="/tags/%EB%82%B4-%EA%B2%BD%ED%97%98/" style="font-size: 10px;">내 경험</a> <a href="/tags/%EB%82%B4%EA%B0%80-%EC%8B%AB%EC%96%B4%ED%95%98%EB%8A%94-%EA%B2%83/" style="font-size: 10px;">내가 싫어하는 것</a> <a href="/tags/%EB%82%B4%EA%B0%80-%EC%A2%8B%EC%95%84%ED%95%98%EB%8A%94-%EA%B2%83/" style="font-size: 10px;">내가 좋아하는 것</a> <a href="/tags/%EB%86%80%EC%9E%90/" style="font-size: 12.86px;">놀자</a> <a href="/tags/%EB%89%B4%EC%8A%A4/" style="font-size: 10px;">뉴스</a> <a href="/tags/%EB%8B%A8%EC%83%81/" style="font-size: 15px;">단상</a> <a href="/tags/%EB%8C%80%ED%95%9C%EC%9D%98%EA%B5%B0-%EC%B0%B8%EB%AA%A8%EC%A4%91%EC%9E%A5/" style="font-size: 10px;">대한의군 참모중장</a> <a href="/tags/%EB%8C%93%EA%B8%80-%EA%B8%88%EC%A7%80/" style="font-size: 10.71px;">댓글 금지</a> <a href="/tags/%EB%8F%84%EB%84%A4%EB%A6%AC%EC%B9%B4%EB%85%B8/" style="font-size: 10.71px;">도네리카노</a> <a href="/tags/%EB%8F%84%EC%84%9C/" style="font-size: 10px;">도서</a> <a href="/tags/%EB%8F%85%EC%84%9C/" style="font-size: 12.86px;">독서</a> <a href="/tags/%EB%8F%85%ED%9B%84%EA%B0%90/" style="font-size: 12.86px;">독후감</a> <a href="/tags/%EB%9E%84%ED%94%84-%EC%97%90%EB%A8%B8%EC%8A%A8/" style="font-size: 10px;">랄프 에머슨</a> <a href="/tags/%EB%A7%88%EC%9A%B0%EC%8A%A4-%EC%9A%B0%ED%81%B4%EB%A6%AD-%EB%A9%94%EB%89%B4/" style="font-size: 13.57px;">마우스 우클릭 메뉴</a> <a href="/tags/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/" style="font-size: 16.43px;">마크다운</a> <a href="/tags/%EB%A7%8C%EB%93%A4%EA%B8%B0/" style="font-size: 10px;">만들기</a> <a href="/tags/%EB%A7%9E%EC%B6%A4%EB%B2%95/" style="font-size: 14.29px;">맞춤법</a> <a href="/tags/%EB%A7%A4%EB%89%B4%EC%96%BC/" style="font-size: 12.86px;">매뉴얼</a> <a href="/tags/%EB%A7%A4%EC%9D%BC-%EA%B8%80%EC%93%B0%EA%B8%B0/" style="font-size: 10px;">매일 글쓰기</a> <a href="/tags/%EB%AA%85%EC%82%AC%ED%99%94/" style="font-size: 10px;">명사화</a> <a href="/tags/%EB%AA%85%EC%96%B8/" style="font-size: 12.86px;">명언</a> <a href="/tags/%EB%AA%A8%EB%A5%B4%EB%8A%94-%EA%B2%83/" style="font-size: 10px;">모르는 것</a> <a href="/tags/%EB%AA%A8%EC%9C%BC%EA%B8%B0/" style="font-size: 10px;">모으기</a> <a href="/tags/%EB%AC%B4%EC%97%87%EC%9D%B4-%EC%98%B3%EC%9D%80%EA%B0%80/" style="font-size: 10px;">무엇이 옳은가</a> <a href="/tags/%EB%AC%B8%EC%A0%9C/" style="font-size: 10px;">문제</a> <a href="/tags/%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0/" style="font-size: 10px;">문제 해결</a> <a href="/tags/%EB%AF%B8%EB%9E%98/" style="font-size: 10px;">미래</a> <a href="/tags/%EB%B0%B0%EA%B2%BD%EC%9D%8C%EC%95%85/" style="font-size: 10.71px;">배경음악</a> <a href="/tags/%EB%B0%B0%EC%9B%80/" style="font-size: 14.29px;">배움</a> <a href="/tags/%EB%B2%84%EA%B7%B8%EB%B3%B4%EA%B3%A0/" style="font-size: 14.29px;">버그보고</a> <a href="/tags/%EB%B3%80%ED%99%94/" style="font-size: 10px;">변화</a> <a href="/tags/%EB%B8%94%EB%A1%9C%EA%B7%B8/" style="font-size: 10.71px;">블로그</a> <a href="/tags/%EC%82%AC%EB%9E%8C%EC%9E%84/" style="font-size: 10px;">사람임</a> <a href="/tags/%EC%82%AC%EC%97%85/" style="font-size: 10px;">사업</a> <a href="/tags/%EC%83%88-%ED%95%B4-%EA%B3%84%ED%9A%8D/" style="font-size: 10.71px;">새 해 계획</a> <a href="/tags/%EC%83%9D%EA%B0%81/" style="font-size: 10px;">생각</a> <a href="/tags/%EC%84%B1%EA%B3%B5/" style="font-size: 10px;">성공</a> <a href="/tags/%EC%84%B8%EC%83%81/" style="font-size: 10.71px;">세상</a> <a href="/tags/%EC%86%8C%EA%B0%9C/" style="font-size: 10px;">소개</a> <a href="/tags/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4/" style="font-size: 17.14px;">소프트웨어</a> <a href="/tags/%EC%8B%9C/" style="font-size: 10px;">시</a> <a href="/tags/%EC%8B%9C%EC%9E%91/" style="font-size: 10px;">시작</a> <a href="/tags/%EC%8B%A0%EB%A2%B0/" style="font-size: 10px;">신뢰</a> <a href="/tags/%EC%8B%A4%EB%AC%B4/" style="font-size: 14.29px;">실무</a> <a href="/tags/%EC%95%84%EB%8A%94-%EA%B2%83/" style="font-size: 10px;">아는 것</a> <a href="/tags/%EC%95%85/" style="font-size: 10px;">악</a> <a href="/tags/%EC%95%88%EB%82%B4%EC%84%9C/" style="font-size: 12.86px;">안내서</a> <a href="/tags/%EC%95%88%EC%A4%91%EA%B7%BC/" style="font-size: 10px;">안중근</a> <a href="/tags/%EC%95%A0%EC%9E%90%EC%9D%BC/" style="font-size: 10px;">애자일</a> <a href="/tags/%EC%95%A0%EC%9E%90%EC%9D%BC-%EA%B0%9C%EB%B0%9C/" style="font-size: 10px;">애자일 개발</a> <a href="/tags/%EC%95%A0%EC%9E%90%EC%9D%BC-%EA%B0%9C%EB%B0%9C%EC%9D%B4%EB%8B%A4/" style="font-size: 10px;">애자일 개발이다</a> <a href="/tags/%EC%95%A0%EC%9E%90%EC%9D%BC%EC%9D%80-%EC%97%86%EB%8B%A4/" style="font-size: 10px;">애자일은 없다</a> <a href="/tags/%EC%95%BD%ED%95%9C-%EA%B2%83/" style="font-size: 10px;">약한 것</a> <a href="/tags/%EC%96%B4%EB%A0%A4%EC%9B%80/" style="font-size: 10px;">어려움</a> <a href="/tags/%EC%97%B4%EC%A0%95/" style="font-size: 10px;">열정</a> <a href="/tags/%EC%9B%8C%EB%93%9C%ED%94%84%EB%A0%88%EC%8A%A4/" style="font-size: 10px;">워드프레스</a> <a href="/tags/%EC%9D%8C%EC%95%85/" style="font-size: 10.71px;">음악</a> <a href="/tags/%EC%9D%98%EC%82%AC/" style="font-size: 10px;">의사</a> <a href="/tags/%EC%9D%B8/" style="font-size: 10px;">인</a> <a href="/tags/%EC%9D%B8%EA%B0%84%EB%8B%B5%EA%B2%8C-%EC%82%B4%EA%B8%B0/" style="font-size: 12.14px;">인간답게 살기</a> <a href="/tags/%EC%9D%B8%EC%83%9D/" style="font-size: 16.43px;">인생</a> <a href="/tags/%EC%9D%B8%EC%83%9D-%EB%85%B8%EB%9E%98/" style="font-size: 10.71px;">인생 노래</a> <a href="/tags/%EC%9D%B8%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8/" style="font-size: 10px;">인스타그램</a> <a href="/tags/%EC%9D%B8%EC%9C%BC%EB%A1%9C-%EC%95%85%EC%97%90-%EB%8C%80%EC%A0%81%ED%95%9C%EB%8B%A4/" style="font-size: 10px;">인으로 악에 대적한다</a> <a href="/tags/%EC%9E%90%EA%B8%B0%EA%B3%84%EB%B0%9C/" style="font-size: 10px;">자기계발</a> <a href="/tags/%EC%9E%90%EB%8F%99%EC%99%84%EC%84%B1/" style="font-size: 10px;">자동완성</a> <a href="/tags/%EC%9E%90%EC%84%B8/" style="font-size: 10px;">자세</a> <a href="/tags/%EC%9E%90%EC%95%84/" style="font-size: 10px;">자아</a> <a href="/tags/%EC%9E%AC%EB%B0%8B%EB%8B%A4/" style="font-size: 12.86px;">재밋다</a> <a href="/tags/%EC%9E%AC%EB%B0%8B%EC%9C%BC%EB%A9%B4-%EA%B7%B8%EB%A7%8C/" style="font-size: 10px;">재밋으면 그만</a> <a href="/tags/%EC%A0%95%EC%B2%B4%EC%84%B1/" style="font-size: 10px;">정체성</a> <a href="/tags/%EC%A0%9C%ED%92%88-%EA%B4%80%EB%A6%AC%EC%9E%90/" style="font-size: 10px;">제품 관리자</a> <a href="/tags/%EC%A2%8B%EC%9D%80-%ED%9A%8C%EC%82%AC/" style="font-size: 10px;">좋은 회사</a> <a href="/tags/%EC%A6%90%EA%B2%81%EA%B2%8C-%EA%B8%80%EC%93%B0%EA%B8%B0/" style="font-size: 10.71px;">즐겁게 글쓰기</a> <a href="/tags/%EC%A6%90%EA%B2%81%EA%B2%8C-%EC%82%B4%EA%B8%B0/" style="font-size: 15px;">즐겁게 살기</a> <a href="/tags/%EC%A6%90%EA%B8%B0%EC%9E%90/" style="font-size: 12.86px;">즐기자</a> <a href="/tags/%EC%B0%BD%EC%A1%B0/" style="font-size: 10px;">창조</a> <a href="/tags/%EC%B1%85%EA%B3%BC-%EB%82%B4-%EC%83%9D%EA%B0%81/" style="font-size: 12.86px;">책과 내 생각</a> <a href="/tags/%EC%B2%9C%EB%85%84%EB%82%98%EB%AC%B4/" style="font-size: 17.86px;">천년나무</a> <a href="/tags/%EC%B7%A8%EB%AF%B8/" style="font-size: 10px;">취미</a> <a href="/tags/%EC%BB%A4%ED%94%BC/" style="font-size: 10.71px;">커피</a> <a href="/tags/%EC%BF%A0%ED%82%A4-%EC%95%84%EB%8B%98/" style="font-size: 10px;">쿠키 아님</a> <a href="/tags/%ED%85%8C%EC%8A%A4%ED%8C%85/" style="font-size: 14.29px;">테스팅</a> <a href="/tags/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%9D%98-%EA%B5%AC%EC%A1%B0%EB%A5%BC-%ED%8C%8C%EC%95%85%ED%95%98%EA%B8%B0/" style="font-size: 10px;">프로세스의 구조를 파악하기</a> <a href="/tags/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/" style="font-size: 10px;">프로젝트</a> <a href="/tags/%ED%94%8C%EB%A6%BD%EC%82%AC%EC%9D%B4%EB%93%9C/" style="font-size: 10px;">플립사이드</a> <a href="/tags/%ED%95%99%EC%8A%B5/" style="font-size: 10.71px;">학습</a> <a href="/tags/%ED%95%9C%EA%B5%AD%EC%96%B4/" style="font-size: 14.29px;">한국어</a> <a href="/tags/%ED%95%9C%EA%B8%80/" style="font-size: 14.29px;">한글</a> <a href="/tags/%ED%95%A8%EA%BB%98-%EC%82%AC%EB%8A%94-%EC%84%B8%EC%83%81/" style="font-size: 10px;">함께 사는 세상</a> <a href="/tags/%ED%95%B4%EA%B2%B0%EC%9D%98-%ED%96%89%EC%9C%84/" style="font-size: 10px;">해결의 행위</a> <a href="/tags/%ED%98%84%EC%9E%AC/" style="font-size: 10px;">현재</a> <a href="/tags/%ED%98%BC%EC%9E%A3%EB%A7%90/" style="font-size: 13.57px;">혼잣말</a> <a href="/tags/%ED%9B%84%EC%9B%90/" style="font-size: 11.43px;">후원</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">ALLIANCES &amp; BRETHRENS</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://cafe.naver.com/swtester">소프트웨어 테스트와 품질 카페</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://softwaretestingreference.tistory.com/">소프트웨어 테스팅 참고서</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://blog.naver.com/mibbeuda">복어수 블로그</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://blog.naver.com/cysdma">아이티마니 블로그</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://softwareqalab.tistory.com/">아이티마니 성능테스트 블로그</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://qa-testing.tistory.com/">품생품사 블로그</a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://qa-linesong.netlify.app/">현의노래 블로그</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                <!-- I am collecting songs I've heard from my childhood -->
+<!-- SCM Music Player https://www.scmplayer.net -->
+<script type="text/javascript" src="https://www.scmplayer.net/script.js" 
+data-config="{
+'skin': 'skins/scmGreen/skin.css',
+'volume': 50,
+'autoplay': false,
+'shuffle': true,
+'repeat': 1,
+'placement': 'bottom',
+'showplaylist': false,
+'playlist':[
+  {'title':'4 Non Blondes - What\'s Up','url':'https://youtu.be/6NXnxTNIWkc'},
+  {'title':'Alanis Morissette - You Oughta Know','url':'https://youtu.be/NPcyTyilmYY'},
+  {'title':'Barbra Streisand - The Way We Were','url':'https://youtu.be/uBPQT2Ia8fU'},
+  {'title':'Bee Gees - How Deep Is Your Love','url':'https://youtu.be/XpqqjU7u5Yc'},
+  {'title':'Ben E. King - Stand By Me','url':'https://youtu.be/z5i9vT8wGY8'},
+  {'title':'Bertie Higgins - Casablanca','url':'https://youtu.be/JNL337qKC5s'},
+  {'title':'Blur - Song 2','url':'https://youtu.be/Wc18xt5wQnk'},
+  {'title':'Carpenters - Top Of The World','url':'https://youtu.be/dewlH6HSDzk'},
+  {'title':'Dooley Wilson - As Time Goes By','url':'https://youtu.be/d22CiKMPpaY'},
+  {'title':'Eric Clapton - Autumn Leaves','url':'https://youtu.be/UQlFOX0YKlQ'},
+  {'title':'Green Days - Basket Case','url':'https://youtu.be/NUTGr5t3MoY'},
+  {'title':'Hugh Grant and Haley Bennett - Way Back Into Love','url':'https://youtu.be/0bwWy67MsOU'},
+  {'title':'Imagine - Johnlennon','url':'https://youtu.be/YkgkThdzX-8'},
+  {'title':'Lady Gaga, Bradley Cooper - Shallow','url':'https://youtu.be/bo_efYhYU2A'},
+  {'title':'Lori Lieberman - Killing Me Softly','url':'https://youtu.be/qRXrNPSwX20'},
+  {'title':'Louis Armstrong - What A Wonderful World','url':'https://youtu.be/A3yCcXgbKrE'},
+  {'title':'Michael Buble - Quando Quando (Feat. Nelly Furtado)','url':'https://youtu.be/tTYzGEvLvMc'},
+  {'title':'Michael Jackson - Billie Jean','url':'https://youtu.be/Zi_XLOBDo_Y'},
+  {'title':'Michael Jackson - Heal the world','url':'https://youtu.be/BWf-eARnf6U'},
+  {'title':'Nathan Evans - Wellerman','url':'https://youtu.be/M26V1IWAP-E'},
+  {'title':'Nirvana - Smells Like Teen Spirit','url':'https://youtu.be/hTWKbfoikeg'},
+  {'title':'The Carpenters - Yesterday Once More','url':'https://youtu.be/YTaWayUE5XA'},
+  {'title':'Peggy March - I Will Follow Him ','url':'https://youtu.be/jgPMYQTINNk'},
+  {'title':'Pharrell Williams - Happy ','url':'https://youtu.be/ZbZSe6N_BXs'},
+  {'title':'Queen - Bohemian Rapsody','url':'https://youtu.be/fJ9rUzIMcZQ'},
+  {'title':'Queen - Love of my life','url':'https://youtu.be/sUJkCXE4sAA'},
+  {'title':'Ricky Martin - Livin\' La Vida Loca', 'url':'https://youtu.be/p47fEXGabaY'},
+  {'title':'Robert Palmer - Bad Case Of Loving You','url':'https://youtu.be/87hAnSXfMRQ'},
+  {'title':'Stevie Wonder - Isn\'t She Lovely','url':'https://youtu.be/oE56g61mW44'},
+  {'title':'The Beatles - Yesyerday','url':'https://youtu.be/NrgmdOz227I'},
+  {'title':'The Temptaions - My girl','url':'https://youtu.be/qEztui18cA8'},
+  {'title':'김광석 - 잊어야 한다는 마음으로','url':'https://youtu.be/3RBKFgsZPJQ'},
+  {'title':'김범준 - 벚꽃엔딩','url':'https://youtu.be/tXV7dfvSefo'},
+  {'title':'김현식 - 내 사랑 내 곁에','url':'https://youtu.be/iJ6ThgYyhSs'},
+  {'title':'듀스 - 고고고','url':'https://youtu.be/BNX_yl5-pp8'},
+  {'title':'듀스 - 우리는','url':'https://youtu.be/YMxwa6Ssl-c'},
+  {'title':'방탄소년단 - Butter','url':'https://youtu.be/WMweEpGlu_U'},
+  {'title':'방탄소년단 - Dynamite','url':'https://youtu.be/gdZLi9oWNZg'},
+  {'title':'방탄소년단 - Permission to dance','url':'https://youtu.be/CuklIb9d3fI'},
+  {'title':'방탄소년단 - 피땀눈물','url':'https://youtu.be/hmE9f-TEutc'},
+  {'title':'봄여름가을겨울 - 어떤 이의 꿈','url':'https://youtu.be/oAggLD932IU'},
+  {'title':'브레이브걸스 - 롤링 (Original)','url':'https://youtu.be/3cZrxpK2EAQ'},
+  {'title':'브레이브걸스 - 롤링 (New Version)','url':'https://youtu.be/MthLgPs7oU4'},
+  {'title':'브레이브걸스 - 운전만해','url':'https://youtu.be/4HjcypoChfQ'},
+  {'title':'브레이브걸스 - 치맛바람','url':'https://youtu.be/e70PkoJhQYM'},
+  {'title':'빅마마 - Break Away','url':'https://youtu.be/NFqE2NkJYjo'},
+  {'title':'서태지와 아이들 - 난 알아요','url':'  https://youtu.be/t475OpPObSg'},
+  {'title':'서태지와 아이들 - 하여가(何如歌)','url':'https://youtu.be/z9ZZ_4Jcrx4'},
+  {'title':'서태지와 아이들 - Come Back Home','url':'https://youtu.be/q3xy4p2JTfU'},
+  {'title':'신승훈 - 그 후로 오랫동안','url':'https://youtu.be/x2PSGpkwyXk'},
+  {'title':'신승훈 - 미소 속에 비친 그대','url':'https://youtu.be/k4X0z_LvDDs'},
+  {'title':'신승훈 - I believe','url':'https://youtu.be/qRvTNLpXAm0'},
+  {'title':'신해철 - 민물장어의 꿈','url':'https://youtu.be/J2t9zR8hihw'},
+  {'title':'양정승 - 밤하늘의 별을','url':'https://youtu.be/zgvI5Jqph08'},
+  {'title':'에픽하이 - 우산','url':'https://youtu.be/NIPtyAKxlRs'},
+  {'title':'왁스 - 화장을 고치고','url':'https://youtu.be/tJlaGA7AT3E'},
+  {'title':'윤종신 - 좋니', 'url':'https://youtu.be/jy_UiIQn_d0'},
+  {'title':'이날치 - 범 내려온다','url':'https://youtu.be/SmTRaSg2fTQ'},
+  {'title':'이선희 - J에게','url':'https://youtu.be/sxWiPHuaBLI'},
+  {'title':'이선희 - 그 중에 그대를 만나','url':'https://youtu.be/IAyMtl9FRHI'},
+  {'title':'이소라 - 바람이 분다','url':'https://youtu.be/pv6qFKM5y_A'},
+  {'title':'조용필 - Hello','url':'https://youtu.be/GG6X3bH80l8'},
+  {'title':'조용필 - Bounce','url':'https://youtu.be/_uYx13TPm-A'},
+  {'title':'프리스타일 - Y','url':'https://youtu.be/dYIT_jeUBKg'},
+  {'title':'Crash - 내가 그린 원안에서','url':'https://youtu.be/s-OgCzpLI7A'},
+  {'title':'Drunken Tiger - 난 널 원해','url':'https://youtu.be/Qr3o9xMaIcc'},
+  {'title':'Drunken Tiger - 너희가 힙합을 아느냐','url':'https://youtu.be/I3q7Up-UjJk'},
+  {'title':'Drunken Tiger - 소외된 모두 왼발을 한 보 앞으로','url':'https://youtu.be/co6VdhK3lpU'},
+  {'title':'KCM - 썸데이','url':'https://youtu.be/8z1IRq9GWa4'},
+  {'title':'SG워너비 - 내 사람','url':'https://youtu.be/G5hbOrbfSRY'},
+  {'title':'SG워너비 - 라라라','url':'https://youtu.be/hPoRgIzXm5o'},
+  {'title':'W&Whale - R.P.G. Shine','url':'https://youtu.be/4HcCzZlP2Nw'},
+]}" ></script>
+<!-- 
+  {'title':'title','url':'address'},
+-->
+<!-- SCM Music Player script end -->
+<!-- {'title':'[Playlist] 기분이 좋아지는 진짜 좋은 상쾌한 팝송','url':'https://youtu.be/kL1oyIm1_FU'}-->
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <!-- 로고 감춤
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                -->
+                <!-- <p>&copy; 2022 Xeppetto</p> -->
+                <p>Copyright 2022년, 천년나무 - All rights reserved &copy; Xeppetto since February, 1997</p>
+                
+                <p>Powered by <a href="https://pages.github.com/" target="_blank">Github Pages</a> & <a href="https://hexo.io/" target="_blank">Hexo</a> || Hueman theme by <a href="https://github.com/ppoffice" target="_blank">PPOffice</a> and modified by <a href="https://Xeppetto.github.io">Xeppetto</a></p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
